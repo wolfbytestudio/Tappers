@@ -6,7 +6,9 @@ Button for creating a new contact.
 All contacts should be a button
 
 Left hand side > picture maybe (or even a bunch of characters to chose from)
+
 middle > how much they owe / you owe them
+
 right > options for deleting etc.
 
 # New Contact
