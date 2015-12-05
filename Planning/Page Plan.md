@@ -25,10 +25,14 @@ Form:
 
 
 # Contact
-
 Name at the top of the title (First and last) with their personalised picture
-
 Payment history - date, time, comment and amount
 should be a scrollable
+New Payment
+
+#New Payment
+
+
+
 
 
