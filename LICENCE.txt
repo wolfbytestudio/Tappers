@@ -10,6 +10,8 @@
   The GNU General Public License is a free, copyleft license for
 software and other kinds of works.
 
+  I do not give you permission to release this on any type of app store.
+
   The licenses for most software and other practical works are designed
 to take away your freedom to share and change the works.  By contrast,
 the GNU General Public License is intended to guarantee your freedom to
