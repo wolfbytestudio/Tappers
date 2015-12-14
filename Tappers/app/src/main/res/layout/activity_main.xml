@@ -6,6 +6,12 @@
     tools:context=".MainActivity">
 
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="55dp">
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,6 +31,17 @@
         android:layout_centerHorizontal="true"
         android:textColor="#ffffff"
         android:background="@drawable/title_border" />
+
+
+    <ImageView
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:id="@+id/newContact"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/title_border"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/new_contact"/>
 
     <ListView
         android:layout_width="wrap_content"
