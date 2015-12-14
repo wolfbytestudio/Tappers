@@ -2,32 +2,55 @@ package com.example.zack.tapperstesting;
 
 import android.animation.Animator;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends Activity {
 
-    ArrayList<Contact> contacts = new ArrayList<>();
+    /**
+     * All the contacts
+     */
+    private ArrayList<Contact> contacts = new ArrayList<>();
 
+    /**
+     * The list view
+     */
     private ListView listView;
 
+    /**
+     * Custom view adapter for custom view controls
+     */
     private CustomListViewAdapter customListViewAdapter;
 
-    ArrayList<HashMap<String, String>> contactList = new ArrayList<>();
+    /**
+     * Contains all the contacts
+     */
+    private ArrayList<HashMap<String, String>> contactList = new ArrayList<>();
 
+    /**
+     * The types of font
+     */
+    private HashMap<String, Typeface> typeFaces = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +65,7 @@ public class MainActivity extends Activity {
         Typeface light = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
         Typeface regular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
 
-        HashMap<String, Typeface> typeFaces = new HashMap<>();
+
 
         typeFaces.put("thin", thin);
         typeFaces.put("light", light);
@@ -50,27 +73,10 @@ public class MainActivity extends Activity {
 
         title.setTypeface(light);
 
-        contacts.add(new Contact("John Smith", "John Smith owes you a total of £65.03", "12/12/2015"));
-        contacts.add(new Contact("Bank Loans", "You owe Bank Loans a total of £6250.00", "1/12/2015"));
-        contacts.add(new Contact("Lauren Smith", "Lauren Smith owes you a total of £5.42", "27/11/2015"));
-        contacts.add(new Contact("Jack Smith", "You and Jack Smith don't owe each other anything", "26/11/2015"));
-        contacts.add(new Contact("Jordan Smith", "Jordan Smith owes you a total of £30.00", "20/11/2015"));
-        contacts.add(new Contact("Company Loans", "You and Company Loans don't owe each other anything", "12/11/2015"));
-
-
-        for(int i = 0; i < contacts.size(); i++)
-        {
-            HashMap<String, String> data = new HashMap<>();
-            data.put("name", contacts.get(i).name);
-            data.put("payment", contacts.get(i).payment);
-            data.put("date", contacts.get(i).date);
-            contactList.add(data);
-        }
 
         listView = (ListView) findViewById(R.id.lstContacts);
 
         customListViewAdapter = new CustomListViewAdapter(getApplicationContext(), contactList, typeFaces);
-
         listView.setAdapter(customListViewAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -92,14 +98,103 @@ public class MainActivity extends Activity {
                 String itemClickId = listView.getItemAtPosition(mPos).toString();
 
                 Toast.makeText(getApplicationContext(), "Id Clicked: " + itemClickId, Toast.LENGTH_LONG).show();
+            }
+        });
 
 
+        ImageView img = (ImageView) findViewById(R.id.newContact);
 
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(v.getContext(), NewContact.class);
+                startActivityForResult(intent, 0);
 
 
             }
         });
+
     }
+
+    /**
+     * Adds a new Contact to the list and repopulates the list view
+     * @param contact - the contact being added
+     */
+    public void addContact(Contact contact)
+    {
+        contacts.add(0, contact);
+
+        HashMap<String, String> data = new HashMap<>();
+        data.put("name", contacts.get(0).name);
+        data.put("total", contacts.get(0).total);
+        data.put("date", contacts.get(0).date);
+
+        contactList.add(0, data);
+
+        customListViewAdapter = new CustomListViewAdapter(getApplicationContext(), contactList, typeFaces);
+        listView.setAdapter(customListViewAdapter);
+    }
+
+    /**
+     * Overriden method speaks with other intents
+     * 0 = new Contact
+     * @param requestCode - the request coming in
+     * @param resultCode - the result coming in
+     * @param data - the intent data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(requestCode == 0)
+        {
+            if(resultCode == 0)
+            {
+                try
+                {
+                    String name = data.getStringExtra("name");
+                    String amount = data.getStringExtra("transaction");
+                    String reason = data.getStringExtra("reason");
+                    String date = data.getStringExtra("date");
+                    String tofrom = data.getStringExtra("tofrom");
+
+                    TransactionType type = TransactionType.valueOf(tofrom);
+
+                    Contact newCon = new Contact(name, "", date);
+
+                    double am = 1;
+                    try
+                    {
+                        am = Double.parseDouble(amount);
+                    }
+                    catch(Exception e)
+                    {
+
+                    }
+
+
+
+                    newCon.addTransaction(new Transaction(type,
+                            am, date, reason));
+
+                    newCon.setTotalString();
+
+
+                    addContact(newCon);
+                }
+                catch(Exception e)
+                {
+                    Toast.makeText(getApplicationContext(), "Error adding contact!", Toast.LENGTH_LONG).show();
+                }
+
+
+
+            }
+        }
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,0 +1,197 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/AppTheme"
+    tools:context="com.example.zack.tapperstesting.NewContact">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="55dp">
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="New Contact"
+        android:id="@+id/contact_title"
+        android:fontFamily="sans-serif-light"
+        android:textAlignment="gravity"
+        android:gravity="center"
+        android:maxHeight="80dp"
+        android:textSize="28dp"
+        android:maxLines="1"
+        android:minHeight="55dp"
+        android:paddingBottom="5dp"
+        android:minWidth="700dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:background="@drawable/title_border" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contact_title"
+        android:textColor="#0b0c0e"
+        android:text="Contact Name"
+        android:textSize="20dp"
+        android:layout_marginLeft="30dp"
+        android:paddingTop="10dp"
+        android:fontFamily="sans-serif-light"
+        android:id="@+id/lblContactName"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
+        android:textSize="14dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:fontFamily="sans-serif-light"
+        android:ems="10"
+        android:id="@+id/txtContactName"
+        android:layout_below="@+id/lblContactName"
+        android:layout_centerHorizontal="true" />
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtContactName"
+        android:textColor="#0b0c0e"
+        android:text="Transaction"
+        android:textSize="20dp"
+        android:layout_marginLeft="30dp"
+        android:paddingTop="5dp"
+        android:fontFamily="sans-serif-light"
+        android:id="@+id/lblTransaction"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginEnd="30dp"
+        android:textSize="14dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:fontFamily="sans-serif-light"
+        android:ems="10"
+        android:id="@+id/txtTransaction"
+        android:layout_below="@+id/lblTransaction" />
+
+
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/txtTransaction"
+        android:layout_marginLeft="-20dp"
+        android:layout_alignTop="@+id/txtTransaction"
+        android:paddingRight="10dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To"
+            android:layout_marginRight="10dp"
+            android:checked="true"
+            android:id="@+id/rdbTo"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="From"
+            android:id="@+id/rdbFrom"
+            android:layout_gravity="right" />
+
+    </RadioGroup>
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTransaction"
+        android:textColor="#0b0c0e"
+        android:text="Reason"
+        android:textSize="20dp"
+        android:layout_marginLeft="30dp"
+        android:paddingTop="5dp"
+        android:fontFamily="sans-serif-light"
+        android:id="@+id/lblReason"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
+        android:textSize="14dp"
+        android:layout_height="wrap_content"
+        android:inputType="textAutoCorrect"
+        android:fontFamily="sans-serif-light"
+        android:text=""
+        android:ems="10"
+        android:id="@+id/txtReason"
+        android:layout_below="@+id/lblReason"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtReason"
+        android:textColor="#0b0c0e"
+        android:text="Date"
+        android:textSize="20dp"
+        android:layout_marginLeft="30dp"
+        android:paddingTop="5dp"
+        android:fontFamily="sans-serif-light"
+        android:id="@+id/lblDate"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Pick new Date"
+        android:layout_marginLeft="10dp"
+        android:fontFamily="sans-serif-light"
+        android:id="@+id/btnPickNewDate"
+        android:layout_below="@+id/lblDate"
+        android:layout_toEndOf="@+id/lblSetDate" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:fontFamily="sans-serif-light"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Date Selected: 14/12/2015"
+        android:layout_marginLeft="20dp"
+        android:textSize="14dp"
+        android:id="@+id/lblSetDate"
+        android:layout_alignTop="@+id/btnPickNewDate"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:text="Confirm"
+        android:id="@+id/cmdConfirm"/>
+
+</RelativeLayout>

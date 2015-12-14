@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -76,7 +77,18 @@ public class CustomListViewAdapter extends BaseAdapter {
         myContact = contact.get(position);
 
         contactName.setText(myContact.get("name"));
-        payment.setText(myContact.get("payment"));
+
+        try
+        {
+            double a = Double.parseDouble(myContact.get("total"));
+            DecimalFormat precision = new DecimalFormat("0.00");
+            payment.setText(precision.format(a));
+        }
+        catch(Exception e)
+        {
+            payment.setText(myContact.get("total"));
+        }
+
         date.setText(myContact.get("date"));
 
 
