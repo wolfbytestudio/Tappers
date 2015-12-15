@@ -29,7 +29,8 @@ public class NewContact extends Activity {
     private List<String> contacts;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_contact);
 
@@ -158,7 +159,7 @@ public class NewContact extends Activity {
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                     yearDate = year;
                     monthDate = monthOfYear + 1;
-                    dayDate = dayOfMonth;
+                    dayDate = dayOfMonth + 1;
                     TextView text = (TextView) findViewById(R.id.lblSetDate);
                     System.out.println();
                     text.setText("Date Selected: " + dayDate + "/" + monthDate + "/" + yearDate);

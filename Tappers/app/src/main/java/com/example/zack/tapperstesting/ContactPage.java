@@ -1,10 +1,13 @@
 package com.example.zack.tapperstesting;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,14 +24,20 @@ public class ContactPage extends Activity {
 
     private HashMap<String, Typeface> fonts;
 
+    private ListView transactionList = null;
+
+
+    private TextView txtTotal;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_page);
 
-        ListView transactionList = (ListView) findViewById(R.id.lstTransaction);
-        fonts = new HashMap<>();
+        txtTotal = (TextView) findViewById(R.id.txtTotal);
 
+        fonts = new HashMap<>();
+        transactionList = (ListView) findViewById(R.id.lstTransaction);
 
 
         Typeface thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
@@ -40,7 +49,6 @@ public class ContactPage extends Activity {
         fonts.put("light", light);
         fonts.put("regular", regular);
 
-        TextView txtTotal = (TextView) findViewById(R.id.txtTotal);
         txtTotal.setTypeface(fonts.get("light"));
         txtTotal.setText(getIntent().getStringExtra("total"));
 
@@ -52,8 +60,38 @@ public class ContactPage extends Activity {
 
         contact = ContactUtil.contact;
 
+        Button btnNEwTrans = (Button) findViewById(R.id.btnNewTransaction);
+
+        btnNEwTrans.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), NewTransaction.class);
+                startActivityForResult(intent, 1);
+            }
+        });
+
         TransactionListAdapter transactionListAdapter= new TransactionListAdapter(getApplicationContext(), contact, fonts);
         transactionList.setAdapter(transactionListAdapter);
+    }
+
+    /**
+     * Overriden method speaks with other intents
+     * 0 = new Contact
+     * @param requestCode - the request coming in
+     * @param resultCode - the result coming in
+     * @param data - the intent data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if (resultCode == 1) {
+                TransactionListAdapter transactionListAdapter= new TransactionListAdapter(getApplicationContext(), contact, fonts);
+                transactionList.setAdapter(transactionListAdapter);
+                contact.setTotalString();
+                txtTotal.setText(contact.total);
+            }
+        }
     }
 
     @Override
