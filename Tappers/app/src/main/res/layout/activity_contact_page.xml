@@ -25,8 +25,6 @@
         android:textColor="#ffffff"
         android:background="@drawable/title_border" />
 
-
-
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -62,13 +60,30 @@
         android:layout_below="@+id/txtTotal"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Transaction"
-        android:id="@+id/btnNewTransaction"
-        android:textSize="10dp"
-        android:layout_below="@+id/txtTotal"
+
+    <ImageButton
+        android:layout_width="31dp"
+        android:layout_height="31dp"
+        android:id="@+id/btnClearHistory"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="6dp"
+        android:background="#00000000"
+        android:scaleType="fitCenter"
+        android:src="@drawable/bin_history"
+        android:layout_alignTop="@+id/txtHistory"
         android:layout_alignParentEnd="true" />
+
+
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/btnNewTransaction"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/title_border"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/new_transaction"/>
+
 
 </RelativeLayout>

@@ -34,15 +34,15 @@
 
 
     <ImageButton
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:id="@+id/newContact"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/title_border"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentRight="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/new_contact"/>
+    android:layout_width="35dp"
+    android:layout_height="35dp"
+    android:id="@+id/newContact"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/title_border"
+    android:layout_marginRight="10dp"
+    android:layout_alignParentRight="true"
+    android:scaleType="fitCenter"
+    android:src="@drawable/new_contact"/>
 
     <ListView
         android:layout_width="wrap_content"

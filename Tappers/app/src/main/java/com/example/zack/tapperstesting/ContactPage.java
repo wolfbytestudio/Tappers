@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,7 +26,6 @@ public class ContactPage extends Activity {
     private HashMap<String, Typeface> fonts;
 
     private ListView transactionList = null;
-
 
     private TextView txtTotal;
 
@@ -60,15 +60,16 @@ public class ContactPage extends Activity {
 
         contact = ContactUtil.contact;
 
-        Button btnNEwTrans = (Button) findViewById(R.id.btnNewTransaction);
+        ImageButton btnNewTrans = (ImageButton) findViewById(R.id.btnNewTransaction);
 
-        btnNEwTrans.setOnClickListener(new View.OnClickListener() {
+        btnNewTrans.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), NewTransaction.class);
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), NewTransaction.class);
                 startActivityForResult(intent, 1);
             }
         });
+
 
         TransactionListAdapter transactionListAdapter= new TransactionListAdapter(getApplicationContext(), contact, fonts);
         transactionList.setAdapter(transactionListAdapter);
