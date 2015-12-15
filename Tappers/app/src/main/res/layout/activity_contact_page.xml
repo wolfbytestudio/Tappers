@@ -1,0 +1,28 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/AppTheme"
+    tools:context="com.example.zack.tapperstesting.ContactPage">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="NAME PLACEHOLDER"
+        android:id="@+id/contactPageTitle"
+        android:fontFamily="sans-serif-light"
+        android:textAlignment="gravity"
+        android:gravity="center"
+        android:maxHeight="80dp"
+        android:textSize="28dp"
+        android:maxLines="1"
+        android:minHeight="55dp"
+        android:paddingBottom="5dp"
+        android:minWidth="700dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:background="@drawable/title_border" />
+
+</RelativeLayout>

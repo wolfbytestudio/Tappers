@@ -18,16 +18,22 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class NewContact extends Activity {
 
     private int yearDate, monthDate, dayDate;
 
+    private List<String> contacts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_contact);
+
+        contacts = getIntent().getStringArrayListExtra("contacts");
 
         Typeface thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface light = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
@@ -92,6 +98,13 @@ public class NewContact extends Activity {
                         || txtContactName.getText().toString().equals(" "))
                 {
                     Toast.makeText(getApplicationContext(), "Cannot add a nameless contact ",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if(contacts.contains(txtContactName.getText()))
+                {
+                    Toast.makeText(getApplicationContext(), "Contact Already Exists",
                             Toast.LENGTH_LONG).show();
                     return;
                 }

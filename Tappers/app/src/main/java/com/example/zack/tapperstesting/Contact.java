@@ -1,5 +1,6 @@
 package com.example.zack.tapperstesting;
 
+import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +8,8 @@ import java.util.List;
 /**
  * Created by Zack on 13/12/2015.
  */
-public class Contact
+@SuppressWarnings("serial")
+public class Contact implements Serializable
 {
 
     public String name;

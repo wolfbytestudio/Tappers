@@ -7,6 +7,8 @@
         <item name="android:colorForeground">#0F1012</item>
         <item name="android:statusBarColor">#0F7BD7</item>
         <item name="android:colorControlNormal">#c5c5c5</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:screenOrientation">portrait</item>
         <item name="android:colorControlActivated">#37A3FF</item>
         <item name="android:colorControlHighlight">#37A3FF</item>
     </style>

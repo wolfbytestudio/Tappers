@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by Zack on 13/12/2015.
  */
-public class CustomListViewAdapter extends BaseAdapter {
+public class MainListAdapter extends BaseAdapter {
 
 
 
@@ -30,7 +30,7 @@ public class CustomListViewAdapter extends BaseAdapter {
     private static LayoutInflater inflater = null;
     private HashMap<String, Typeface> fonts;
 
-    public CustomListViewAdapter(Context context, ArrayList<HashMap<String, String>> contact
+    public MainListAdapter(Context context, ArrayList<HashMap<String, String>> contact
             , HashMap<String, Typeface> fonts)
     {
         this.fonts = fonts;

@@ -7,7 +7,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.AdapterView;
@@ -16,14 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Type;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 
 public class MainActivity extends Activity {
 
@@ -40,7 +33,7 @@ public class MainActivity extends Activity {
     /**
      * Custom view adapter for custom view controls
      */
-    private CustomListViewAdapter customListViewAdapter;
+    private MainListAdapter customListViewAdapter;
 
     /**
      * Contains all the contacts
@@ -76,7 +69,7 @@ public class MainActivity extends Activity {
 
         listView = (ListView) findViewById(R.id.lstContacts);
 
-        customListViewAdapter = new CustomListViewAdapter(getApplicationContext(), contactList, typeFaces);
+        customListViewAdapter = new MainListAdapter(getApplicationContext(), contactList, typeFaces);
         listView.setAdapter(customListViewAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -110,6 +103,16 @@ public class MainActivity extends Activity {
 
 
                 Intent intent = new Intent(v.getContext(), NewContact.class);
+
+                ArrayList<String> contactNames = new ArrayList<String>();
+
+                for(Contact c : contacts)
+                {
+                    contactNames.add(c.name);
+                }
+
+                intent.putStringArrayListExtra("contacts", contactNames);
+
                 startActivityForResult(intent, 0);
 
 
@@ -133,7 +136,7 @@ public class MainActivity extends Activity {
 
         contactList.add(0, data);
 
-        customListViewAdapter = new CustomListViewAdapter(getApplicationContext(), contactList, typeFaces);
+        customListViewAdapter = new MainListAdapter(getApplicationContext(), contactList, typeFaces);
         listView.setAdapter(customListViewAdapter);
     }
 
@@ -172,8 +175,6 @@ public class MainActivity extends Activity {
                     {
 
                     }
-
-
 
                     newCon.addTransaction(new Transaction(type,
                             am, date, reason));
