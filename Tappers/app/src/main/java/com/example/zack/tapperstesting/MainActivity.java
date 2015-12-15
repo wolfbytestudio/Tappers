@@ -20,6 +20,7 @@ import java.util.HashMap;
 
 public class MainActivity extends Activity {
 
+
     /**
      * All the contacts
      */
@@ -38,7 +39,7 @@ public class MainActivity extends Activity {
     /**
      * Contains all the contacts
      */
-    private ArrayList<HashMap<String, String>> contactList = new ArrayList<>();
+    private final ArrayList<HashMap<String, String>> contactList = new ArrayList<>();
 
     /**
      * The types of font
@@ -77,20 +78,18 @@ public class MainActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 int mPos = position;
-                int cx = view.getWidth() / 2;
-                int cy = view.getHeight() / 2;
+                Intent intent = new Intent(view.getContext(), ContactPage.class);
 
-                int finalRadius = Math.max(view.getWidth(), view.getHeight());
-                Animator anim =
-                        ViewAnimationUtils.createCircularReveal(view, cx, cy, 0, finalRadius);
+                intent.putExtra("name", contacts.get(position).name);
 
-                anim.setDuration(1500);
-                view.setVisibility(View.VISIBLE);
-                anim.start();
+                Contact c = contacts.get(position);
+                ContactUtil.contact = c;
+                c.setTotalString();
+                intent.putExtra("total", c.total);
 
-                String itemClickId = listView.getItemAtPosition(mPos).toString();
+                //intent.putExtra("contact", contacts.get(position));
+                startActivity(intent);
 
-                Toast.makeText(getApplicationContext(), "Id Clicked: " + itemClickId, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -176,13 +175,16 @@ public class MainActivity extends Activity {
 
                     }
 
-                    newCon.addTransaction(new Transaction(type,
-                            am, date, reason));
+                    if(am != 0)
+                    {
+
+                        newCon.addTransaction(new Transaction(type,
+                                am, date, reason));
+                    }
 
                     newCon.setTotalString();
-
-
                     addContact(newCon);
+
                 }
                 catch(Exception e)
                 {

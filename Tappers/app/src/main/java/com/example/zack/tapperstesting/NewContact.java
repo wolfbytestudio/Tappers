@@ -35,6 +35,7 @@ public class NewContact extends Activity {
 
         contacts = getIntent().getStringArrayListExtra("contacts");
 
+
         Typeface thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface light = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
         Typeface regular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");

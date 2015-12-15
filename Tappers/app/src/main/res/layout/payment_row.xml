@@ -4,8 +4,11 @@
 
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
         android:src="@drawable/to_icon"
         android:id="@+id/imgTransactionType"/>
 
@@ -19,7 +22,7 @@
         android:layout_marginTop="5dp"
         android:text="You Lent £50 from Name 1"
         android:maxWidth="270dp"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:layout_toRightOf="@id/imgTransactionType"
         android:textColor="#0F1012"
         android:layout_height="wrap_content" />
@@ -31,7 +34,7 @@
         android:textStyle="normal"
         android:layout_marginLeft="5dp"
         android:text="Reason Unspecific"
-        android:textSize="16dp"
+        android:textSize="12dp"
         android:textColor="#555658"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lblPaymentName"

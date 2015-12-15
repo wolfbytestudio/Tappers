@@ -25,4 +25,40 @@
         android:textColor="#ffffff"
         android:background="@drawable/title_border" />
 
+
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/lstTransaction"
+        android:background="@drawable/border_top_transaction"
+        android:layout_below="@+id/txtHistory"></ListView>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="NAME owes you a total of £50.00"
+        android:fontFamily="sans-serif-light"
+        android:textSize="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/txtTotal"
+        android:layout_below="@+id/contactPageTitle"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="History"
+        android:fontFamily="sans-serif-light"
+        android:textSize="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/txtHistory"
+        android:layout_below="@+id/txtTotal"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
