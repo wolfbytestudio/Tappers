@@ -1,4 +1,4 @@
-package com.example.zack.tapperstesting;
+package com.example.zack.tapperstesting.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -10,6 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.zack.tapperstesting.R;
+import com.example.zack.tapperstesting.contact.Contact;
 
 import org.w3c.dom.Text;
 
@@ -23,26 +26,27 @@ import java.util.List;
  */
 public class MainListAdapter extends BaseAdapter {
 
-
-
     private Context context;
-    private ArrayList<HashMap<String, String>> contact;
+
+    private ArrayList<Contact> contacts;
+
     private static LayoutInflater inflater = null;
+
     private HashMap<String, Typeface> fonts;
 
-    public MainListAdapter(Context context, ArrayList<HashMap<String, String>> contact
+    public MainListAdapter(Context context, ArrayList<Contact> contacts
             , HashMap<String, Typeface> fonts)
     {
         this.fonts = fonts;
         this.context = context;
-        this.contact = contact;
+        this.contacts = contacts;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
 
     @Override
     public int getCount() {
-        return contact.size();
+        return contacts.size();
     }
 
     @Override
@@ -73,26 +77,22 @@ public class MainListAdapter extends BaseAdapter {
         payment.setTypeface(fonts.get("light"));
         date.setTypeface(fonts.get("regular"));
 
-        HashMap<String, String> myContact = new HashMap<>();
-        myContact = contact.get(position);
+        Contact myContact = contacts.get(position);
 
-        contactName.setText(myContact.get("name"));
+        contactName.setText(myContact.name);
 
         try
         {
-            double a = Double.parseDouble(myContact.get("total"));
+            double a = Double.parseDouble(myContact.total);
             DecimalFormat precision = new DecimalFormat("0.00");
             payment.setText(precision.format(a));
         }
         catch(Exception e)
         {
-            payment.setText(myContact.get("total"));
+            payment.setText(myContact.total);
         }
 
-        date.setText(myContact.get("date"));
-
-
-
+        date.setText(myContact.date);
         return view;
     }
 }

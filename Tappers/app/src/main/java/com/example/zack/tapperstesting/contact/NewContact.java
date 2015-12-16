@@ -1,4 +1,4 @@
-package com.example.zack.tapperstesting;
+package com.example.zack.tapperstesting.contact;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -12,13 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.example.zack.tapperstesting.util.ActivityUtils;
+import com.example.zack.tapperstesting.R;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -27,6 +28,9 @@ public class NewContact extends Activity {
     private int yearDate, monthDate, dayDate;
 
     private List<String> contacts;
+
+    private TextView lblDateSelected;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,43 +46,38 @@ public class NewContact extends Activity {
         Typeface regular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
 
 
+
+
         TextView title = (TextView) findViewById(R.id.contact_title);
-        title.setTypeface(light);
-
         TextView lblContactName = (TextView) findViewById(R.id.lblContactName);
-        lblContactName.setTypeface(light);
-
         TextView lblTransaction = (TextView) findViewById(R.id.lblTransaction);
-        lblTransaction.setTypeface(light);
-
         TextView lblReason = (TextView) findViewById(R.id.lblReason);
-        lblReason.setTypeface(light);
-
+        lblDateSelected = (TextView) findViewById(R.id.lblSetDate);
         TextView lblDate = (TextView) findViewById(R.id.lblDate);
+
+        lblContactName.setTypeface(light);
+        title.setTypeface(light);
+        lblTransaction.setTypeface(light);
+        lblReason.setTypeface(light);
+        initializeDate();
+        lblDateSelected.setTypeface(light);
         lblDate.setTypeface(light);
 
+
         final EditText txtContactName = (EditText) findViewById(R.id.txtContactName);
-        txtContactName.setTypeface(light);
-
         final EditText txtTransaction = (EditText) findViewById(R.id.txtTransaction);
-        txtTransaction.setTypeface(light);
-
         final EditText txtReason = (EditText) findViewById(R.id.txtReason);
-        txtReason.setTypeface(light);
-
         final RadioButton rdbTo = (RadioButton) findViewById(R.id.rdbTo);
-        rdbTo.setTypeface(light);
-
         final RadioButton rdbFrom = (RadioButton) findViewById(R.id.rdbFrom);
+        final Button newDate = (Button) findViewById(R.id.btnPickNewDate);
+        final Button confirm = (Button) findViewById(R.id.cmdConfirm);
+
+        txtContactName.setTypeface(light);
+        txtTransaction.setTypeface(light);
+        txtReason.setTypeface(light);
+        rdbTo.setTypeface(light);
         rdbFrom.setTypeface(light);
 
-        Calendar cal = Calendar.getInstance();
-
-        yearDate = cal.get(Calendar.YEAR);
-        monthDate = cal.get(Calendar.MONTH);
-        dayDate = cal.get(Calendar.DAY_OF_MONTH);
-
-        Button newDate = (Button) findViewById(R.id.btnPickNewDate);
 
         newDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,16 +86,26 @@ public class NewContact extends Activity {
             }
         });
 
-        Button confirm = (Button) findViewById(R.id.cmdConfirm);
 
-        final TextView text = (TextView) findViewById(R.id.lblSetDate);
+        txtContactName.setSelected(false);
+
+
+        ImageButton btnBack = (ImageButton) findViewById(R.id.btnBackNewContact);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent returnIntent = getIntent();
+                setResult(-1, returnIntent);
+                finish();
+            }
+        });
 
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if(txtContactName.getText().toString().equals("")
-                        || txtContactName.getText().toString().equals(null)
                         || txtContactName.getText().toString().equals(" "))
                 {
                     Toast.makeText(getApplicationContext(), "Cannot add a nameless contact ",
@@ -104,43 +113,52 @@ public class NewContact extends Activity {
                     return;
                 }
 
-                if(contacts.contains(txtContactName.getText()))
+                if(txtReason.getText().toString().equals(""))
+                {
+                    txtReason.setText("Reason Unspecific");
+                }
+
+                if(contacts.contains(txtContactName.getText().toString()))
                 {
                     Toast.makeText(getApplicationContext(), "Contact Already Exists",
                             Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                if(txtTransaction.getText().toString().equals("")
-                        || txtTransaction.getText().toString().equals(null))
+                if(txtTransaction.getText().toString().equals(""))
                 {
-                    Toast.makeText(getApplicationContext(), "Must add an amount",
-                            Toast.LENGTH_LONG).show();
-                    return;
+                    txtTransaction.setText("0");
                 }
+
                 Intent returnIntent = getIntent();
+
+
+                String toFrom = "To";
+                if(rdbTo.isChecked()) { toFrom = "to"; }
+                else { toFrom = "from"; }
+
                 returnIntent.putExtra("name", txtContactName.getText().toString());
                 returnIntent.putExtra("transaction", txtTransaction.getText().toString());
                 returnIntent.putExtra("reason", txtReason.getText().toString());
+                returnIntent.putExtra("date", lblDateSelected.getText().toString().substring(15));
+                returnIntent.putExtra("tofrom", toFrom.toString().toUpperCase());
 
-
-                returnIntent.putExtra("date", text.getText().toString().substring(15));
-
-                String tofrom = "";
-                if(rdbTo.isChecked())
-                {
-                    tofrom = "to";
-                }
-                else
-                {
-                    tofrom = "from";
-                }
-
-                returnIntent.putExtra("tofrom", tofrom.toString().toUpperCase());
-                setResult(0, returnIntent);
+                setResult(ActivityUtils.NEW_CONTACT_RETURN, returnIntent);
                 finish();
             }
         });
+    }
+
+
+    private void initializeDate()
+    {
+        Calendar cal = Calendar.getInstance();
+
+        yearDate = cal.get(Calendar.YEAR);
+        monthDate = cal.get(Calendar.MONTH);
+        dayDate = cal.get(Calendar.DAY_OF_MONTH);
+
+        lblDateSelected.setText("Date Selected: " + dayDate +"/" + (monthDate + 1) + "/" + yearDate);
     }
 
     @Override
@@ -159,7 +177,7 @@ public class NewContact extends Activity {
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                     yearDate = year;
                     monthDate = monthOfYear + 1;
-                    dayDate = dayOfMonth + 1;
+                    dayDate = dayOfMonth;
                     TextView text = (TextView) findViewById(R.id.lblSetDate);
                     System.out.println();
                     text.setText("Date Selected: " + dayDate + "/" + monthDate + "/" + yearDate);

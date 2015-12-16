@@ -1,4 +1,7 @@
-package com.example.zack.tapperstesting;
+package com.example.zack.tapperstesting.contact;
+
+import com.example.zack.tapperstesting.transaction.Transaction;
+import com.example.zack.tapperstesting.transaction.TransactionType;
 
 import java.io.Serializable;
 import java.text.NumberFormat;
@@ -70,7 +73,6 @@ public class Contact implements Serializable
 
         if(value == 0)
         {
-
             total = "You and " + name + " don't owe each other anything!";
             return;
         }

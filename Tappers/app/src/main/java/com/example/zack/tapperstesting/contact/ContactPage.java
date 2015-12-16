@@ -1,22 +1,26 @@
-package com.example.zack.tapperstesting;
+package com.example.zack.tapperstesting.contact;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.example.zack.tapperstesting.transaction.NewTransaction;
+import com.example.zack.tapperstesting.R;
+import com.example.zack.tapperstesting.adapter.TransactionListAdapter;
+import com.example.zack.tapperstesting.util.ActivityUtils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 
 public class ContactPage extends Activity {
@@ -29,6 +33,8 @@ public class ContactPage extends Activity {
 
     private TextView txtTotal;
 
+    private TransactionListAdapter transactionListAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +44,6 @@ public class ContactPage extends Activity {
 
         fonts = new HashMap<>();
         transactionList = (ListView) findViewById(R.id.lstTransaction);
-
 
         Typeface thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface light = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
@@ -70,9 +75,53 @@ public class ContactPage extends Activity {
             }
         });
 
+        ImageButton btnClearHistory = (ImageButton) findViewById(R.id.btnClearHistory);
 
-        TransactionListAdapter transactionListAdapter= new TransactionListAdapter(getApplicationContext(), contact, fonts);
-        transactionList.setAdapter(transactionListAdapter);
+        btnClearHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                if (contact.transactions.size() == 0) {
+                                    Toast.makeText(getApplicationContext(), "There is no history to delete!", Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                                ContactUtil.contact.transactions.clear();
+                                updateContactList();
+
+                                contact.setTotalString();
+                                txtTotal.setText(contact.total);
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setMessage("Are you sure you want to clear the history for " + ContactUtil.contact.name).setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+            }
+        });
+
+        ImageButton btnBack = (ImageButton) findViewById(R.id.btnBackContact);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getIntent();
+                setResult(ActivityUtils.CONTACT_RETURN, intent);
+                finish();
+            }
+        });
+
+        updateContactList();
     }
 
     /**
@@ -87,12 +136,25 @@ public class ContactPage extends Activity {
 
         if (requestCode == 1) {
             if (resultCode == 1) {
-                TransactionListAdapter transactionListAdapter= new TransactionListAdapter(getApplicationContext(), contact, fonts);
-                transactionList.setAdapter(transactionListAdapter);
+                updateContactList();
                 contact.setTotalString();
                 txtTotal.setText(contact.total);
             }
         }
+    }
+
+    private void updateContactList()
+    {
+        for(int i = 0; i < contact.transactions.size(); i++)
+        {
+            if(contact.transactions.get(i).getAmount() == 0)
+            {
+                contact.transactions.remove(i);
+            }
+        }
+
+        transactionListAdapter = new TransactionListAdapter(getApplicationContext(), contact, fonts);
+        transactionList.setAdapter(transactionListAdapter);
     }
 
     @Override

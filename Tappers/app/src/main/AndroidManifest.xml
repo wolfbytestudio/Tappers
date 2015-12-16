@@ -18,17 +18,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NewContact"
+            android:name=".contact.NewContact"
             android:label="@string/title_activity_new_contact"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".ContactPage"
+            android:name=".contact.ContactPage"
             android:label="@string/title_activity_contact_page"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".NewTransaction"
+            android:name=".transaction.NewTransaction"
             android:label="@string/title_activity_new_transaction"
             android:screenOrientation="portrait">
         </activity>

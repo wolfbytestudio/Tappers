@@ -1,4 +1,4 @@
-package com.example.zack.tapperstesting;
+package com.example.zack.tapperstesting.transaction;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -10,10 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.example.zack.tapperstesting.R;
+import com.example.zack.tapperstesting.contact.ContactUtil;
 
 import java.util.Calendar;
 
@@ -85,6 +88,17 @@ public class NewTransaction extends Activity {
                 showDialog(0);
             }
         });
+
+        ImageButton btnBack = (ImageButton) findViewById(R.id.btnBackNewTransaction);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent returnIntent = getIntent();
+                setResult(-1, returnIntent);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -103,9 +117,8 @@ public class NewTransaction extends Activity {
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                     yearDate = year;
                     monthDate = monthOfYear + 1;
-                    dayDate = dayOfMonth + 1;
+                    dayDate = dayOfMonth;
                     TextView text = (TextView) findViewById(R.id.lblSetDateTran);
-                    System.out.println();
                     text.setText("Date Selected: " + dayDate + "/" + monthDate + "/" + yearDate);
                 }
             };

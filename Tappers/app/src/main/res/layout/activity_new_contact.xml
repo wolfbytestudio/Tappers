@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/AppTheme"
-    tools:context="com.example.zack.tapperstesting.NewContact">
+    tools:context="com.example.zack.tapperstesting.contact.NewContact">
 
 
     <LinearLayout
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtContactName"
         android:textColor="#0b0c0e"
-        android:text="Transaction"
+        android:text="Transaction Amount"
         android:textSize="20dp"
         android:layout_marginLeft="30dp"
         android:paddingTop="5dp"
@@ -195,5 +195,18 @@
         android:layout_alignParentBottom="true"
         android:text="Confirm"
         android:id="@+id/cmdConfirm"/>
+
+    <ImageButton
+        android:layout_width="55dp"
+        android:layout_height="54.5dp"
+        android:id="@+id/btnBackNewContact"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:cropToPadding="true"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:src="@drawable/back_arrow"
+        android:layout_above="@+id/txtTotal"
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>

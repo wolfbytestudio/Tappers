@@ -1,19 +1,20 @@
-package com.example.zack.tapperstesting;
+package com.example.zack.tapperstesting.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.media.Image;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.zack.tapperstesting.R;
+import com.example.zack.tapperstesting.contact.Contact;
+import com.example.zack.tapperstesting.transaction.Transaction;
+import com.example.zack.tapperstesting.transaction.TransactionType;
+
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -83,7 +84,16 @@ public class TransactionListAdapter extends BaseAdapter {
         }
 
 
-        lblReason.setText(transaction.getReason());
+        if(transaction.getReason().equals(""))
+        {
+            lblReason.setText("Reason unspecific");
+        }
+        else
+        {
+            lblReason.setText(transaction.getReason());
+        }
+
+        lblTime.setText(transaction.getDate());
 
         return view;
     }

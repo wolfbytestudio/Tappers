@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="wrap_content">
 
 
     <ImageView
@@ -25,7 +25,8 @@
         android:textSize="18dp"
         android:layout_toRightOf="@id/imgTransactionType"
         android:textColor="#0F1012"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/lblPaymentDate" />
 
     <TextView
 
@@ -46,6 +47,7 @@
         android:layout_alignParentRight="true"
         android:fontFamily="sans-serif-light"
         android:textSize="10dp"
+        android:gravity="center"
         android:textColor="#37383A"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
