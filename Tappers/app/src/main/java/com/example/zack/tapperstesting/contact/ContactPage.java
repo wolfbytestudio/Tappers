@@ -94,7 +94,6 @@ public class ContactPage extends Activity {
                                 }
                                 ContactUtil.contact.transactions.clear();
                                 updateContactList();
-
                                 contact.setTotalString();
                                 txtTotal.setText(contact.total);
                                 break;

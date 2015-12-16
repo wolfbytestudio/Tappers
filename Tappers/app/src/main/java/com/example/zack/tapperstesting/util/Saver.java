@@ -47,19 +47,21 @@ public class Saver {
         for (Contact contact : contacts) {
             temp += contact.name + ":" + contact.total + ":"
                     + contact.date + ":";
-            if(contact.transactions.size() == 0)
-            {
-                temp += ";";
-                saveString = temp;
-                return;
-            }
+
+            int counter = 0;
 
             for (Transaction transaction :
                     contact.transactions) {
+                counter++;
                 temp+= transaction.getReason() + "%"
                         + transaction.getAmount() + "%"
                         + transaction.getDate() + "%"
-                        + transaction.getType() + "-";
+                        + transaction.getType();
+                if(counter != contact.transactions.size())
+                {
+                    temp += "-";
+                }
+
             }
             temp += ";";
         }

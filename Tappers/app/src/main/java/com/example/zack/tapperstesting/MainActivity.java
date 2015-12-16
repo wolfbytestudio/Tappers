@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -65,6 +66,7 @@ public class MainActivity extends Activity {
         Loader load = new Loader(getApplicationContext());
         load.load();
         contacts = load.getContacts();
+        //contacts.clear();
 
         TextView title = (TextView) findViewById(R.id.txtTitle);
 
@@ -140,6 +142,7 @@ public class MainActivity extends Activity {
 
         customListViewAdapter = new MainListAdapter(getApplicationContext(), contacts, typeFaces);
         listView.setAdapter(customListViewAdapter);
+
     }
 
     public void removeContact(int index)
@@ -207,11 +210,18 @@ public class MainActivity extends Activity {
         if(requestCode == ActivityUtils.CONTACT) {
             if (resultCode == ActivityUtils.CONTACT_RETURN) {
 
-                if(contacts.get(contactPagePosition).transactions.size() == 0)
+                if(ContactUtil.contact.transactions.size() == 0)
                 {
                     contacts.get(contactPagePosition).total = "You and " +
                             contacts.get(contactPagePosition).name
                             + " don't owe each other anything!";
+                    contacts.get(contactPagePosition).transactions.add(
+                            new Transaction(TransactionType.FROM, 0, "0/0/0", "Reason Unspecific")
+                    );
+                    customListViewAdapter = new MainListAdapter(getApplicationContext(), contacts, typeFaces);
+                    listView.setAdapter(customListViewAdapter);
+                    Saver saver = new Saver(contacts, getApplicationContext());
+                    saver.save();
                     return;
                 }
 
@@ -224,9 +234,14 @@ public class MainActivity extends Activity {
                 }catch(Exception e) {
                     Log.d("abc", "ERROR: " + e.toString());
                 }
+                Saver saver = new Saver(contacts, getApplicationContext());
+                saver.save();
                 ContactUtil.contact = null;
             }
         }
+
+
+
     }
 
     @Override

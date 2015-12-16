@@ -74,10 +74,9 @@ public class Loader
             Contact currentContact;
 
             String[] sectors = loaderString.split(";");
-            Log.d("abc", "loaderString: " + loaderString);
+            Log.d("abc", "Loading String: " + loaderString);
 
-            Log.d("abc", "sectors: " + sectors.length);
-            for(int i = 0; i < sectors.length - 1; i++)
+            for(int i = 0; i < sectors.length; i++)
             {
                 tempTrans = new ArrayList<>();
                 String[] segments = sectors[i].split(":");
@@ -87,7 +86,6 @@ public class Loader
 
                 String[] transactionSegments = segments[3].split("-");
 
-                Log.d("abc", "transactionSegments: " + transactionSegments.length);
                 if((transactionSegments.length) == 0)
                 {
                     currentContact = new Contact(name, total, date);
@@ -95,11 +93,11 @@ public class Loader
                 }
                 else
                 {
-                    Log.d("abc", "transsss seg: " + transactionSegments.length);
+
                     for(int x = 0; x < transactionSegments.length; x++)
                     {
-                        String[] newSeg = transactionSegments[i].split("%");
-                        Log.d("abc", "new seg: " + newSeg.length);
+                        String[] newSeg = transactionSegments[x].split("%");
+
                         String reason = newSeg[0];
                         double amount = Double.parseDouble(newSeg[1]);
                         String dateTran = newSeg[2];
@@ -108,6 +106,7 @@ public class Loader
                                 TransactionType.valueOf(newSeg[3].toUpperCase());
 
                         Transaction trans = new Transaction(type, amount, dateTran, reason);
+                        Log.d("abc", "added transaction: " + type  );
                         tempTrans.add(trans);
                     }
 
