@@ -1,6 +1,7 @@
 package com.example.zack.tapperstesting.util;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -10,8 +11,11 @@ import com.example.zack.tapperstesting.transaction.TransactionType;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -31,56 +35,48 @@ public class Loader
 
     public String loaderString = "";
 
+    private Context context;
+
+    public Loader (Context context)
+    {
+        this.context = context;
+    }
+
     public void load()
     {
-        loaderString = "1";
-
-        ArrayList<Transaction> tempTrans;
-        Contact currentContact;
-        StringBuilder builder = new StringBuilder();
-        loaderString = "2";
-
-        String collected;
-
         contacts = new ArrayList<>();
 
-        String fileName = "tappers.txt";
-        File file = new File(fileName);
-
-        if(!file.exists()) {
-            try {
-                file.createNewFile();
-            }
-            catch (Exception io) { }
-        }
-
         try {
-            InputStream load = null;
+            InputStream inputStream = context.openFileInput("tappers.txt");
 
-            try {//Attempt to initialize input stream
-                load = new BufferedInputStream(new FileInputStream(file));
-                load.close();
-            } catch(Exception io) {
-                Log.d("a", "FAILED TO LOAD LOADER");
-            }
-
-            byte[] dataArray = new byte[load.available()];
-            while (load.read(dataArray) != -1 )
+            if(inputStream != null)
             {
-                collected = new String(dataArray);
+                InputStreamReader inputStreamReader = new InputStreamReader((inputStream));
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                String temp;
+                StringBuilder strBuilder = new StringBuilder();
+
+                while( (temp = bufferedReader.readLine()) != null ) {
+                    strBuilder.append(temp);
+                }
+                inputStream.close();
+                loaderString = strBuilder.toString();
             }
-            load.close();
 
-        } catch (Exception e) {
-            //loaderString = "failed";
-        }
-
-        collected =  builder.toString();
+        } catch(FileNotFoundException e) {
+        } catch(IOException e) { }
 
 
         try
         {
-            String[] sectors = collected.split(";");
+            ArrayList<Transaction> tempTrans;
+            Contact currentContact;
+
+            String[] sectors = loaderString.split(";");
+            Log.d("abc", "loaderString: " + loaderString);
+
+            Log.d("abc", "sectors: " + sectors.length);
             for(int i = 0; i < sectors.length - 1; i++)
             {
                 tempTrans = new ArrayList<>();
@@ -91,28 +87,39 @@ public class Loader
 
                 String[] transactionSegments = segments[3].split("-");
 
-                for(int x = 0; x < transactionSegments.length; x++)
+                Log.d("abc", "transactionSegments: " + transactionSegments.length);
+                if((transactionSegments.length) == 0)
                 {
-                    String reason = transactionSegments[0];
-                    double amount = Double.parseDouble(transactionSegments[1]);
-                    String dateTran = transactionSegments[2];
-                    TransactionType type =
-                            TransactionType.valueOf(transactionSegments[3].toUpperCase());
-
-
-                    Transaction trans = new Transaction(type, amount, dateTran, reason);
-                    tempTrans.add(trans);
-
+                    currentContact = new Contact(name, total, date);
+                    contacts.add(currentContact);
                 }
+                else
+                {
+                    Log.d("abc", "transsss seg: " + transactionSegments.length);
+                    for(int x = 0; x < transactionSegments.length; x++)
+                    {
+                        String[] newSeg = transactionSegments[i].split("%");
+                        Log.d("abc", "new seg: " + newSeg.length);
+                        String reason = newSeg[0];
+                        double amount = Double.parseDouble(newSeg[1]);
+                        String dateTran = newSeg[2];
 
-                currentContact = new Contact(name, total, date, tempTrans);
+                        TransactionType type =
+                                TransactionType.valueOf(newSeg[3].toUpperCase());
 
-                contacts.add(currentContact);
+                        Transaction trans = new Transaction(type, amount, dateTran, reason);
+                        tempTrans.add(trans);
+                    }
+
+                    currentContact = new Contact(name, total, date, tempTrans);
+
+                    Log.d("abc", "ADDED NEW CONTACT");
+                    contacts.add(currentContact);
+                }
             }
-        }
-        catch(Exception io)
-        {
+        } catch(Exception io) {
 
+            Log.d("abc", "IROOO " + io.toString());
         }
 
     }

@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
     /**
      * All the contacts
      */
-    private ArrayList<Contact> contacts = new ArrayList<>();
+    private ArrayList<Contact> contacts;
 
     /**
      * The list view
@@ -60,35 +60,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        File file = new File("tappers");
+        contacts = new ArrayList<>();
 
-
-        if(!file.exists()) { try {
-                file.createNewFile();
-            }catch (Exception io) { }
-        }
-
-        Loader loader = new Loader();
-        try
-        {
-            try
-            {
-                loader.load();
-                Toast.makeText(getApplicationContext(), loader.loaderString, Toast.LENGTH_LONG).show();
-                contacts = loader.getContacts();
-            }
-            catch (Exception io)
-            {
-                Toast.makeText(getApplicationContext(), loader.loaderString, Toast.LENGTH_LONG).show();
-            }
-
-
-
-        } catch (Exception io) {
-
-        }
-
-
+        Loader load = new Loader(getApplicationContext());
+        load.load();
+        contacts = load.getContacts();
 
         TextView title = (TextView) findViewById(R.id.txtTitle);
 
@@ -159,9 +135,7 @@ public class MainActivity extends Activity {
         contact.setTotalString();
         contacts.add(0, contact);
 
-
-
-        Saver saver = new Saver(contacts);
+        Saver saver = new Saver(contacts, getApplicationContext());
         saver.save();
 
         customListViewAdapter = new MainListAdapter(getApplicationContext(), contacts, typeFaces);
@@ -232,10 +206,24 @@ public class MainActivity extends Activity {
 
         if(requestCode == ActivityUtils.CONTACT) {
             if (resultCode == ActivityUtils.CONTACT_RETURN) {
-                Toast.makeText(getApplicationContext(), "Returned from Contact Page", Toast.LENGTH_LONG).show();
-                ContactUtil.contact.setTotalString();
+
+                if(contacts.get(contactPagePosition).transactions.size() == 0)
+                {
+                    contacts.get(contactPagePosition).total = "You and " +
+                            contacts.get(contactPagePosition).name
+                            + " don't owe each other anything!";
+                    return;
+                }
+
                 removeContact(contactPagePosition);
-                addContact(ContactUtil.contact);
+                try {
+                    Log.d("abc", ContactUtil.contact.name);
+                    Log.d("abc", ContactUtil.contact.total);
+                    Log.d("abc", ContactUtil.contact.date);
+                    addContact(ContactUtil.contact);
+                }catch(Exception e) {
+                    Log.d("abc", "ERROR: " + e.toString());
+                }
                 ContactUtil.contact = null;
             }
         }
@@ -262,4 +250,5 @@ public class MainActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
