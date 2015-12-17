@@ -107,6 +107,8 @@ public class ContactPage extends Activity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                 builder.setMessage("Are you sure you want to clear the history for " + ContactUtil.contact.name).setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
+
+
             }
         });
 

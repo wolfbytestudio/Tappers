@@ -46,7 +46,8 @@
         android:textColor="#37383A"
         android:textSize="15dp"
         android:layout_toRightOf="@id/thumbnail"
-        android:text="John Smith owes you placeholder, placeholder and another placeholder" />
+        android:text="John Smith owes you placeholder, placeholder and another placeholder"
+        android:layout_toStartOf="@+id/btnDeleteContact" />
 
 
     <TextView
@@ -60,6 +61,18 @@
         android:text="13/12/2015"
         />
 
+    <ImageButton
+        android:layout_width="31dp"
+        android:layout_height="31dp"
+        android:id="@+id/btnDeleteContact"
+        android:layout_marginRight="10dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/bin_history"
+        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/date"
+        android:layout_marginTop="10dp"
+        android:focusable="false"/>
 
 
 </RelativeLayout>

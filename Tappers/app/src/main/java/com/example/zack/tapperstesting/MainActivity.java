@@ -33,7 +33,6 @@ import java.util.HashMap;
 
 public class MainActivity extends Activity {
 
-
     /**
      * All the contacts
      */
@@ -54,7 +53,15 @@ public class MainActivity extends Activity {
      */
     private HashMap<String, Typeface> typeFaces = new HashMap<>();
 
-    private int contactPagePosition = 0;
+    /**
+     * Contains the last contact page position
+     */
+    public int contactPagePosition = 0;
+
+    /**
+     * Object for handling saving
+     */
+    public Saver save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +72,13 @@ public class MainActivity extends Activity {
 
         Loader load = new Loader(getApplicationContext());
         load.load();
-        contacts = load.getContacts();
-        //contacts.clear();
 
-        TextView title = (TextView) findViewById(R.id.txtTitle);
+        contacts = load.getContacts();
+
+        //contacts.clear();
+        save = new Saver(contacts, getApplicationContext());
+
+
 
         Typeface thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface light = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
@@ -80,12 +90,14 @@ public class MainActivity extends Activity {
         typeFaces.put("light", light);
         typeFaces.put("regular", regular);
 
+
+        TextView title = (TextView) findViewById(R.id.txtTitle);
         title.setTypeface(light);
 
 
         listView = (ListView) findViewById(R.id.lstContacts);
 
-        customListViewAdapter = new MainListAdapter(getApplicationContext(), contacts, typeFaces);
+        customListViewAdapter = new MainListAdapter(getApplicationContext(), contacts, typeFaces, this);
         listView.setAdapter(customListViewAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -107,9 +119,7 @@ public class MainActivity extends Activity {
             }
         });
 
-
         ImageView img = (ImageView) findViewById(R.id.newContact);
-
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,19 +147,17 @@ public class MainActivity extends Activity {
         contact.setTotalString();
         contacts.add(0, contact);
 
-        Saver saver = new Saver(contacts, getApplicationContext());
-        saver.save();
 
-        customListViewAdapter = new MainListAdapter(getApplicationContext(), contacts, typeFaces);
-        listView.setAdapter(customListViewAdapter);
+        save.save();
+
+        customListViewAdapter.notifyDataSetChanged();
 
     }
 
     public void removeContact(int index)
     {
         contacts.remove(index);
-        customListViewAdapter = new MainListAdapter(getApplicationContext(), contacts, typeFaces);
-        listView.setAdapter(customListViewAdapter);
+        customListViewAdapter.notifyDataSetChanged();
 
     }
 
@@ -218,8 +226,7 @@ public class MainActivity extends Activity {
                     contacts.get(contactPagePosition).transactions.add(
                             new Transaction(TransactionType.FROM, 0, "0/0/0", "Reason Unspecific")
                     );
-                    customListViewAdapter = new MainListAdapter(getApplicationContext(), contacts, typeFaces);
-                    listView.setAdapter(customListViewAdapter);
+                    customListViewAdapter.notifyDataSetChanged();
                     Saver saver = new Saver(contacts, getApplicationContext());
                     saver.save();
                     return;

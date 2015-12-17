@@ -1,6 +1,10 @@
 package com.example.zack.tapperstesting.adapter;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -11,9 +15,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.zack.tapperstesting.MainActivity;
 import com.example.zack.tapperstesting.R;
 import com.example.zack.tapperstesting.contact.Contact;
+import com.example.zack.tapperstesting.contact.ContactPage;
+import com.example.zack.tapperstesting.contact.ContactUtil;
+import com.example.zack.tapperstesting.util.ActivityUtils;
+import com.example.zack.tapperstesting.util.Saver;
 
 import org.w3c.dom.Text;
 
@@ -35,13 +45,17 @@ public class MainListAdapter extends BaseAdapter {
 
     private HashMap<String, Typeface> fonts;
 
+    private MainActivity owner;
+
     public MainListAdapter(Context context, ArrayList<Contact> contacts
-            , HashMap<String, Typeface> fonts)
+            , HashMap<String, Typeface> fonts, MainActivity owner)
     {
         this.fonts = fonts;
         this.context = context;
         this.contacts = contacts;
+        this.owner = owner;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
     }
 
 
@@ -61,7 +75,7 @@ public class MainListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         View view = convertView;
 
@@ -94,6 +108,53 @@ public class MainListAdapter extends BaseAdapter {
         }
 
         date.setText(myContact.date);
+
+        ImageView deleteContact = (ImageView) view.findViewById(R.id.btnDeleteContact);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int mPos = position;
+                Intent intent = new Intent(view.getContext(), ContactPage.class);
+
+                intent.putExtra("name", contacts.get(position).name);
+
+                Contact c = contacts.get(position);
+                ContactUtil.contact = c;
+                c.setTotalString();
+                intent.putExtra("total", c.total);
+                owner.contactPagePosition = position;
+                owner.startActivityForResult(intent, ActivityUtils.CONTACT);
+
+            }
+        });
+
+
+        deleteContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                contacts.remove(position);
+                                owner.save.save();
+                                notifyDataSetChanged();
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(owner);
+                builder.setMessage("Are you sure you want to delete the contact '" + contacts.get(position).name + "'?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+
+            }
+        });
 
         return view;
     }
