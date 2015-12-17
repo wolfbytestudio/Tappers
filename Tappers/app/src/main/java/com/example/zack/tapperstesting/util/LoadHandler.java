@@ -23,7 +23,7 @@ import java.util.ArrayList;
 /**
  * Created by Zack on 16/12/2015.
  */
-public class Loader
+public class LoadHandler
 {
 
     private ArrayList<Contact> contacts;
@@ -37,7 +37,7 @@ public class Loader
 
     private Context context;
 
-    public Loader (Context context)
+    public LoadHandler(Context context)
     {
         this.context = context;
     }

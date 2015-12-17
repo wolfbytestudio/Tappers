@@ -21,6 +21,8 @@ import com.example.zack.tapperstesting.R;
 import com.example.zack.tapperstesting.adapter.TransactionListAdapter;
 import com.example.zack.tapperstesting.util.ActivityUtils;
 
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
 
 
@@ -50,10 +52,12 @@ public class ContactPage extends Activity {
         Typeface light = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
         Typeface regular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
 
-
         fonts.put("thin", thin);
         fonts.put("light", light);
         fonts.put("regular", regular);
+
+        TextView lblBackContacts = (TextView) findViewById(R.id.lblBackContacts);
+        lblBackContacts.setTypeface(fonts.get("regular"));
 
         txtTotal.setTypeface(fonts.get("light"));
         txtTotal.setText(getIntent().getStringExtra("total"));

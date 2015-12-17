@@ -71,7 +71,7 @@
         android:src="@drawable/bin_history"
         android:layout_centerVertical="true"
         android:layout_alignEnd="@+id/date"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:focusable="false"/>
 
 

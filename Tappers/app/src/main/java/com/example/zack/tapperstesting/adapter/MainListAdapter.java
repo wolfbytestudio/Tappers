@@ -1,21 +1,16 @@
 package com.example.zack.tapperstesting.adapter;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.zack.tapperstesting.MainActivity;
 import com.example.zack.tapperstesting.R;
@@ -23,14 +18,10 @@ import com.example.zack.tapperstesting.contact.Contact;
 import com.example.zack.tapperstesting.contact.ContactPage;
 import com.example.zack.tapperstesting.contact.ContactUtil;
 import com.example.zack.tapperstesting.util.ActivityUtils;
-import com.example.zack.tapperstesting.util.Saver;
-
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by Zack on 13/12/2015.

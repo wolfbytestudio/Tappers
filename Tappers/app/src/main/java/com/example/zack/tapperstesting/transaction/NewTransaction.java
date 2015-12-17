@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,12 +42,34 @@ public class NewTransaction extends Activity {
         Button btnAccept = (Button) findViewById(R.id.cmdConfirmTrans);
         Button btnDate = (Button) findViewById(R.id.btnPickNewDateTran);
 
-        final TextView amount = (TextView) findViewById(R.id.txtTransactionTran);
-        final TextView reason = (TextView) findViewById(R.id.txtReasonTran);
-        final TextView date = (TextView) findViewById(R.id.lblSetDateTran);
+        Typeface thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
+        Typeface light = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
+        Typeface regular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
 
+
+        TextView txtTransactionTitle = (TextView) findViewById(R.id.lblTransactionTran);
+        txtTransactionTitle.setTypeface(light);
+
+        TextView lblReasonTran = (TextView) findViewById(R.id.lblReasonTran);
+        lblReasonTran.setTypeface(light);
+
+        TextView lblDateTran = (TextView) findViewById(R.id.lblDateTran);
+        lblDateTran.setTypeface(light);
+
+        final TextView amount = (TextView) findViewById(R.id.txtTransactionTran);
+        amount.setTypeface(light);
+        final TextView reason = (TextView) findViewById(R.id.txtReasonTran);
+        reason.setTypeface(light);
+        final TextView date = (TextView) findViewById(R.id.lblSetDateTran);
+        date.setTypeface(light);
+        final TextView back = (TextView) findViewById(R.id.lblBackContactsTransaction);
+        back.setTypeface(regular);
         final RadioButton to = (RadioButton) findViewById(R.id.rdbToTran);
+        to.setTypeface(light);
         final RadioButton from = (RadioButton) findViewById(R.id.rdbFromTran);
+        from.setTypeface(light);
+
+
 
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override

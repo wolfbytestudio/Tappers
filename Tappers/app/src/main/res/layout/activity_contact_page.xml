@@ -78,6 +78,7 @@
         android:layout_width="49dp"
         android:layout_height="54.5dp"
         android:id="@+id/btnNewTransaction"
+
         android:background="@drawable/title_border"
         android:layout_alignParentRight="true"
         android:scaleType="fitCenter"
@@ -86,17 +87,33 @@
         android:layout_above="@+id/txtTotal"
         android:src="@drawable/new_transaction"/>
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="54.5dp"
+        android:gravity="center"
+        android:layout_marginLeft="25dp"
+        android:textSize="17dp"
+        android:id="@+id/lblBackContacts"
+        android:text="Menu"
+        android:background="@null"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#FFFFFF" />
+
     <ImageButton
-        android:layout_width="55dp"
+        android:layout_width="75dp"
         android:layout_height="54.5dp"
         android:id="@+id/btnBackContact"
         android:background="@null"
         android:scaleType="fitCenter"
+        android:paddingRight="40dp"
         android:cropToPadding="true"
         android:paddingTop="14dp"
         android:paddingBottom="14dp"
         android:src="@drawable/back_arrow"
         android:layout_above="@+id/txtTotal"
         android:layout_alignParentTop="true" />
+
+
 
 </RelativeLayout>

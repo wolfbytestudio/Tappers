@@ -45,8 +45,8 @@ public class NewContact extends Activity {
         Typeface light = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
         Typeface regular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
 
-
-
+        TextView lblBackContacts = (TextView) findViewById(R.id.lblBackContactsNew);
+        lblBackContacts.setTypeface(regular);
 
         TextView title = (TextView) findViewById(R.id.contact_title);
         TextView lblContactName = (TextView) findViewById(R.id.lblContactName);

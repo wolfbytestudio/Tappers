@@ -15,7 +15,7 @@ import java.util.ArrayList;
 /**
  * Created by Zack on 16/12/2015.
  */
-public class Saver {
+public class SaveHandler {
 
     private ArrayList<Contact> contacts;
 
@@ -25,7 +25,7 @@ public class Saver {
 
     private Context context;
 
-    public Saver(ArrayList<Contact> contacts, Context context)
+    public SaveHandler(ArrayList<Contact> contacts, Context context)
     {
         this.contacts = contacts;
         this.context = context;

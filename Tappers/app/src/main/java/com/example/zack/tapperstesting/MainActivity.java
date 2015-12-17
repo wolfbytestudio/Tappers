@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,11 +22,9 @@ import com.example.zack.tapperstesting.contact.NewContact;
 import com.example.zack.tapperstesting.transaction.Transaction;
 import com.example.zack.tapperstesting.transaction.TransactionType;
 import com.example.zack.tapperstesting.util.ActivityUtils;
-import com.example.zack.tapperstesting.util.Loader;
-import com.example.zack.tapperstesting.util.Saver;
+import com.example.zack.tapperstesting.util.LoadHandler;
+import com.example.zack.tapperstesting.util.SaveHandler;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -61,7 +58,7 @@ public class MainActivity extends Activity {
     /**
      * Object for handling saving
      */
-    public Saver save;
+    public SaveHandler save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,13 +68,13 @@ public class MainActivity extends Activity {
         contacts = new ArrayList<>();
 
 
-        Loader load = new Loader(getApplicationContext());
+        LoadHandler load = new LoadHandler(getApplicationContext());
         load.load();
 
         contacts = load.getContacts();
 
         //contacts.clear();
-        save = new Saver(contacts, getApplicationContext());
+        save = new SaveHandler(contacts, getApplicationContext());
 
 
 
@@ -230,7 +227,7 @@ public class MainActivity extends Activity {
                             new Transaction(TransactionType.FROM, 0, "0/0/0", "Reason Unspecific")
                     );
                     customListViewAdapter.notifyDataSetChanged();
-                    Saver saver = new Saver(contacts, getApplicationContext());
+                    SaveHandler saver = new SaveHandler(contacts, getApplicationContext());
                     saver.save();
                     return;
                 }
@@ -244,7 +241,7 @@ public class MainActivity extends Activity {
                 }catch(Exception e) {
                     Log.d("abc", "ERROR: " + e.toString());
                 }
-                Saver saver = new Saver(contacts, getApplicationContext());
+                SaveHandler saver = new SaveHandler(contacts, getApplicationContext());
                 saver.save();
                 ContactUtil.contact = null;
             }

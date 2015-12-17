@@ -25,146 +25,170 @@
         android:textColor="#ffffff"
         android:background="@drawable/title_border" />
 
-    <TextView
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtTransactionTitle"
-        android:textColor="#0b0c0e"
-        android:text="Transaction Amount"
-        android:textSize="20dp"
-        android:layout_marginLeft="30dp"
-        android:paddingTop="5dp"
-        android:fontFamily="sans-serif-light"
-        android:id="@+id/lblTransactionTran"
-        android:layout_centerHorizontal="true"
-        />
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/txtTransactionTitle">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
-    <EditText
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#0b0c0e"
+                android:text="Transaction Amount"
+                android:textSize="20dp"
+                android:layout_marginLeft="30dp"
+                android:paddingTop="5dp"
+                android:fontFamily="sans-serif-light"
+                android:id="@+id/lblTransactionTran"
+                android:layout_centerHorizontal="true"
+                />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginEnd="30dp"
+                android:textSize="14dp"
+                android:text="0"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:fontFamily="sans-serif-light"
+                android:ems="10"
+                android:id="@+id/txtTransactionTran"
+                android:layout_below="@+id/lblTransactionTran" />
+
+
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/txtTransactionTran"
+                android:layout_marginLeft="-20dp"
+                android:layout_alignTop="@+id/txtTransactionTran"
+                android:paddingRight="10dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="To"
+                    android:layout_marginRight="10dp"
+                    android:checked="true"
+                    android:id="@+id/rdbToTran"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="From"
+                    android:id="@+id/rdbFromTran"
+                    android:layout_gravity="right" />
+
+            </RadioGroup>
+
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtTransactionTran"
+                android:textColor="#0b0c0e"
+                android:text="Reason"
+                android:textSize="20dp"
+                android:layout_marginLeft="30dp"
+                android:paddingTop="5dp"
+                android:fontFamily="sans-serif-light"
+                android:id="@+id/lblReasonTran"
+                android:layout_centerHorizontal="true"
+                />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="30dp"
+                android:textSize="14dp"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoCorrect"
+                android:fontFamily="sans-serif-light"
+                android:text=""
+                android:ems="10"
+                android:id="@+id/txtReasonTran"
+                android:layout_below="@+id/lblReasonTran"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtReasonTran"
+                android:textColor="#0b0c0e"
+                android:text="Date"
+                android:textSize="20dp"
+                android:layout_marginLeft="30dp"
+                android:paddingTop="5dp"
+                android:fontFamily="sans-serif-light"
+                android:id="@+id/lblDateTran"
+                android:layout_centerHorizontal="true"
+                />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Pick new Date"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="sans-serif-light"
+                android:id="@+id/btnPickNewDateTran"
+                android:layout_below="@+id/lblDateTran"
+                android:layout_toEndOf="@+id/lblSetDateTran" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:gravity="center"
+                android:fontFamily="sans-serif-light"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Date Selected: 14/12/2015"
+                android:layout_marginLeft="20dp"
+                android:textSize="14dp"
+                android:id="@+id/lblSetDateTran"
+                android:layout_alignTop="@+id/btnPickNewDateTran"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_below="@+id/btnPickNewDateTran"
+                android:text="Confirm"
+                android:id="@+id/cmdConfirmTrans"/>
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="14dp"
-        android:layout_marginEnd="30dp"
-        android:textSize="14dp"
-        android:text="0"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:fontFamily="sans-serif-light"
-        android:ems="10"
-        android:id="@+id/txtTransactionTran"
-        android:layout_below="@+id/lblTransactionTran" />
-
-
-    <RadioGroup
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/txtTransactionTran"
-        android:layout_marginLeft="-20dp"
-        android:layout_alignTop="@+id/txtTransactionTran"
-        android:paddingRight="10dp"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="To"
-            android:layout_marginRight="10dp"
-            android:checked="true"
-            android:id="@+id/rdbToTran"/>
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="From"
-            android:id="@+id/rdbFromTran"
-            android:layout_gravity="right" />
-
-    </RadioGroup>
-
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtTransactionTran"
-        android:textColor="#0b0c0e"
-        android:text="Reason"
-        android:textSize="20dp"
-        android:layout_marginLeft="30dp"
-        android:paddingTop="5dp"
-        android:fontFamily="sans-serif-light"
-        android:id="@+id/lblReasonTran"
-        android:layout_centerHorizontal="true"
-        />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="30dp"
-        android:textSize="14dp"
-        android:layout_height="wrap_content"
-        android:inputType="textAutoCorrect"
-        android:fontFamily="sans-serif-light"
-        android:text=""
-        android:ems="10"
-        android:id="@+id/txtReasonTran"
-        android:layout_below="@+id/lblReasonTran"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtReasonTran"
-        android:textColor="#0b0c0e"
-        android:text="Date"
-        android:textSize="20dp"
-        android:layout_marginLeft="30dp"
-        android:paddingTop="5dp"
-        android:fontFamily="sans-serif-light"
-        android:id="@+id/lblDateTran"
-        android:layout_centerHorizontal="true"
-        />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Pick new Date"
-        android:layout_marginLeft="10dp"
-        android:fontFamily="sans-serif-light"
-        android:id="@+id/btnPickNewDateTran"
-        android:layout_below="@+id/lblDateTran"
-        android:layout_toEndOf="@+id/lblSetDateTran" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="44dp"
+        android:layout_height="54.5dp"
         android:gravity="center"
+        android:layout_marginLeft="25dp"
+        android:textSize="17dp"
+        android:id="@+id/lblBackContactsTransaction"
+        android:text="Contact"
+        android:background="@null"
         android:fontFamily="sans-serif-light"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Date Selected: 14/12/2015"
-        android:layout_marginLeft="20dp"
-        android:textSize="14dp"
-        android:id="@+id/lblSetDateTran"
-        android:layout_alignTop="@+id/btnPickNewDateTran"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_alignParentBottom="true"
-        android:text="Confirm"
-        android:id="@+id/cmdConfirmTrans"/>
+        android:textColor="#FFFFFF" />
 
     <ImageButton
-        android:layout_width="55dp"
+        android:layout_width="75dp"
         android:layout_height="54.5dp"
         android:id="@+id/btnBackNewTransaction"
         android:background="@null"
         android:scaleType="fitCenter"
+        android:paddingRight="40dp"
         android:cropToPadding="true"
         android:paddingTop="14dp"
         android:paddingBottom="14dp"
