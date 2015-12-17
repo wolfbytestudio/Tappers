@@ -70,6 +70,7 @@ public class MainActivity extends Activity {
 
         contacts = new ArrayList<>();
 
+
         Loader load = new Loader(getApplicationContext());
         load.load();
 
@@ -120,6 +121,8 @@ public class MainActivity extends Activity {
         });
 
         ImageView img = (ImageView) findViewById(R.id.newContact);
+
+
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
