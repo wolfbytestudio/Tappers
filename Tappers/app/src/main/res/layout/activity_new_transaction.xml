@@ -15,7 +15,7 @@
         android:textAlignment="gravity"
         android:gravity="center"
         android:maxHeight="80dp"
-        android:textSize="28dp"
+        android:textSize="25dp"
         android:maxLines="1"
         android:minHeight="55dp"
         android:paddingBottom="5dp"

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.zack.tapperstesting.MainActivity;
 import com.example.zack.tapperstesting.R;
+import com.example.zack.tapperstesting.contact.CharacterType;
 import com.example.zack.tapperstesting.contact.Contact;
 import com.example.zack.tapperstesting.contact.ContactPage;
 import com.example.zack.tapperstesting.contact.ContactUtil;
@@ -96,6 +98,18 @@ public class MainListAdapter extends BaseAdapter {
         catch(Exception e)
         {
             payment.setText(myContact.total);
+        }
+
+
+        ImageView character = (ImageView) view.findViewById(R.id.characterImage);
+
+        if(myContact.characterType == CharacterType.MALE)
+        {
+            character.setImageResource(R.drawable.male);
+        }
+        else
+        {
+            character.setImageResource(R.drawable.female);
         }
 
         date.setText(myContact.date);

@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,7 +69,18 @@ public class ContactPage extends Activity {
         lblTitle.setText(getIntent().getStringExtra("name").toString());
         txtHistory.setTypeface(fonts.get("light"));
 
+        ImageView characterImageContact = (ImageView) findViewById(R.id.characterImageContact);
+
         contact = ContactUtil.contact;
+
+        if(contact.characterType == CharacterType.MALE)
+        {
+            characterImageContact.setImageResource(R.drawable.male);
+        }
+        else
+        {
+            characterImageContact.setImageResource(R.drawable.female);
+        }
 
         ImageButton btnNewTrans = (ImageButton) findViewById(R.id.btnNewTransaction);
 

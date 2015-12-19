@@ -47,7 +47,7 @@ public class NewTransaction extends Activity {
         Typeface regular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
 
 
-        TextView txtTransactionTitle = (TextView) findViewById(R.id.lblTransactionTran);
+        TextView txtTransactionTitle = (TextView) findViewById(R.id.txtTransactionTitle);
         txtTransactionTitle.setTypeface(light);
 
         TextView lblReasonTran = (TextView) findViewById(R.id.lblReasonTran);
@@ -69,6 +69,7 @@ public class NewTransaction extends Activity {
         final RadioButton from = (RadioButton) findViewById(R.id.rdbFromTran);
         from.setTypeface(light);
 
+        date.setText("Date Selected: " + dayDate + "/" + (monthDate + 1) + "/" + yearDate);
 
 
         btnAccept.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +100,7 @@ public class NewTransaction extends Activity {
                 ContactUtil.contact.addTransaction(new Transaction(
                         type, am, date.getText().toString().substring(15),
                         reason.getText().toString()));
+
                 Intent returnIntent = getIntent();
                 setResult(1, returnIntent);
                 finish();

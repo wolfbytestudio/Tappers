@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.zack.tapperstesting.contact.CharacterType;
 import com.example.zack.tapperstesting.contact.Contact;
 import com.example.zack.tapperstesting.transaction.Transaction;
 import com.example.zack.tapperstesting.transaction.TransactionType;
@@ -78,17 +79,20 @@ public class LoadHandler
 
             for(int i = 0; i < sectors.length; i++)
             {
+                CharacterType charType = CharacterType.MALE;
                 tempTrans = new ArrayList<>();
                 String[] segments = sectors[i].split(":");
                 String name = segments[0];
                 String total = segments[1];
                 String date = segments[2];
 
-                String[] transactionSegments = segments[3].split("-");
+                String character = segments[3];
+
+                String[] transactionSegments = segments[4].split("-");
 
                 if((transactionSegments.length) == 0)
                 {
-                    currentContact = new Contact(name, total, date);
+                    currentContact = new Contact(name, total, date, charType);
                     contacts.add(currentContact);
                 }
                 else
@@ -110,7 +114,11 @@ public class LoadHandler
                         tempTrans.add(trans);
                     }
 
-                    currentContact = new Contact(name, total, date, tempTrans);
+                    try {
+                        charType = CharacterType.valueOf(character.toUpperCase());
+                    } catch (Exception io) {}
+
+                    currentContact = new Contact(name, total, date,charType, tempTrans);
 
                     Log.d("abc", "ADDED NEW CONTACT");
                     contacts.add(currentContact);

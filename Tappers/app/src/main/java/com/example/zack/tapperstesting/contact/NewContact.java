@@ -69,6 +69,8 @@ public class NewContact extends Activity {
         final EditText txtReason = (EditText) findViewById(R.id.txtReason);
         final RadioButton rdbTo = (RadioButton) findViewById(R.id.rdbTo);
         final RadioButton rdbFrom = (RadioButton) findViewById(R.id.rdbFrom);
+        final RadioButton rdbMale = (RadioButton) findViewById(R.id.rdbMale);
+        final RadioButton rdbFemale = (RadioButton) findViewById(R.id.rdbFemale);
         final Button newDate = (Button) findViewById(R.id.btnPickNewDate);
         final Button confirm = (Button) findViewById(R.id.cmdConfirm);
 
@@ -137,11 +139,18 @@ public class NewContact extends Activity {
                 if(rdbTo.isChecked()) { toFrom = "to"; }
                 else { toFrom = "from"; }
 
+
+
+                String maleFemale = "Male";
+                if(rdbMale.isChecked()) { maleFemale = "Male"; }
+                else { maleFemale = "Female"; }
+
                 returnIntent.putExtra("name", txtContactName.getText().toString());
                 returnIntent.putExtra("transaction", txtTransaction.getText().toString());
                 returnIntent.putExtra("reason", txtReason.getText().toString());
                 returnIntent.putExtra("date", lblDateSelected.getText().toString().substring(15));
-                returnIntent.putExtra("tofrom", toFrom.toString().toUpperCase());
+                returnIntent.putExtra("character", maleFemale.toUpperCase());
+                returnIntent.putExtra("tofrom", toFrom.toUpperCase());
 
                 setResult(ActivityUtils.NEW_CONTACT_RETURN, returnIntent);
                 finish();

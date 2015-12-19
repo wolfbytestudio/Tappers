@@ -18,21 +18,25 @@ public class Contact implements Serializable
     public String name;
     public String total;
     public String date;
+    public CharacterType characterType;
     public List<Transaction> transactions;
 
-    public Contact(String name, String total, String date, List<Transaction> transactions)
+    public Contact(String name, String total, String date, CharacterType characterType,
+                   List<Transaction> transactions)
     {
         this.name = name;
         this.total = total;
         this.date = date;
+        this.characterType = characterType;
         this.transactions = transactions;
     }
 
-    public Contact(String name, String total, String date)
+    public Contact(String name, String total, String date, CharacterType characterType)
     {
         this.name = name;
         this.total = total;
         this.date = date;
+        this.characterType = characterType;
         this.transactions = null;
     }
     /**

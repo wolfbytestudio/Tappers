@@ -217,7 +217,33 @@
                 android:layout_alignTop="@+id/btnPickNewDate"
                 android:layout_alignParentStart="true" />
 
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-20dp"
+                android:paddingRight="10dp"
+                android:gravity="center"
+                android:id="@+id/rdbCharacter"
+                android:orientation="horizontal"
+                android:layout_below="@+id/btnPickNewDate"
+                android:layout_centerHorizontal="true">
 
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:layout_marginRight="10dp"
+                    android:checked="true"
+                    android:id="@+id/rdbMale"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:id="@+id/rdbFemale"
+                    android:layout_gravity="right" />
+
+            </RadioGroup>
 
             <Button
                 android:layout_width="fill_parent"
@@ -226,9 +252,12 @@
                 android:layout_marginRight="20dp"
                 android:text="Confirm"
                 android:id="@+id/cmdConfirm"
-                android:layout_below="@+id/btnPickNewDate"
-                android:layout_centerHorizontal="true" />
+                android:layout_below="@+id/rdbCharacter"
+                android:gravity="center"/>
+
         </RelativeLayout>
+
+
 
     </ScrollView>
 
