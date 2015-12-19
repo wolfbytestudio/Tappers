@@ -75,7 +75,7 @@ public class MainActivity extends Activity {
         contacts = load.getContacts();
         //contacts.clear();
         save = new SaveHandler(contacts, getApplicationContext());
-
+        //save.save();
 
 
         Typeface thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
@@ -184,14 +184,14 @@ public class MainActivity extends Activity {
                     String reason = data.getStringExtra("reason");
                     String date = data.getStringExtra("date");
                     String charString = data.getStringExtra("character");
+                    String backgroundCol = data.getStringExtra("bgcol");
                     String tofrom = data.getStringExtra("tofrom");
-
 
                     TransactionType type = TransactionType.valueOf(tofrom);
                     CharacterType charType = CharacterType.valueOf(charString);
 
 
-                    Contact newCon = new Contact(name, "", date, charType);
+                    Contact newCon = new Contact(name, "", date, charType, backgroundCol);
 
                     Log.d("a", "Hi3");
                     double am = 0;
@@ -239,9 +239,6 @@ public class MainActivity extends Activity {
 
                 removeContact(contactPagePosition);
                 try {
-                    Log.d("abc", ContactUtil.contact.name);
-                    Log.d("abc", ContactUtil.contact.total);
-                    Log.d("abc", ContactUtil.contact.date);
                     addContact(ContactUtil.contact);
                 }catch(Exception e) {
                     Log.d("abc", "ERROR: " + e.toString());

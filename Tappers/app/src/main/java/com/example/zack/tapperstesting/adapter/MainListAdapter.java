@@ -111,8 +111,52 @@ public class MainListAdapter extends BaseAdapter {
         {
             character.setImageResource(R.drawable.female);
         }
-
         date.setText(myContact.date);
+
+        if(myContact.backgroundColour.equalsIgnoreCase("default"))
+        {
+            character.setBackgroundResource(R.drawable.bgcol_default);
+        }
+        if(myContact.backgroundColour.equalsIgnoreCase("blue"))
+        {
+            character.setBackgroundResource(R.drawable.bgcol_blue);
+        }
+        if(myContact.backgroundColour.equalsIgnoreCase("green"))
+        {
+            character.setBackgroundResource(R.drawable.bgcol_green);
+        }
+        if(myContact.backgroundColour.equalsIgnoreCase("turq"))
+        {
+            character.setBackgroundResource(R.drawable.bgcol_turq);
+        }
+        if(myContact.backgroundColour.equalsIgnoreCase("purple"))
+        {
+            character.setBackgroundResource(R.drawable.bgcol_purple);
+        }
+        if(myContact.backgroundColour.equalsIgnoreCase("pink"))
+        {
+            character.setBackgroundResource(R.drawable.bgcol_pink);
+        }
+        if(myContact.backgroundColour.equalsIgnoreCase("red"))
+        {
+            character.setBackgroundResource(R.drawable.bgcol_red);
+        }
+        if(myContact.backgroundColour.equalsIgnoreCase("orange"))
+        {
+            character.setBackgroundResource(R.drawable.bgcol_orange);
+        }
+        if(myContact.backgroundColour.equalsIgnoreCase("gold"))
+        {
+            character.setBackgroundResource(R.drawable.bgcol_gold);
+        }
+        if(myContact.backgroundColour.equalsIgnoreCase("yellow"))
+        {
+            character.setBackgroundResource(R.drawable.bgcol_yellow);
+        }
+        if(myContact.backgroundColour.equalsIgnoreCase("black"))
+        {
+            character.setBackgroundResource(R.drawable.bgcol_black);
+        }
 
         ImageView deleteContact = (ImageView) view.findViewById(R.id.btnDeleteContact);
 

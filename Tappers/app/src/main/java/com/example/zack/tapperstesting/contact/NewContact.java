@@ -31,6 +31,9 @@ public class NewContact extends Activity {
 
     private TextView lblDateSelected;
 
+    private String backgroundSelected = "default";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,10 +43,10 @@ public class NewContact extends Activity {
 
         contacts = getIntent().getStringArrayListExtra("contacts");
 
-
         Typeface thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface light = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
         Typeface regular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
+
 
         TextView lblBackContacts = (TextView) findViewById(R.id.lblBackContactsNew);
         lblBackContacts.setTypeface(regular);
@@ -62,7 +65,7 @@ public class NewContact extends Activity {
         initializeDate();
         lblDateSelected.setTypeface(light);
         lblDate.setTypeface(light);
-
+        loadBackgrounds();
 
         final EditText txtContactName = (EditText) findViewById(R.id.txtContactName);
         final EditText txtTransaction = (EditText) findViewById(R.id.txtTransaction);
@@ -91,7 +94,6 @@ public class NewContact extends Activity {
 
         txtContactName.setSelected(false);
 
-
         ImageButton btnBack = (ImageButton) findViewById(R.id.btnBackNewContact);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +102,102 @@ public class NewContact extends Activity {
                 Intent returnIntent = getIntent();
                 setResult(-1, returnIntent);
                 finish();
+            }
+        });
+
+
+        TextView backgroundLabel = (TextView) findViewById(R.id.lblBackgroundColours);
+        backgroundLabel.setTypeface(light);
+
+        final ImageButton bgDefault = (ImageButton) findViewById(R.id.bgcol_default);
+        final ImageButton bgBlue = (ImageButton) findViewById(R.id.bgcol_blue);
+        final ImageButton bgGreen = (ImageButton) findViewById(R.id.bgcol_green);
+        final ImageButton bgTurq = (ImageButton) findViewById(R.id.bgcol_turq);
+        final ImageButton bgPurple = (ImageButton) findViewById(R.id.bgcol_purple);
+        final ImageButton bgPink = (ImageButton) findViewById(R.id.bgcol_pink);
+        final ImageButton bgRed = (ImageButton) findViewById(R.id.bgcol_red);
+        final ImageButton bgOrange = (ImageButton) findViewById(R.id.bgcol_orange);
+        final ImageButton bgGold = (ImageButton) findViewById(R.id.bgcol_gold);
+        final ImageButton bgYellow = (ImageButton) findViewById(R.id.bgcol_yellow);
+        final ImageButton bgBlack = (ImageButton) findViewById(R.id.bgcol_black);
+
+        bgDefault.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backgroundSelected = "default";
+                Toast.makeText(getApplicationContext(), "White Background Selected", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        bgBlue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backgroundSelected = "blue";
+                Toast.makeText(getApplicationContext(), "Blue Background Selected", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        bgGreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backgroundSelected = "green";
+                Toast.makeText(getApplicationContext(), "Green Background Selected", Toast.LENGTH_LONG).show();
+            }
+        });
+        bgTurq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backgroundSelected = "turq";
+                Toast.makeText(getApplicationContext(), "Turqoise Background Selected", Toast.LENGTH_LONG).show();
+            }
+        });
+        bgPurple.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backgroundSelected = "purple";
+                Toast.makeText(getApplicationContext(), "Purple Background Selected", Toast.LENGTH_LONG).show();
+            }
+        });
+        bgPink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backgroundSelected = "pink";
+                Toast.makeText(getApplicationContext(), "Pink Background Selected", Toast.LENGTH_LONG).show();
+            }
+        });
+        bgRed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backgroundSelected = "red";
+                Toast.makeText(getApplicationContext(), "Red Background Selected", Toast.LENGTH_LONG).show();
+            }
+        });
+        bgOrange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backgroundSelected = "Orange";
+                Toast.makeText(getApplicationContext(), "Orange Background Selected", Toast.LENGTH_LONG).show();
+            }
+        });
+        bgGold.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backgroundSelected = "gold";
+                Toast.makeText(getApplicationContext(), "Gold Background Selected", Toast.LENGTH_LONG).show();
+            }
+        });
+        bgYellow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backgroundSelected = "yellow";
+                Toast.makeText(getApplicationContext(), "Yellow Background Selected", Toast.LENGTH_LONG).show();
+            }
+        });
+        bgBlack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backgroundSelected = "black";
+                Toast.makeText(getApplicationContext(), "Black Background Selected", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -150,6 +248,7 @@ public class NewContact extends Activity {
                 returnIntent.putExtra("reason", txtReason.getText().toString());
                 returnIntent.putExtra("date", lblDateSelected.getText().toString().substring(15));
                 returnIntent.putExtra("character", maleFemale.toUpperCase());
+                returnIntent.putExtra("bgcol", backgroundSelected);
                 returnIntent.putExtra("tofrom", toFrom.toUpperCase());
 
                 setResult(ActivityUtils.NEW_CONTACT_RETURN, returnIntent);
@@ -158,6 +257,12 @@ public class NewContact extends Activity {
         });
     }
 
+
+    private void loadBackgrounds()
+    {
+
+
+    }
 
     private void initializeDate()
     {

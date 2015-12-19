@@ -66,7 +66,6 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/contact_title"
                 android:textColor="#0b0c0e"
                 android:text="Contact Name"
                 android:textSize="20dp"
@@ -223,6 +222,7 @@
                 android:layout_marginLeft="-20dp"
                 android:paddingRight="10dp"
                 android:gravity="center"
+                android:paddingBottom="10dp"
                 android:id="@+id/rdbCharacter"
                 android:orientation="horizontal"
                 android:layout_below="@+id/btnPickNewDate"
@@ -245,6 +245,127 @@
 
             </RadioGroup>
 
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rdbCharacter"
+                android:textColor="#0b0c0e"
+                android:text="Background Colour"
+                android:textSize="20dp"
+                android:layout_marginLeft="30dp"
+                android:paddingTop="5dp"
+                android:fontFamily="sans-serif-light"
+                android:id="@+id/lblBackgroundColours"
+                android:layout_marginBottom="5dp"
+                android:layout_centerHorizontal="true"
+                />
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/backgroundColours"
+                android:layout_below="@+id/lblBackgroundColours"
+                android:background="#ffffff">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="73dp"
+                    android:gravity="center_vertical"
+                    android:background="@null">
+                    
+                    <ImageButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/bgcol_default"
+                        android:layout_marginRight="6dp"
+                        android:background="@drawable/bgcol_default"/>
+
+                    <ImageButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/bgcol_blue"
+                        android:background="@drawable/bgcol_blue"
+                        android:layout_marginRight="6dp"
+                        android:layout_toEndOf="@+id/bgcol_default" />
+
+                    <ImageButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/bgcol_green"
+                        android:background="@drawable/bgcol_green"
+                        android:layout_marginRight="6dp"
+                        android:layout_toEndOf="@+id/bgcol_blue" />
+
+                    <ImageButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="6dp"
+                        android:id="@+id/bgcol_turq"
+                        android:background="@drawable/bgcol_turq"
+                        android:layout_toEndOf="@+id/bgcol_green" />
+
+                    <ImageButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="6dp"
+                        android:id="@+id/bgcol_purple"
+                        android:background="@drawable/bgcol_purple"
+                        android:layout_toEndOf="@+id/bgcol_turq" />
+
+                    <ImageButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="6dp"
+                        android:id="@+id/bgcol_pink"
+                        android:background="@drawable/bgcol_pink"
+                        android:layout_toEndOf="@+id/bgcol_purple" />
+
+                    <ImageButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="6dp"
+                        android:id="@+id/bgcol_red"
+                        android:background="@drawable/bgcol_red"
+                        android:layout_toEndOf="@+id/bgcol_pink" />
+
+                    <ImageButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="6dp"
+                        android:id="@+id/bgcol_orange"
+                        android:background="@drawable/bgcol_orange"
+                        android:layout_toEndOf="@+id/bgcol_red" />
+
+                    <ImageButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="6dp"
+                        android:id="@+id/bgcol_gold"
+                        android:background="@drawable/bgcol_gold"
+                        android:layout_toEndOf="@+id/bgcol_orange" />
+
+                    <ImageButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="6dp"
+                        android:id="@+id/bgcol_yellow"
+                        android:background="@drawable/bgcol_yellow"
+                        android:layout_toEndOf="@+id/bgcol_gold" />
+
+                    <ImageButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="6dp"
+                        android:id="@+id/bgcol_black"
+                        android:background="@drawable/bgcol_black"
+                        android:layout_toEndOf="@+id/bgcol_yellow" />
+
+                </RelativeLayout>
+
+            </HorizontalScrollView>
+
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -252,7 +373,7 @@
                 android:layout_marginRight="20dp"
                 android:text="Confirm"
                 android:id="@+id/cmdConfirm"
-                android:layout_below="@+id/rdbCharacter"
+                android:layout_below="@+id/backgroundColours"
                 android:gravity="center"/>
 
         </RelativeLayout>
@@ -260,8 +381,6 @@
 
 
     </ScrollView>
-
-
 
 
 </RelativeLayout>

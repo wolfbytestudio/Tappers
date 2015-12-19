@@ -88,11 +88,13 @@ public class LoadHandler
 
                 String character = segments[3];
 
-                String[] transactionSegments = segments[4].split("-");
+                String background = segments[4];
+
+                String[] transactionSegments = segments[5].split("-");
 
                 if((transactionSegments.length) == 0)
                 {
-                    currentContact = new Contact(name, total, date, charType);
+                    currentContact = new Contact(name, total, date, charType, background);
                     contacts.add(currentContact);
                 }
                 else
@@ -118,7 +120,7 @@ public class LoadHandler
                         charType = CharacterType.valueOf(character.toUpperCase());
                     } catch (Exception io) {}
 
-                    currentContact = new Contact(name, total, date,charType, tempTrans);
+                    currentContact = new Contact(name, total, date,charType, background, tempTrans);
 
                     Log.d("abc", "ADDED NEW CONTACT");
                     contacts.add(currentContact);

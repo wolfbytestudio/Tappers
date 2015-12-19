@@ -82,6 +82,52 @@ public class ContactPage extends Activity {
             characterImageContact.setImageResource(R.drawable.female);
         }
 
+
+        if(contact.backgroundColour.equalsIgnoreCase("default"))
+        {
+            characterImageContact.setBackgroundResource(R.drawable.bgcol_default);
+        }
+        if(contact.backgroundColour.equalsIgnoreCase("blue"))
+        {
+            characterImageContact.setBackgroundResource(R.drawable.bgcol_blue);
+        }
+        if(contact.backgroundColour.equalsIgnoreCase("green"))
+        {
+            characterImageContact.setBackgroundResource(R.drawable.bgcol_green);
+        }
+        if(contact.backgroundColour.equalsIgnoreCase("turq"))
+        {
+            characterImageContact.setBackgroundResource(R.drawable.bgcol_turq);
+        }
+        if(contact.backgroundColour.equalsIgnoreCase("purple"))
+        {
+            characterImageContact.setBackgroundResource(R.drawable.bgcol_purple);
+        }
+        if(contact.backgroundColour.equalsIgnoreCase("pink"))
+        {
+            characterImageContact.setBackgroundResource(R.drawable.bgcol_pink);
+        }
+        if(contact.backgroundColour.equalsIgnoreCase("red"))
+        {
+            characterImageContact.setBackgroundResource(R.drawable.bgcol_red);
+        }
+        if(contact.backgroundColour.equalsIgnoreCase("orange"))
+        {
+            characterImageContact.setBackgroundResource(R.drawable.bgcol_orange);
+        }
+        if(contact.backgroundColour.equalsIgnoreCase("gold"))
+        {
+            characterImageContact.setBackgroundResource(R.drawable.bgcol_gold);
+        }
+        if(contact.backgroundColour.equalsIgnoreCase("yellow"))
+        {
+            characterImageContact.setBackgroundResource(R.drawable.bgcol_yellow);
+        }
+        if(contact.backgroundColour.equalsIgnoreCase("black"))
+        {
+            characterImageContact.setBackgroundResource(R.drawable.bgcol_black);
+        }
+
         ImageButton btnNewTrans = (ImageButton) findViewById(R.id.btnNewTransaction);
 
         btnNewTrans.setOnClickListener(new View.OnClickListener() {
