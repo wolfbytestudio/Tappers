@@ -35,7 +35,7 @@ public class ContactPage extends Activity {
 
     private ListView transactionList = null;
 
-    private TextView txtTotal;
+    public TextView txtTotal;
 
     private TransactionListAdapter transactionListAdapter;
 
@@ -207,7 +207,7 @@ public class ContactPage extends Activity {
         }
     }
 
-    private void updateContactList()
+    public void updateContactList()
     {
         for(int i = 0; i < contact.transactions.size(); i++)
         {
@@ -217,7 +217,7 @@ public class ContactPage extends Activity {
             }
         }
 
-        transactionListAdapter = new TransactionListAdapter(getApplicationContext(), contact, fonts);
+        transactionListAdapter = new TransactionListAdapter(getApplicationContext(), contact, fonts, this);
         transactionList.setAdapter(transactionListAdapter);
     }
 

@@ -1,16 +1,21 @@
 package com.example.zack.tapperstesting.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.zack.tapperstesting.MainActivity;
 import com.example.zack.tapperstesting.R;
 import com.example.zack.tapperstesting.contact.Contact;
+import com.example.zack.tapperstesting.contact.ContactPage;
 import com.example.zack.tapperstesting.transaction.Transaction;
 import com.example.zack.tapperstesting.transaction.TransactionType;
 
@@ -25,15 +30,17 @@ public class TransactionListAdapter extends BaseAdapter {
 
     private Context context;
     private Contact contact;
+    private ContactPage owner;
     private static LayoutInflater inflater = null;
     private HashMap<String, Typeface> fonts;
 
     public TransactionListAdapter(Context context, Contact contact
-            , HashMap<String, Typeface> fonts)
+            , HashMap<String, Typeface> fonts, ContactPage owner)
     {
         this.fonts = fonts;
         this.context = context;
         this.contact = contact;
+        this.owner = owner;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -54,7 +61,7 @@ public class TransactionListAdapter extends BaseAdapter {
 
 
     @Override
-    public View getView(int i, View convertView, ViewGroup viewGroup) {
+    public View getView(final int i, View convertView, ViewGroup viewGroup) {
         View view = convertView;
 
         if(view == null) {
@@ -95,13 +102,43 @@ public class TransactionListAdapter extends BaseAdapter {
 
         lblTime.setText(transaction.getDate());
 
+
+        ImageButton btnDeleteHistoryItem = (ImageButton)view.findViewById(R.id.btnDeleteHistoryItem);
+
+        btnDeleteHistoryItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                contact.transactions.remove(i);
+                                owner.updateContactList();
+                                contact.setTotalString();
+                                owner.txtTotal.setText(contact.total);
+
+                                notifyDataSetChanged();
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(owner);
+                builder.setMessage("Are you sure you want to delete this transaction?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+            }
+        });
+
         return view;
     }
 
     private String getPayment(Transaction t, String name)
     {
         String r = "";
-
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
 
         if(t.getType() == TransactionType.FROM)

@@ -43,6 +43,7 @@ public class Contact implements Serializable
         this.backgroundColour = backgroundColour;
         this.transactions = null;
     }
+
     /**
      * Adds a transaction to the transactions list
      * @param transaction - the transaction being added in
