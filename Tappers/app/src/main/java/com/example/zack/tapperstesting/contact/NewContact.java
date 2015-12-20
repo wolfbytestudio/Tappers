@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.example.zack.tapperstesting.util.ActivityUtils;
 import com.example.zack.tapperstesting.R;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 import java.util.List;
 
@@ -33,6 +35,20 @@ public class NewContact extends Activity {
 
     private String backgroundSelected = "default";
 
+    private String characterSelected = "default male";
+
+    ImageButton charMale;
+    ImageButton charFemale;
+    ImageButton charStonerBob;
+    ImageButton charGothGirl;
+
+    private void resetBackgrounds()
+    {
+        charMale.setBackground(null);
+        charFemale.setBackground(null);
+        charStonerBob.setBackground(null);
+        charGothGirl.setBackground(null);
+    }
 
 
     @Override
@@ -42,6 +58,11 @@ public class NewContact extends Activity {
         setContentView(R.layout.activity_new_contact);
 
         contacts = getIntent().getStringArrayListExtra("contacts");
+
+        charMale = (ImageButton) findViewById(R.id.char_default_male);
+        charFemale = (ImageButton) findViewById(R.id.char_default_female);
+        charStonerBob = (ImageButton) findViewById(R.id.char_stoner_bob);
+        charGothGirl = (ImageButton) findViewById(R.id.char_goth_girl);
 
         Typeface thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface light = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
@@ -72,8 +93,6 @@ public class NewContact extends Activity {
         final EditText txtReason = (EditText) findViewById(R.id.txtReason);
         final RadioButton rdbTo = (RadioButton) findViewById(R.id.rdbTo);
         final RadioButton rdbFrom = (RadioButton) findViewById(R.id.rdbFrom);
-        final RadioButton rdbMale = (RadioButton) findViewById(R.id.rdbMale);
-        final RadioButton rdbFemale = (RadioButton) findViewById(R.id.rdbFemale);
         final Button newDate = (Button) findViewById(R.id.btnPickNewDate);
         final Button confirm = (Button) findViewById(R.id.cmdConfirm);
 
@@ -201,6 +220,49 @@ public class NewContact extends Activity {
             }
         });
 
+
+        TextView lblChars = (TextView) findViewById(R.id.lblCharacters);
+        lblChars.setTypeface(light);
+
+
+        charMale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetBackgrounds();
+                charMale.setBackgroundResource(R.drawable.bgcol_blue);
+                characterSelected = "default male";
+            }
+        });
+
+
+        charFemale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetBackgrounds();
+                charFemale.setBackgroundResource(R.drawable.bgcol_blue);
+                characterSelected = "default female";
+            }
+        });
+
+        charStonerBob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetBackgrounds();
+                charStonerBob.setBackgroundResource(R.drawable.bgcol_blue);
+                characterSelected = "stoner bob";
+            }
+        });
+
+        charGothGirl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetBackgrounds();
+                charGothGirl.setBackgroundResource(R.drawable.bgcol_blue);
+                characterSelected = "goth girl";
+            }
+        });
+
+
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -232,22 +294,15 @@ public class NewContact extends Activity {
 
                 Intent returnIntent = getIntent();
 
-
                 String toFrom = "To";
                 if(rdbTo.isChecked()) { toFrom = "to"; }
                 else { toFrom = "from"; }
-
-
-
-                String maleFemale = "Male";
-                if(rdbMale.isChecked()) { maleFemale = "Male"; }
-                else { maleFemale = "Female"; }
 
                 returnIntent.putExtra("name", txtContactName.getText().toString());
                 returnIntent.putExtra("transaction", txtTransaction.getText().toString());
                 returnIntent.putExtra("reason", txtReason.getText().toString());
                 returnIntent.putExtra("date", lblDateSelected.getText().toString().substring(15));
-                returnIntent.putExtra("character", maleFemale.toUpperCase());
+                returnIntent.putExtra("character", characterSelected);
                 returnIntent.putExtra("bgcol", backgroundSelected);
                 returnIntent.putExtra("tofrom", toFrom.toUpperCase());
 

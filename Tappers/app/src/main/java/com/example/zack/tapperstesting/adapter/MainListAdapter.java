@@ -15,10 +15,8 @@ import android.widget.TextView;
 
 import com.example.zack.tapperstesting.MainActivity;
 import com.example.zack.tapperstesting.R;
-import com.example.zack.tapperstesting.contact.CharacterType;
-import com.example.zack.tapperstesting.contact.Contact;
-import com.example.zack.tapperstesting.contact.ContactPage;
-import com.example.zack.tapperstesting.contact.ContactUtil;
+import com.example.zack.tapperstesting.contact.*;
+import com.example.zack.tapperstesting.contact.Character;
 import com.example.zack.tapperstesting.util.ActivityUtils;
 
 import java.text.DecimalFormat;
@@ -103,14 +101,10 @@ public class MainListAdapter extends BaseAdapter {
 
         ImageView character = (ImageView) view.findViewById(R.id.characterImage);
 
-        if(myContact.characterType == CharacterType.MALE)
-        {
-            character.setImageResource(R.drawable.male);
-        }
-        else
-        {
-            character.setImageResource(R.drawable.female);
-        }
+        Character person = Character.getCharacterForName(myContact.characterType);
+
+        character.setImageResource(person.getCharacterFile());
+
         date.setText(myContact.date);
 
         if(myContact.backgroundColour.equalsIgnoreCase("default"))

@@ -216,40 +216,90 @@
                 android:layout_alignTop="@+id/btnPickNewDate"
                 android:layout_alignParentStart="true" />
 
-            <RadioGroup
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="-20dp"
-                android:paddingRight="10dp"
-                android:gravity="center"
-                android:paddingBottom="10dp"
-                android:id="@+id/rdbCharacter"
-                android:orientation="horizontal"
-                android:layout_below="@+id/btnPickNewDate"
-                android:layout_centerHorizontal="true">
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Male"
-                    android:layout_marginRight="10dp"
-                    android:checked="true"
-                    android:id="@+id/rdbMale"/>
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Female"
-                    android:id="@+id/rdbFemale"
-                    android:layout_gravity="right" />
-
-            </RadioGroup>
 
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rdbCharacter"
+                android:layout_below="@+id/lblSetDate"
+                android:textColor="#0b0c0e"
+                android:text="Characters"
+                android:textSize="20dp"
+                android:layout_marginLeft="30dp"
+                android:paddingTop="5dp"
+                android:fontFamily="sans-serif-light"
+                android:id="@+id/lblCharacters"
+                android:layout_marginBottom="5dp"
+                android:layout_centerHorizontal="true"
+                />
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/backgroundChararcters"
+                android:layout_below="@+id/lblCharacters"
+                android:background="#ffffff">
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="73dp"
+                    android:gravity="center_vertical"
+                    android:background="@null">
+
+                    <ImageButton
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:id="@+id/char_default_male"
+                        android:scaleType="fitCenter"
+                        android:background="@drawable/bgcol_blue"
+                        android:layout_marginRight="6dp"
+                        android:src="@drawable/male"
+                        />
+
+                    <ImageButton
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:scaleType="fitCenter"
+                    android:background="@null"
+                    android:layout_marginRight="6dp"
+
+                    android:id="@+id/char_default_female"
+                    android:layout_toEndOf="@+id/char_default_male"
+                    android:src="@drawable/female"/>
+
+                    <ImageButton
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:scaleType="fitCenter"
+                        android:background="@null"
+                        android:layout_marginRight="6dp"
+
+                        android:id="@+id/char_stoner_bob"
+                        android:layout_toEndOf="@+id/char_default_female"
+                        android:src="@drawable/stoner_bob"/>
+
+                    <ImageButton
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:scaleType="fitCenter"
+                        android:background="@null"
+                        android:layout_marginRight="6dp"
+
+                        android:id="@+id/char_goth_girl"
+                        android:layout_toEndOf="@+id/char_stoner_bob"
+                        android:src="@drawable/goth_girl"/>
+
+
+                </RelativeLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/backgroundChararcters"
                 android:textColor="#0b0c0e"
                 android:text="Background Colour"
                 android:textSize="20dp"

@@ -71,17 +71,13 @@ public class ContactPage extends Activity {
 
         ImageView characterImageContact = (ImageView) findViewById(R.id.characterImageContact);
 
+
+
         contact = ContactUtil.contact;
 
-        if(contact.characterType == CharacterType.MALE)
-        {
-            characterImageContact.setImageResource(R.drawable.male);
-        }
-        else
-        {
-            characterImageContact.setImageResource(R.drawable.female);
-        }
+        Character charType = Character.getCharacterForName(contact.characterType);
 
+        characterImageContact.setImageResource(charType.getCharacterFile());
 
         if(contact.backgroundColour.equalsIgnoreCase("default"))
         {

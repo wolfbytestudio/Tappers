@@ -46,7 +46,7 @@ public class SaveHandler {
         String temp = "";
         for (Contact contact : contacts) {
             temp += contact.name + ":" + contact.total + ":" +
-                     contact.date + ":" + contact.characterType.toString() + ":"
+                     contact.date + ":" + contact.characterType + ":"
                     + contact.backgroundColour + ":";
 
             int counter = 0;

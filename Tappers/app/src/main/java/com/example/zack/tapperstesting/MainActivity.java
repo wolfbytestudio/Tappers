@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zack.tapperstesting.adapter.MainListAdapter;
-import com.example.zack.tapperstesting.contact.CharacterType;
 import com.example.zack.tapperstesting.contact.Contact;
 import com.example.zack.tapperstesting.contact.ContactPage;
 import com.example.zack.tapperstesting.contact.ContactUtil;
@@ -188,10 +187,8 @@ public class MainActivity extends Activity {
                     String tofrom = data.getStringExtra("tofrom");
 
                     TransactionType type = TransactionType.valueOf(tofrom);
-                    CharacterType charType = CharacterType.valueOf(charString);
 
-
-                    Contact newCon = new Contact(name, "", date, charType, backgroundCol);
+                    Contact newCon = new Contact(name, "", date, charString, backgroundCol);
 
                     Log.d("a", "Hi3");
                     double am = 0;

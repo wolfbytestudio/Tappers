@@ -1,20 +1,13 @@
 package com.example.zack.tapperstesting.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.zack.tapperstesting.contact.CharacterType;
 import com.example.zack.tapperstesting.contact.Contact;
 import com.example.zack.tapperstesting.transaction.Transaction;
 import com.example.zack.tapperstesting.transaction.TransactionType;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -79,7 +72,6 @@ public class LoadHandler
 
             for(int i = 0; i < sectors.length; i++)
             {
-                CharacterType charType = CharacterType.MALE;
                 tempTrans = new ArrayList<>();
                 String[] segments = sectors[i].split(":");
                 String name = segments[0];
@@ -94,7 +86,7 @@ public class LoadHandler
 
                 if((transactionSegments.length) == 0)
                 {
-                    currentContact = new Contact(name, total, date, charType, background);
+                    currentContact = new Contact(name, total, date, character, background);
                     contacts.add(currentContact);
                 }
                 else
@@ -116,11 +108,7 @@ public class LoadHandler
                         tempTrans.add(trans);
                     }
 
-                    try {
-                        charType = CharacterType.valueOf(character.toUpperCase());
-                    } catch (Exception io) {}
-
-                    currentContact = new Contact(name, total, date,charType, background, tempTrans);
+                    currentContact = new Contact(name, total, date, character, background, tempTrans);
 
                     Log.d("abc", "ADDED NEW CONTACT");
                     contacts.add(currentContact);
