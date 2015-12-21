@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,10 +38,12 @@ public class NewContact extends Activity {
 
     private String characterSelected = "default male";
 
-    ImageButton charMale;
-    ImageButton charFemale;
-    ImageButton charStonerBob;
-    ImageButton charGothGirl;
+    private ImageButton lastCharSelected;
+
+    private ImageButton charMale;
+    private ImageButton charFemale;
+    private ImageButton charStonerBob;
+    private ImageButton charGothGirl;
 
     private void resetBackgrounds()
     {
@@ -63,6 +66,9 @@ public class NewContact extends Activity {
         charFemale = (ImageButton) findViewById(R.id.char_default_female);
         charStonerBob = (ImageButton) findViewById(R.id.char_stoner_bob);
         charGothGirl = (ImageButton) findViewById(R.id.char_goth_girl);
+
+        lastCharSelected = charMale;
+        lastCharSelected.setBackgroundResource(CharacterBackground.DEFAULT.getSmallBackground());
 
         Typeface thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface light = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
@@ -123,8 +129,7 @@ public class NewContact extends Activity {
                 finish();
             }
         });
-
-
+        
         TextView backgroundLabel = (TextView) findViewById(R.id.lblBackgroundColours);
         backgroundLabel.setTypeface(light);
 
@@ -142,81 +147,60 @@ public class NewContact extends Activity {
 
         bgDefault.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                backgroundSelected = "default";
-                Toast.makeText(getApplicationContext(), "White Background Selected", Toast.LENGTH_LONG).show();
+            public void onClick(View v) {selectBackground("default");
             }
         });
-
         bgBlue.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                backgroundSelected = "blue";
-                Toast.makeText(getApplicationContext(), "Blue Background Selected", Toast.LENGTH_LONG).show();
+            public void onClick(View v) {selectBackground("blue");
             }
         });
-
         bgGreen.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                backgroundSelected = "green";
-                Toast.makeText(getApplicationContext(), "Green Background Selected", Toast.LENGTH_LONG).show();
+            public void onClick(View v) {selectBackground("green");
             }
         });
         bgTurq.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                backgroundSelected = "turq";
-                Toast.makeText(getApplicationContext(), "Turqoise Background Selected", Toast.LENGTH_LONG).show();
+            public void onClick(View v) {selectBackground("turq");
             }
         });
         bgPurple.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                backgroundSelected = "purple";
-                Toast.makeText(getApplicationContext(), "Purple Background Selected", Toast.LENGTH_LONG).show();
+            public void onClick(View v) {selectBackground("pruple");
             }
         });
         bgPink.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                backgroundSelected = "pink";
-                Toast.makeText(getApplicationContext(), "Pink Background Selected", Toast.LENGTH_LONG).show();
+            public void onClick(View v) {selectBackground("pink");
             }
         });
         bgRed.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                backgroundSelected = "red";
-                Toast.makeText(getApplicationContext(), "Red Background Selected", Toast.LENGTH_LONG).show();
+            public void onClick(View v) {selectBackground("red");
             }
         });
         bgOrange.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                backgroundSelected = "Orange";
-                Toast.makeText(getApplicationContext(), "Orange Background Selected", Toast.LENGTH_LONG).show();
+            public void onClick(View v) {selectBackground("orange");
             }
         });
         bgGold.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                backgroundSelected = "gold";
-                Toast.makeText(getApplicationContext(), "Gold Background Selected", Toast.LENGTH_LONG).show();
+                selectBackground("gold");
             }
         });
         bgYellow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                backgroundSelected = "yellow";
-                Toast.makeText(getApplicationContext(), "Yellow Background Selected", Toast.LENGTH_LONG).show();
+                selectBackground("yellow");
             }
         });
         bgBlack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                backgroundSelected = "black";
-                Toast.makeText(getApplicationContext(), "Black Background Selected", Toast.LENGTH_LONG).show();
+                selectBackground("black");
             }
         });
 
@@ -228,37 +212,25 @@ public class NewContact extends Activity {
         charMale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetBackgrounds();
-                charMale.setBackgroundResource(R.drawable.bgcol_blue);
-                characterSelected = "default male";
+                selectCharacter(charMale, "default male");
             }
         });
-
-
         charFemale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetBackgrounds();
-                charFemale.setBackgroundResource(R.drawable.bgcol_blue);
-                characterSelected = "default female";
+                selectCharacter(charFemale, "default female");
             }
         });
-
         charStonerBob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetBackgrounds();
-                charStonerBob.setBackgroundResource(R.drawable.bgcol_blue);
-                characterSelected = "stoner bob";
+                selectCharacter(charStonerBob, "stoner bob");
             }
         });
-
         charGothGirl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetBackgrounds();
-                charGothGirl.setBackgroundResource(R.drawable.bgcol_blue);
-                characterSelected = "goth girl";
+                selectCharacter(charGothGirl, "goth girl");
             }
         });
 
@@ -312,6 +284,22 @@ public class NewContact extends Activity {
         });
     }
 
+
+    private void selectCharacter(ImageButton character, String identifier)
+    {
+        resetBackgrounds();
+        characterSelected = identifier;
+        CharacterBackground bg = CharacterBackground.getBackgroundForId(backgroundSelected);
+        character.setBackgroundResource(bg.getSmallBackground());
+        lastCharSelected = character;
+    }
+
+    private void selectBackground(String id)
+    {
+        backgroundSelected = id;
+        CharacterBackground bg = CharacterBackground.getBackgroundForId(backgroundSelected);
+        lastCharSelected.setBackgroundResource(bg.getSmallBackground());
+    }
 
     private void loadBackgrounds()
     {

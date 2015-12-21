@@ -25,6 +25,25 @@
         android:textColor="#ffffff"
         android:background="@drawable/title_border" />
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:id="@+id/character_background"
+        android:background="@drawable/bgcol_default_big"
+        android:layout_below="@+id/contactPageTitle">
+
+        <ImageView
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:cropToPadding="true"
+            android:src="@drawable/female"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:id="@+id/characterImageContact"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -41,9 +60,9 @@
         android:fontFamily="sans-serif-light"
         android:textSize="15dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:id="@+id/txtTotal"
-        android:layout_below="@+id/contactPageTitle"
+        android:layout_below="@+id/character_background"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -55,7 +74,7 @@
         android:fontFamily="sans-serif-light"
         android:textSize="30dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/txtHistory"
         android:layout_below="@+id/txtTotal"
         android:layout_centerHorizontal="true" />
@@ -78,13 +97,12 @@
         android:layout_width="49dp"
         android:layout_height="54.5dp"
         android:id="@+id/btnNewTransaction"
-
         android:background="@drawable/title_border"
         android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:scaleType="fitCenter"
         android:paddingLeft="7dp"
         android:paddingRight="7dp"
-        android:layout_above="@+id/txtTotal"
         android:src="@drawable/new_transaction"/>
 
 
@@ -102,7 +120,7 @@
 
     <ImageButton
         android:layout_width="75dp"
-        android:layout_height="54.5dp"
+        android:layout_height="55dp"
         android:id="@+id/btnBackContact"
         android:background="@null"
         android:scaleType="fitCenter"
@@ -111,20 +129,9 @@
         android:paddingTop="14dp"
         android:paddingBottom="14dp"
         android:src="@drawable/back_arrow"
-        android:layout_above="@+id/txtTotal"
         android:layout_alignParentTop="true" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:cropToPadding="true"
-        android:src="@drawable/female"
-        android:layout_gravity="center"
-        android:background="@drawable/background_circle_character"
-        android:layout_height="50dp"
-        android:layout_marginBottom="3dp"
-        android:id="@+id/characterImageContact"
-        android:layout_alignBottom="@+id/contactPageTitle"
-        android:layout_toEndOf="@+id/btnBackContact" />
+
 
 
 

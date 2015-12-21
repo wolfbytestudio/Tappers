@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,53 +77,14 @@ public class ContactPage extends Activity {
         contact = ContactUtil.contact;
 
         Character charType = Character.getCharacterForName(contact.characterType);
+        CharacterBackground charBackground =
+                CharacterBackground.getBackgroundForId(contact.backgroundColour);
 
         characterImageContact.setImageResource(charType.getCharacterFile());
 
-        if(contact.backgroundColour.equalsIgnoreCase("default"))
-        {
-            characterImageContact.setBackgroundResource(R.drawable.bgcol_default);
-        }
-        if(contact.backgroundColour.equalsIgnoreCase("blue"))
-        {
-            characterImageContact.setBackgroundResource(R.drawable.bgcol_blue);
-        }
-        if(contact.backgroundColour.equalsIgnoreCase("green"))
-        {
-            characterImageContact.setBackgroundResource(R.drawable.bgcol_green);
-        }
-        if(contact.backgroundColour.equalsIgnoreCase("turq"))
-        {
-            characterImageContact.setBackgroundResource(R.drawable.bgcol_turq);
-        }
-        if(contact.backgroundColour.equalsIgnoreCase("purple"))
-        {
-            characterImageContact.setBackgroundResource(R.drawable.bgcol_purple);
-        }
-        if(contact.backgroundColour.equalsIgnoreCase("pink"))
-        {
-            characterImageContact.setBackgroundResource(R.drawable.bgcol_pink);
-        }
-        if(contact.backgroundColour.equalsIgnoreCase("red"))
-        {
-            characterImageContact.setBackgroundResource(R.drawable.bgcol_red);
-        }
-        if(contact.backgroundColour.equalsIgnoreCase("orange"))
-        {
-            characterImageContact.setBackgroundResource(R.drawable.bgcol_orange);
-        }
-        if(contact.backgroundColour.equalsIgnoreCase("gold"))
-        {
-            characterImageContact.setBackgroundResource(R.drawable.bgcol_gold);
-        }
-        if(contact.backgroundColour.equalsIgnoreCase("yellow"))
-        {
-            characterImageContact.setBackgroundResource(R.drawable.bgcol_yellow);
-        }
-        if(contact.backgroundColour.equalsIgnoreCase("black"))
-        {
-            characterImageContact.setBackgroundResource(R.drawable.bgcol_black);
-        }
+        RelativeLayout charBack = (RelativeLayout) findViewById(R.id.character_background);
+
+        charBack.setBackgroundResource(charBackground.getLargeBackground());
 
         ImageButton btnNewTrans = (ImageButton) findViewById(R.id.btnNewTransaction);
 
