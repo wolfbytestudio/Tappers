@@ -129,7 +129,7 @@ public class NewContact extends Activity {
                 finish();
             }
         });
-        
+
         TextView backgroundLabel = (TextView) findViewById(R.id.lblBackgroundColours);
         backgroundLabel.setTypeface(light);
 
@@ -167,7 +167,7 @@ public class NewContact extends Activity {
         });
         bgPurple.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {selectBackground("pruple");
+            public void onClick(View v) {selectBackground("purple");
             }
         });
         bgPink.setOnClickListener(new View.OnClickListener() {
