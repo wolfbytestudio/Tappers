@@ -292,6 +292,16 @@
                         android:layout_toEndOf="@+id/char_stoner_bob"
                         android:src="@drawable/goth_girl"/>
 
+                    <ImageButton
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:scaleType="fitCenter"
+                        android:background="@null"
+                        android:layout_marginRight="6dp"
+
+                        android:id="@+id/char_stoner_bob_alt"
+                        android:layout_toEndOf="@+id/char_goth_girl"
+                        android:src="@drawable/stoner_bob_alt"/>
 
                 </RelativeLayout>
             </HorizontalScrollView>

@@ -11,6 +11,7 @@ public enum Character
     DEFAULT_MALE("default male", R.drawable.male),
     DEFAULT_FEMALE("default female", R.drawable.female),
     STONER_BOB("stoner bob", R.drawable.stoner_bob),
+    STONER_BOB_ALT("stoner bob alt", R.drawable.stoner_bob_alt),
     GOTH_GIRL("goth girl", R.drawable.goth_girl);
 
     private String identifier;
