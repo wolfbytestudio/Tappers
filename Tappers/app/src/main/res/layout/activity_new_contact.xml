@@ -303,6 +303,28 @@
                         android:layout_toEndOf="@+id/char_goth_girl"
                         android:src="@drawable/stoner_bob_alt"/>
 
+                    <ImageButton
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:scaleType="fitCenter"
+                        android:background="@null"
+                        android:layout_marginRight="6dp"
+
+                        android:id="@+id/char_abudady"
+                        android:layout_toEndOf="@+id/char_stoner_bob_alt"
+                        android:src="@drawable/abudady"/>
+
+                    <ImageButton
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:scaleType="fitCenter"
+                        android:background="@null"
+                        android:layout_marginRight="6dp"
+
+                        android:id="@+id/char_abiba"
+                        android:layout_toEndOf="@+id/char_abudady"
+                        android:src="@drawable/abiba"/>
+
                 </RelativeLayout>
             </HorizontalScrollView>
 

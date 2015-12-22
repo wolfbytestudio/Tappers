@@ -13,15 +13,12 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zack.tapperstesting.util.ActivityUtils;
 import com.example.zack.tapperstesting.R;
-
-import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.List;
@@ -44,7 +41,9 @@ public class NewContact extends Activity {
     private ImageButton charFemale;
     private ImageButton charStonerBob;
     private ImageButton charGothGirl;
-    private ImageButton getCharStonerBobAlt;
+    private ImageButton charStonerBobAlt;
+    private ImageButton charAbudady;
+    private ImageButton charAbiba;
 
     private void resetBackgrounds()
     {
@@ -52,7 +51,9 @@ public class NewContact extends Activity {
         charFemale.setBackground(null);
         charStonerBob.setBackground(null);
         charGothGirl.setBackground(null);
-        getCharStonerBobAlt.setBackground(null);
+        charStonerBobAlt.setBackground(null);
+        charAbudady.setBackground(null);
+        charAbiba.setBackground(null);
     }
 
 
@@ -68,7 +69,9 @@ public class NewContact extends Activity {
         charFemale = (ImageButton) findViewById(R.id.char_default_female);
         charStonerBob = (ImageButton) findViewById(R.id.char_stoner_bob);
         charGothGirl = (ImageButton) findViewById(R.id.char_goth_girl);
-        getCharStonerBobAlt = (ImageButton) findViewById(R.id.char_stoner_bob_alt);
+        charStonerBobAlt = (ImageButton) findViewById(R.id.char_stoner_bob_alt);
+        charAbudady = (ImageButton) findViewById(R.id.char_abudady);
+        charAbiba = (ImageButton) findViewById(R.id.char_abiba);
 
         lastCharSelected = charMale;
         lastCharSelected.setBackgroundResource(CharacterBackground.DEFAULT.getSmallBackground());
@@ -237,10 +240,24 @@ public class NewContact extends Activity {
             }
         });
 
-        getCharStonerBobAlt.setOnClickListener(new View.OnClickListener() {
+        charStonerBobAlt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectCharacter(getCharStonerBobAlt, "stoner bob alt");
+                selectCharacter(charStonerBobAlt, "stoner bob alt");
+            }
+        });
+
+        charAbudady.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectCharacter(charAbudady, "abudady");
+            }
+        });
+
+        charAbiba.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectCharacter(charAbiba, "abiba");
             }
         });
 
