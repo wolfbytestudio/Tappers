@@ -1,7 +1,7 @@
-package com.example.zack.tapperstesting.contact;
+package org.tappers.contact;
 
-import com.example.zack.tapperstesting.transaction.Transaction;
-import com.example.zack.tapperstesting.transaction.TransactionType;
+import org.tappers.transaction.Transaction;
+import org.tappers.transaction.TransactionType;
 
 import java.io.Serializable;
 import java.text.NumberFormat;

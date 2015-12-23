@@ -1,4 +1,4 @@
-package com.example.zack.tapperstesting.transaction;
+package org.tappers.transaction;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -12,12 +12,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.example.zack.tapperstesting.R;
-import com.example.zack.tapperstesting.contact.ContactUtil;
+import org.tappers.R;
+import org.tappers.contact.ContactUtil;
 
 import java.util.Calendar;
 
@@ -45,6 +44,9 @@ public class NewTransaction extends Activity {
         Typeface thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface light = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
         Typeface regular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
+
+        TextView txtTransactionTran =  (TextView) findViewById(R.id.lblTransactionTran);
+        txtTransactionTran.setTypeface(light);
 
 
         TextView txtTransactionTitle = (TextView) findViewById(R.id.txtTransactionTitle);

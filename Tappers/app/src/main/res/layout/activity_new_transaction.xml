@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/AppTheme"
-    tools:context="com.example.zack.tapperstesting.transaction.NewTransaction">
+    tools:context="org.tappers.transaction.NewTransaction">
 
     <TextView
         android:layout_width="wrap_content"

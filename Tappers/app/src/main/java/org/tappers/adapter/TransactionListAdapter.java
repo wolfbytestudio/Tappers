@@ -1,4 +1,4 @@
-package com.example.zack.tapperstesting.adapter;
+package org.tappers.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -12,12 +12,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.zack.tapperstesting.MainActivity;
-import com.example.zack.tapperstesting.R;
-import com.example.zack.tapperstesting.contact.Contact;
-import com.example.zack.tapperstesting.contact.ContactPage;
-import com.example.zack.tapperstesting.transaction.Transaction;
-import com.example.zack.tapperstesting.transaction.TransactionType;
+import org.tappers.R;
+import org.tappers.contact.Contact;
+import org.tappers.contact.ContactPage;
+import org.tappers.transaction.Transaction;
+import org.tappers.transaction.TransactionType;
 
 import java.text.NumberFormat;
 import java.util.HashMap;

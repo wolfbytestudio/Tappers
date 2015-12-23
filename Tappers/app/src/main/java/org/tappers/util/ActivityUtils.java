@@ -1,6 +1,6 @@
-package com.example.zack.tapperstesting.util;
+package org.tappers.util;
 
-import com.example.zack.tapperstesting.contact.Contact;
+import org.tappers.contact.Contact;
 
 import java.util.ArrayList;
 

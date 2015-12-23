@@ -1,4 +1,4 @@
-package com.example.zack.tapperstesting;
+package org.tappers;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,19 +14,21 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.zack.tapperstesting.adapter.MainListAdapter;
-import com.example.zack.tapperstesting.contact.Contact;
-import com.example.zack.tapperstesting.contact.ContactPage;
-import com.example.zack.tapperstesting.contact.ContactUtil;
-import com.example.zack.tapperstesting.contact.NewContact;
-import com.example.zack.tapperstesting.transaction.Transaction;
-import com.example.zack.tapperstesting.transaction.TransactionType;
-import com.example.zack.tapperstesting.util.ActivityUtils;
-import com.example.zack.tapperstesting.util.LoadHandler;
-import com.example.zack.tapperstesting.util.SaveHandler;
+import org.tappers.adapter.MainListAdapter;
+import org.tappers.contact.Contact;
+import org.tappers.contact.ContactPage;
+import org.tappers.contact.ContactUtil;
+import org.tappers.contact.NewContact;
+import org.tappers.transaction.Transaction;
+import org.tappers.transaction.TransactionType;
+import org.tappers.util.ActivityUtils;
+import org.tappers.util.LoadHandler;
+import org.tappers.util.SaveHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import org.tappers.R;
 
 public class MainActivity extends Activity {
 

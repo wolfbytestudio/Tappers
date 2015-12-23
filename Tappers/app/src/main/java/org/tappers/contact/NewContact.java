@@ -1,4 +1,4 @@
-package com.example.zack.tapperstesting.contact;
+package org.tappers.contact;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -17,8 +17,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.zack.tapperstesting.util.ActivityUtils;
-import com.example.zack.tapperstesting.R;
+import org.tappers.util.ActivityUtils;
+import org.tappers.R;
 
 import java.util.Calendar;
 import java.util.List;

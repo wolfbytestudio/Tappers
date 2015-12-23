@@ -1,11 +1,11 @@
-package com.example.zack.tapperstesting.util;
+package org.tappers.util;
 
 import android.content.Context;
 import android.util.Log;
 
-import com.example.zack.tapperstesting.contact.Contact;
-import com.example.zack.tapperstesting.transaction.Transaction;
-import com.example.zack.tapperstesting.transaction.TransactionType;
+import org.tappers.contact.Contact;
+import org.tappers.transaction.Transaction;
+import org.tappers.transaction.TransactionType;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

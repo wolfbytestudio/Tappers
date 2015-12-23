@@ -1,13 +1,11 @@
-package com.example.zack.tapperstesting.util;
+package org.tappers.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.zack.tapperstesting.contact.Contact;
-import com.example.zack.tapperstesting.transaction.Transaction;
+import org.tappers.contact.Contact;
+import org.tappers.transaction.Transaction;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;

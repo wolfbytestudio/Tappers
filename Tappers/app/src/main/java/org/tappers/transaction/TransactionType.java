@@ -1,4 +1,4 @@
-package com.example.zack.tapperstesting.transaction;
+package org.tappers.transaction;
 
 /**
  * Created by Zack on 14/12/2015.

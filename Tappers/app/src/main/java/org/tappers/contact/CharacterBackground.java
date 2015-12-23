@@ -1,6 +1,6 @@
-package com.example.zack.tapperstesting.contact;
+package org.tappers.contact;
 
-import com.example.zack.tapperstesting.R;
+import org.tappers.R;
 
 /**
  * Created by Zack on 20/12/2015.

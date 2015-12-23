@@ -1,13 +1,11 @@
-package com.example.zack.tapperstesting.contact;
+package org.tappers.contact;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,13 +16,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.zack.tapperstesting.transaction.NewTransaction;
-import com.example.zack.tapperstesting.R;
-import com.example.zack.tapperstesting.adapter.TransactionListAdapter;
-import com.example.zack.tapperstesting.util.ActivityUtils;
+import org.tappers.transaction.NewTransaction;
+import org.tappers.R;
+import org.tappers.adapter.TransactionListAdapter;
+import org.tappers.util.ActivityUtils;
 
-import org.w3c.dom.Text;
-
+import java.lang.*;
 import java.util.HashMap;
 
 
