@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Zack on 13/12/2015.
@@ -83,16 +84,12 @@ public class Contact implements Serializable
         if(value == 0)
         {
             total = "You and " + name + " don't owe each other anything!";
-            return;
         }
-
-        if(value < 0)
+        else if(value < 0)
         {
             total = "You owe " + name + " a total of " + formatter.format(Math.abs(value));
-            return;
         }
-
-        if(value > 0)
+        else if(value > 0)
         {
             total = name + " owes you a total of " + formatter.format(Math.abs(value));
         }

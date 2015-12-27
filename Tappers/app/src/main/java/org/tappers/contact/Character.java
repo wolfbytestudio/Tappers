@@ -14,6 +14,7 @@ public enum Character
     STONER_BOB_ALT("stoner bob alt", R.drawable.stoner_bob_alt),
     GOTH_GIRL("goth girl", R.drawable.goth_girl),
     ABIBA("abiba", R.drawable.abiba),
+    GAMER_BOB("gamer bob", R.drawable.gamer_bob),
     ABUDADY("abudady", R.drawable.abudady);
 
     private String identifier;

@@ -62,13 +62,28 @@ public class MainActivity extends Activity {
      */
     public SaveHandler save;
 
+    /**
+     * Displays all the contacts
+     */
+    private TextView txtContactCount;
+
+    /**
+     * Updates the character count
+     */
+    public void updateContactCount()
+    {
+        txtContactCount.setText(contacts.size() + "");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         contacts = new ArrayList<>();
 
+        txtContactCount = (TextView) findViewById(R.id.contactCount);
 
         LoadHandler load = new LoadHandler(getApplicationContext());
         load.load();
@@ -78,10 +93,14 @@ public class MainActivity extends Activity {
         save = new SaveHandler(contacts, getApplicationContext());
         //save.save();
 
+        updateContactCount();
 
         Typeface thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface light = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
         Typeface regular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
+
+
+        txtContactCount.setTypeface(light);
 
 
 
@@ -136,6 +155,8 @@ public class MainActivity extends Activity {
                 startActivityForResult(intent, ActivityUtils.NEW_CONTACT);
             }
         });
+
+
 
     }
 
@@ -210,7 +231,7 @@ public class MainActivity extends Activity {
                     System.out.print("WHYYYYY?");
                     newCon.setTotalString();
                     addContact(newCon);
-
+                    updateContactCount();
                 }
                 catch(Exception e)
                 {

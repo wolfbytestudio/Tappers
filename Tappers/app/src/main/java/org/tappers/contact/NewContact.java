@@ -44,6 +44,7 @@ public class NewContact extends Activity {
     private ImageButton charStonerBobAlt;
     private ImageButton charAbudady;
     private ImageButton charAbiba;
+    private ImageButton charGamerBob;
 
     private void resetBackgrounds()
     {
@@ -54,6 +55,7 @@ public class NewContact extends Activity {
         charStonerBobAlt.setBackground(null);
         charAbudady.setBackground(null);
         charAbiba.setBackground(null);
+        charGamerBob.setBackground(null);
     }
 
 
@@ -72,6 +74,7 @@ public class NewContact extends Activity {
         charStonerBobAlt = (ImageButton) findViewById(R.id.char_stoner_bob_alt);
         charAbudady = (ImageButton) findViewById(R.id.char_abudady);
         charAbiba = (ImageButton) findViewById(R.id.char_abiba);
+        charGamerBob = (ImageButton) findViewById(R.id.char_gamer_bob);
 
         lastCharSelected = charMale;
         lastCharSelected.setBackgroundResource(CharacterBackground.DEFAULT.getSmallBackground());
@@ -261,6 +264,12 @@ public class NewContact extends Activity {
             }
         });
 
+        charGamerBob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectCharacter(charGamerBob, "gamer bob");
+            }
+        });
 
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -124,9 +124,7 @@ public class MainListAdapter extends BaseAdapter {
             public void onClick(View view) {
                 int mPos = position;
                 Intent intent = new Intent(view.getContext(), ContactPage.class);
-
                 intent.putExtra("name", contacts.get(position).name);
-
                 Contact c = contacts.get(position);
                 ContactUtil.contact = c;
                 c.setTotalString();
@@ -148,6 +146,7 @@ public class MainListAdapter extends BaseAdapter {
                             case DialogInterface.BUTTON_POSITIVE:
                                 contacts.remove(position);
                                 owner.save.save();
+                                owner.updateContactCount();
                                 notifyDataSetChanged();
                                 break;
 

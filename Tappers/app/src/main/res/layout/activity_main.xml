@@ -43,6 +43,30 @@
         android:scaleType="fitCenter"
         android:src="@drawable/new_contact"/>
 
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/imgContactCount"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/title_border"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentRight="false"
+        android:scaleType="fitCenter"
+        android:src="@drawable/contact_count"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:layout_marginLeft="2dp"
+        android:textSize="18dp"
+        android:text="15"
+        android:textColor="#FFFFFF"
+        android:layout_toRightOf="@+id/imgContactCount"
+        android:id="@+id/contactCount"
+        android:fontFamily=""
+        android:background="@null"/>
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
