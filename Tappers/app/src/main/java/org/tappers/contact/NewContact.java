@@ -76,6 +76,7 @@ public class NewContact extends Activity {
         charAbiba = (ImageButton) findViewById(R.id.char_abiba);
         charGamerBob = (ImageButton) findViewById(R.id.char_gamer_bob);
 
+
         lastCharSelected = charMale;
         lastCharSelected.setBackgroundResource(CharacterBackground.DEFAULT.getSmallBackground());
 

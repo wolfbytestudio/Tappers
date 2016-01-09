@@ -261,7 +261,7 @@
                         android:background="@drawable/bgcol_blue"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
-                        android:src="@drawable/male"
+                        android:src="@drawable/male_small"
                         />
 
                     <ImageButton
@@ -272,7 +272,7 @@
                     android:layout_marginRight="10dp"
                     android:id="@+id/char_default_female"
                     android:layout_toEndOf="@+id/char_default_male"
-                    android:src="@drawable/female"/>
+                    android:src="@drawable/female_small"/>
 
                     <ImageButton
                         android:layout_width="75dp"
@@ -282,7 +282,7 @@
                         android:layout_marginRight="10dp"
                         android:id="@+id/char_stoner_bob"
                         android:layout_toEndOf="@+id/char_default_female"
-                        android:src="@drawable/stoner_bob"/>
+                        android:src="@drawable/stoner_bob_small"/>
 
                     <ImageButton
                         android:layout_width="75dp"
@@ -293,7 +293,7 @@
 
                         android:id="@+id/char_goth_girl"
                         android:layout_toEndOf="@+id/char_stoner_bob"
-                        android:src="@drawable/goth_girl"/>
+                        android:src="@drawable/goth_girl_small"/>
 
                     <ImageButton
                         android:layout_width="75dp"
@@ -305,7 +305,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_below="@+id/char_default_male"
                         android:id="@+id/char_stoner_bob_alt"
-                        android:src="@drawable/stoner_bob_alt"/>
+                        android:src="@drawable/stoner_bob_alt_small"/>
 
                     <ImageButton
                         android:layout_width="75dp"
@@ -317,7 +317,7 @@
                         android:layout_below="@+id/char_default_male"
                         android:id="@+id/char_abudady"
                         android:layout_toEndOf="@+id/char_stoner_bob_alt"
-                        android:src="@drawable/abudady"/>
+                        android:src="@drawable/abudady_small"/>
 
                     <ImageButton
                         android:layout_width="75dp"
@@ -329,7 +329,7 @@
                         android:layout_below="@+id/char_default_male"
                         android:id="@+id/char_abiba"
                         android:layout_toEndOf="@+id/char_abudady"
-                        android:src="@drawable/abiba"/>
+                        android:src="@drawable/abiba_small"/>
 
                     <ImageButton
                         android:layout_width="75dp"
@@ -341,7 +341,7 @@
                         android:layout_below="@+id/char_default_male"
                         android:id="@+id/char_gamer_bob"
                         android:layout_toEndOf="@+id/char_abiba"
-                        android:src="@drawable/gamer_bob"/>
+                        android:src="@drawable/gamer_bob_small"/>
 
                 </RelativeLayout>
             </HorizontalScrollView>
