@@ -107,7 +107,7 @@ public class MainListAdapter extends BaseAdapter {
 
         Character person = Character.getCharacterForName(myContact.characterType);
 
-        character.setImageResource(person.getCharacterFile());
+        character.setImageResource(person.getCharacterSmallFile());
 
         date.setText(myContact.date);
 

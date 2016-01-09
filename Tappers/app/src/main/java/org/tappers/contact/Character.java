@@ -8,22 +8,24 @@ import org.tappers.R;
 public enum Character
 {
 
-    DEFAULT_MALE("default male", R.drawable.male),
-    DEFAULT_FEMALE("default female", R.drawable.female),
-    STONER_BOB("stoner bob", R.drawable.stoner_bob),
-    STONER_BOB_ALT("stoner bob alt", R.drawable.stoner_bob_alt),
-    GOTH_GIRL("goth girl", R.drawable.goth_girl),
-    ABIBA("abiba", R.drawable.abiba),
-    GAMER_BOB("gamer bob", R.drawable.gamer_bob),
-    ABUDADY("abudady", R.drawable.abudady);
+    DEFAULT_MALE("default male", R.drawable.male, R.drawable.male_small),
+    DEFAULT_FEMALE("default female", R.drawable.female, R.drawable.female_small),
+    STONER_BOB("stoner bob", R.drawable.stoner_bob, R.drawable.stoner_bob_small),
+    STONER_BOB_ALT("stoner bob alt", R.drawable.stoner_bob_alt, R.drawable.stoner_bob_alt_small),
+    GOTH_GIRL("goth girl", R.drawable.goth_girl, R.drawable.goth_girl_small),
+    ABIBA("abiba", R.drawable.abiba, R.drawable.abiba_small),
+    GAMER_BOB("gamer bob", R.drawable.gamer_bob, R.drawable.gamer_bob_small),
+    ABUDADY("abudady", R.drawable.abudady, R.drawable.abudady_small);
 
     private String identifier;
     private int characterFile;
+    private int characterFileSmall;
 
-    Character(String identifier, int characterFile)
+    Character(String identifier, int characterFile, int characterFileSmall)
     {
         this.setIdentifier(identifier);
         this.setCharacterFile(characterFile);
+        this.setCharacterSmallFile(characterFileSmall);
     }
 
 
@@ -41,6 +43,14 @@ public enum Character
 
     public void setCharacterFile(int characterFile) {
         this.characterFile = characterFile;
+    }
+
+    public int getCharacterSmallFile() {
+        return characterFileSmall;
+    }
+
+    public void setCharacterSmallFile(int characterFile) {
+        this.characterFileSmall = characterFile;
     }
 
     public static Character getCharacterForName(String name)
