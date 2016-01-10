@@ -60,7 +60,7 @@ public class MainActivity extends Activity {
     /**
      * Object for handling saving
      */
-    public SaveHandler save;
+    public static SaveHandler save;
 
     /**
      * Displays all the contacts

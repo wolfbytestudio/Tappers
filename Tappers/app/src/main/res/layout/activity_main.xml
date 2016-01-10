@@ -44,10 +44,10 @@
         android:src="@drawable/new_contact"/>
 
     <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/imgContactCount"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/title_border"
         android:layout_marginLeft="5dp"
         android:layout_alignParentRight="false"

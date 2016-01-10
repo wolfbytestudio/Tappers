@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.tappers.MainActivity;
 import org.tappers.transaction.NewTransaction;
 import org.tappers.R;
 import org.tappers.adapter.TransactionListAdapter;
@@ -113,6 +115,7 @@ public class ContactPage extends Activity {
                                 updateContactList();
                                 contact.setTotalString();
                                 txtTotal.setText(contact.total);
+                                MainActivity.save.save();
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:
@@ -158,6 +161,7 @@ public class ContactPage extends Activity {
                 updateContactList();
                 contact.setTotalString();
                 txtTotal.setText(contact.total);
+                MainActivity.save.save();
             }
         }
     }
