@@ -17,7 +17,6 @@ import android.widget.Toast;
 import org.tappers.adapter.MainListAdapter;
 import org.tappers.contact.Contact;
 import org.tappers.contact.ContactPage;
-import org.tappers.contact.ContactUtil;
 import org.tappers.contact.NewContact;
 import org.tappers.transaction.Transaction;
 import org.tappers.transaction.TransactionType;
@@ -28,14 +27,26 @@ import org.tappers.util.SaveHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.tappers.R;
-
 public class MainActivity extends Activity {
 
     /**
      * All the contacts
      */
-    private ArrayList<Contact> contacts;
+    public static ArrayList<Contact> contacts;
+
+    public static int getPositionForContact(String name)
+    {
+        int counter = 0;
+        for(Contact con : contacts)
+        {
+            if(con.name.equalsIgnoreCase(name))
+            {
+                return counter;
+            }
+            counter++;
+        }
+        return -1;
+    }
 
     /**
      * The list view
@@ -51,11 +62,6 @@ public class MainActivity extends Activity {
      * The types of font
      */
     private HashMap<String, Typeface> typeFaces = new HashMap<>();
-
-    /**
-     * Contains the last contact page position
-     */
-    public int contactPagePosition = 0;
 
     /**
      * Object for handling saving
@@ -90,7 +96,7 @@ public class MainActivity extends Activity {
 
         contacts = load.getContacts();
         //contacts.clear();
-        save = new SaveHandler(contacts, getApplicationContext());
+        save = new SaveHandler(getApplicationContext());
         //save.save();
 
         updateContactCount();
@@ -128,12 +134,12 @@ public class MainActivity extends Activity {
                 intent.putExtra("name", contacts.get(position).name);
 
                 Contact c = contacts.get(position);
-                ContactUtil.contact = c;
                 c.setTotalString();
-                intent.putExtra("total", c.total);
-                contactPagePosition = position;
-                startActivityForResult(intent, ActivityUtils.CONTACT);
 
+                intent.putExtra("total", c.total);
+                intent.putExtra("pos", mPos);
+
+                startActivityForResult(intent, ActivityUtils.CONTACT);
             }
         });
 
@@ -243,29 +249,29 @@ public class MainActivity extends Activity {
         if(requestCode == ActivityUtils.CONTACT) {
             if (resultCode == ActivityUtils.CONTACT_RETURN) {
 
-                if(ContactUtil.contact.transactions.size() == 0)
+                for(Contact conn : contacts)
                 {
-                    contacts.get(contactPagePosition).total = "You and " +
-                            contacts.get(contactPagePosition).name
-                            + " don't owe each other anything!";
-                    contacts.get(contactPagePosition).transactions.add(
-                            new Transaction(TransactionType.FROM, 0, "0/0/0", "Reason Unspecific")
-                    );
-                    customListViewAdapter.notifyDataSetChanged();
-                    SaveHandler saver = new SaveHandler(contacts, getApplicationContext());
-                    saver.save();
-                    return;
+                    if(conn.transactions.size() == 0)
+                    {
+                        conn.total = "You and " +
+                                conn.name
+                                + " don't owe each other anything!";
+                        conn.transactions.add(
+                                new Transaction(TransactionType.FROM, 0, "0/0/0", "Reason Unspecific")
+                        );
+                        customListViewAdapter.notifyDataSetChanged();
+                    }
+                    else
+                    {
+                        conn.setTotalString();
+                        customListViewAdapter.notifyDataSetChanged();
+                    }
+
                 }
 
-                removeContact(contactPagePosition);
-                try {
-                    addContact(ContactUtil.contact);
-                }catch(Exception e) {
-                    Log.d("abc", "ERROR: " + e.toString());
-                }
-                SaveHandler saver = new SaveHandler(contacts, getApplicationContext());
+
+                SaveHandler saver = new SaveHandler(getApplicationContext());
                 saver.save();
-                ContactUtil.contact = null;
             }
         }
 

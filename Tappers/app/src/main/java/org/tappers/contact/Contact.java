@@ -17,10 +17,15 @@ public class Contact implements Serializable
 {
 
     public String name;
+
     public String total;
+
     public String date;
+
     public String characterType;
+
     public String backgroundColour;
+
     public List<Transaction> transactions;
 
     public Contact(String name, String total, String date, String characterType,

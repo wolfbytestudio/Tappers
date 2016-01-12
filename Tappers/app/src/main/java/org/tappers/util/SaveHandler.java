@@ -3,6 +3,7 @@ package org.tappers.util;
 import android.content.Context;
 import android.util.Log;
 
+import org.tappers.MainActivity;
 import org.tappers.contact.Contact;
 import org.tappers.transaction.Transaction;
 
@@ -15,17 +16,14 @@ import java.util.ArrayList;
  */
 public class SaveHandler {
 
-    private ArrayList<Contact> contacts;
-
     private String saveString;
 
     public String getSaveString() { return saveString; }
 
     private Context context;
 
-    public SaveHandler(ArrayList<Contact> contacts, Context context)
+    public SaveHandler(Context context)
     {
-        this.contacts = contacts;
         this.context = context;
     }
 
@@ -42,7 +40,7 @@ public class SaveHandler {
     private void generateSaveString()
     {
         String temp = "";
-        for (Contact contact : contacts) {
+        for (Contact contact : MainActivity.contacts) {
             temp += contact.name + ":" + contact.total + ":" +
                      contact.date + ":" + contact.characterType + ":"
                     + contact.backgroundColour + ":";

@@ -39,6 +39,10 @@ public class ContactPage extends Activity {
 
     private TransactionListAdapter transactionListAdapter;
 
+    private int position;
+
+    private String name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,12 +72,12 @@ public class ContactPage extends Activity {
         lblTitle.setTypeface(fonts.get("light"));
         lblTitle.setText(getIntent().getStringExtra("name").toString());
         txtHistory.setTypeface(fonts.get("light"));
-
+        name = getIntent().getStringExtra("name").toString();
         ImageView characterImageContact = (ImageView) findViewById(R.id.characterImageContact);
 
+        position = MainActivity.getPositionForContact(getIntent().getStringExtra("name").toString());
 
-
-        contact = ContactUtil.contact;
+        contact = MainActivity.contacts.get(position);
 
         Character charType = Character.getCharacterForName(contact.characterType);
         CharacterBackground charBackground =
@@ -91,6 +95,8 @@ public class ContactPage extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), NewTransaction.class);
+
+                intent.putExtra("pos", position);
                 startActivityForResult(intent, 1);
             }
         });
@@ -111,7 +117,7 @@ public class ContactPage extends Activity {
                                     Toast.makeText(getApplicationContext(), "There is no history to delete!", Toast.LENGTH_LONG).show();
                                     return;
                                 }
-                                ContactUtil.contact.transactions.clear();
+                                contact.transactions.clear();
                                 updateContactList();
                                 contact.setTotalString();
                                 txtTotal.setText(contact.total);
@@ -125,7 +131,8 @@ public class ContactPage extends Activity {
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setMessage("Are you sure you want to clear the history for " + ContactUtil.contact.name).setPositiveButton("Yes", dialogClickListener)
+                builder.setMessage("Are you sure you want to clear the history for " + contact.name)
+                        .setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
 
 
@@ -138,6 +145,7 @@ public class ContactPage extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = getIntent();
+                intent.putExtra("name", position);
                 setResult(ActivityUtils.CONTACT_RETURN, intent);
                 finish();
             }
@@ -161,6 +169,7 @@ public class ContactPage extends Activity {
                 updateContactList();
                 contact.setTotalString();
                 txtTotal.setText(contact.total);
+                data.putExtra("pos", position);
                 MainActivity.save.save();
             }
         }

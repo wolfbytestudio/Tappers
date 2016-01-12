@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.tappers.MainActivity;
 import org.tappers.R;
 import org.tappers.contact.Contact;
 import org.tappers.contact.ContactPage;
@@ -116,7 +117,7 @@ public class TransactionListAdapter extends BaseAdapter {
                                 owner.updateContactList();
                                 contact.setTotalString();
                                 owner.txtTotal.setText(contact.total);
-
+                                MainActivity.save.save();
                                 notifyDataSetChanged();
                                 break;
 

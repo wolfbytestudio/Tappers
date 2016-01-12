@@ -19,7 +19,6 @@ import org.tappers.contact.Character;
 import org.tappers.contact.CharacterBackground;
 import org.tappers.contact.Contact;
 import org.tappers.contact.ContactPage;
-import org.tappers.contact.ContactUtil;
 
 import org.tappers.util.ActivityUtils;
 
@@ -126,10 +125,8 @@ public class MainListAdapter extends BaseAdapter {
                 Intent intent = new Intent(view.getContext(), ContactPage.class);
                 intent.putExtra("name", contacts.get(position).name);
                 Contact c = contacts.get(position);
-                ContactUtil.contact = c;
                 c.setTotalString();
                 intent.putExtra("total", c.total);
-                owner.contactPagePosition = position;
                 owner.startActivityForResult(intent, ActivityUtils.CONTACT);
 
             }

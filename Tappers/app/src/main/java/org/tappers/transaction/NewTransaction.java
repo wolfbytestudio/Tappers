@@ -15,8 +15,8 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import org.tappers.MainActivity;
 import org.tappers.R;
-import org.tappers.contact.ContactUtil;
 
 import java.util.Calendar;
 
@@ -99,7 +99,9 @@ public class NewTransaction extends Activity {
 
                 TransactionType type = TransactionType.valueOf(tofrom);
 
-                ContactUtil.contact.addTransaction(new Transaction(
+
+
+                MainActivity.contacts.get(getIntent().getIntExtra("pos", 0)).addTransaction(new Transaction(
                         type, am, date.getText().toString().substring(15),
                         reason.getText().toString()));
 

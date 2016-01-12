@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/AppTheme"
+    android:background="#D7D7D7"
     tools:context=".MainActivity">
 
 
@@ -67,17 +68,30 @@
         android:fontFamily=""
         android:background="@null"/>
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lstContacts"
-        android:divider="#EDEDED"
-        android:dividerHeight="1dp"
-        android:layout_centerHorizontal="true"
-        android:fastScrollAlwaysVisible="false"
-        tools:listitem="@android:layout/simple_list_item_checked"
+
+
+
+
+    <RelativeLayout
         android:layout_below="@+id/txtTitle"
-        android:listSelector="@drawable/list_selector"
-        android:layout_alignParentBottom="true" />
+        android:background="#FFFFFF"
+        android:layout_width="500dp"
+        android:layout_centerHorizontal="true"
+        android:maxWidth="400dp"
+        android:minWidth="300dp"
+        android:paddingRight="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_height="fill_parent">
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lstContacts"
+            android:divider="#EDEDED"
+            android:dividerHeight="1dp"
+            android:layout_centerHorizontal="true"
+            android:fastScrollAlwaysVisible="false"
+            tools:listitem="@android:layout/simple_list_item_checked"
+            android:listSelector="@drawable/list_selector"/>
+    </RelativeLayout>
 
 </RelativeLayout>
