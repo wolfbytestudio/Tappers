@@ -24,6 +24,7 @@ import org.tappers.util.ActivityUtils;
 import org.tappers.util.LoadHandler;
 import org.tappers.util.SaveHandler;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -81,14 +82,16 @@ public class MainActivity extends Activity {
         txtContactCount.setText(contacts.size() + "");
     }
 
+
+    private TextView txtTotalOwe;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         contacts = new ArrayList<>();
-
+        txtTotalOwe = (TextView) findViewById(R.id.txtTotalOwe);
         txtContactCount = (TextView) findViewById(R.id.contactCount);
 
         LoadHandler load = new LoadHandler(getApplicationContext());
@@ -100,11 +103,16 @@ public class MainActivity extends Activity {
         //save.save();
 
         updateContactCount();
+        generateTotal();
 
         Typeface thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface light = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
         Typeface regular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
 
+
+
+
+        txtTotalOwe.setTypeface(light);
 
         txtContactCount.setTypeface(light);
 
@@ -165,6 +173,46 @@ public class MainActivity extends Activity {
 
 
     }
+
+
+    public void generateTotal()
+    {
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        if(contacts.size() == 0)
+        {
+            txtTotalOwe.setText("Add a new contact by clicking the top right button");
+            return;
+        }
+        double total = 0;
+        for(Contact c : contacts)
+        {
+            for(Transaction t : c.transactions)
+            {
+                if(t.getType() == TransactionType.FROM)
+                {
+                    total -= t.getAmount();
+                }
+                else
+                {
+                    total += t.getAmount();
+                }
+            }
+        }
+
+        if(total < 0)
+        {
+            txtTotalOwe.setText("You owe a total of " + formatter.format(Math.abs(total)));
+        }
+        else if(total > 0)
+        {
+            txtTotalOwe.setText("You are owed a total of " + formatter.format(Math.abs(total)));
+        }
+        else
+        {
+            txtTotalOwe.setText("Nobody owes anyone anything!");
+        }
+    }
+
 
     /**
      * Adds a new Contact to the list and repopulates the list view
@@ -275,7 +323,7 @@ public class MainActivity extends Activity {
             }
         }
 
-
+        generateTotal();
 
     }
 

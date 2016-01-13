@@ -70,10 +70,22 @@
 
 
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="You are owed a total of £0,000.00"
+        android:layout_below="@+id/txtTitle"
+        android:width="500dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:id="@+id/txtTotalOwe"
+        android:layout_centerHorizontal="true" />
 
     <RelativeLayout
-        android:layout_below="@+id/txtTitle"
+        android:layout_below="@+id/txtTotalOwe"
         android:background="#FFFFFF"
         android:layout_width="500dp"
         android:layout_centerHorizontal="true"
@@ -92,6 +104,7 @@
             android:fastScrollAlwaysVisible="false"
             tools:listitem="@android:layout/simple_list_item_checked"
             android:listSelector="@drawable/list_selector"/>
+
     </RelativeLayout>
 
 </RelativeLayout>

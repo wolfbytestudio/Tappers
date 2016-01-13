@@ -145,6 +145,7 @@ public class MainListAdapter extends BaseAdapter {
                                 owner.save.save();
                                 owner.updateContactCount();
                                 notifyDataSetChanged();
+                                owner.generateTotal();
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:

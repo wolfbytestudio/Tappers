@@ -8,8 +8,8 @@ android {
         applicationId "org.tapper"
         minSdkVersion 17
         targetSdkVersion 23
-        versionCode 6
-        versionName "3"
+        versionCode 8
+        versionName "4"
     }
     buildTypes {
         release {
