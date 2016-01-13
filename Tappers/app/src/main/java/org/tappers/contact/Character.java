@@ -15,6 +15,10 @@ public enum Character
     GOTH_GIRL("goth girl", R.drawable.goth_girl, R.drawable.goth_girl_small),
     ABIBA("abiba", R.drawable.abiba, R.drawable.abiba_small),
     GAMER_BOB("gamer bob", R.drawable.gamer_bob, R.drawable.gamer_bob_small),
+
+    BLUE_DRESS_FEMALE("blue dress female", R.drawable.blue_dress_female, R.drawable.blue_dress_female_small),
+    RED_DRESS_FEMALE("red dress female", R.drawable.red_dress_female, R.drawable.red_dress_female_small),
+
     ABUDADY("abudady", R.drawable.abudady, R.drawable.abudady_small);
 
     private String identifier;

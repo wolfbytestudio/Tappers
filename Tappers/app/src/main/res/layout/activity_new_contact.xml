@@ -295,6 +295,18 @@
                         android:layout_toEndOf="@+id/char_stoner_bob"
                         android:src="@drawable/goth_girl_small"/>
 
+
+                    <ImageButton
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:scaleType="fitCenter"
+                        android:background="@null"
+                        android:layout_marginRight="10dp"
+
+                        android:id="@+id/char_red_dress"
+                        android:layout_toEndOf="@+id/char_goth_girl"
+                        android:src="@drawable/red_dress_female_small"/>
+
                     <ImageButton
                         android:layout_width="75dp"
                         android:layout_height="75dp"
@@ -342,6 +354,19 @@
                         android:id="@+id/char_gamer_bob"
                         android:layout_toEndOf="@+id/char_abiba"
                         android:src="@drawable/gamer_bob_small"/>
+
+
+                    <ImageButton
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:layout_marginTop="10dp"
+                        android:scaleType="fitCenter"
+                        android:background="@null"
+                        android:layout_marginRight="10dp"
+                        android:layout_below="@+id/char_default_male"
+                        android:id="@+id/char_blue_dress"
+                        android:layout_toEndOf="@+id/char_gamer_bob"
+                        android:src="@drawable/blue_dress_female_small"/>
 
                 </RelativeLayout>
             </HorizontalScrollView>

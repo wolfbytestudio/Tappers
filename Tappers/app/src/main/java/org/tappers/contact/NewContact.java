@@ -46,6 +46,9 @@ public class NewContact extends Activity {
     private ImageButton charAbiba;
     private ImageButton charGamerBob;
 
+    private ImageButton charBlueDress;
+    private ImageButton charRedDress;
+
     private void resetBackgrounds()
     {
         charMale.setBackground(null);
@@ -56,6 +59,8 @@ public class NewContact extends Activity {
         charAbudady.setBackground(null);
         charAbiba.setBackground(null);
         charGamerBob.setBackground(null);
+        charBlueDress.setBackground(null);
+        charRedDress.setBackground(null);
     }
 
 
@@ -75,6 +80,9 @@ public class NewContact extends Activity {
         charAbudady = (ImageButton) findViewById(R.id.char_abudady);
         charAbiba = (ImageButton) findViewById(R.id.char_abiba);
         charGamerBob = (ImageButton) findViewById(R.id.char_gamer_bob);
+
+        charRedDress = (ImageButton) findViewById(R.id.char_red_dress);
+        charBlueDress = (ImageButton) findViewById(R.id.char_blue_dress);
 
 
         lastCharSelected = charMale;
@@ -269,6 +277,20 @@ public class NewContact extends Activity {
             @Override
             public void onClick(View v) {
                 selectCharacter(charGamerBob, "gamer bob");
+            }
+        });
+
+        charRedDress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectCharacter(charRedDress, "red dress female");
+            }
+        });
+
+        charBlueDress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectCharacter(charBlueDress, "blue dress female");
             }
         });
 
