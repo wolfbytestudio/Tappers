@@ -8,24 +8,25 @@ import org.tappers.R;
 public enum Character
 {
 
-    DEFAULT_MALE("default male", R.drawable.male, R.drawable.male_small),
-    DEFAULT_FEMALE("default female", R.drawable.female, R.drawable.female_small),
-    STONER_BOB("stoner bob", R.drawable.stoner_bob, R.drawable.stoner_bob_small),
-    STONER_BOB_ALT("stoner bob alt", R.drawable.stoner_bob_alt, R.drawable.stoner_bob_alt_small),
-    GOTH_GIRL("goth girl", R.drawable.goth_girl, R.drawable.goth_girl_small),
-    ABIBA("abiba", R.drawable.abiba, R.drawable.abiba_small),
-    GAMER_BOB("gamer bob", R.drawable.gamer_bob, R.drawable.gamer_bob_small),
+    DEFAULT_MALE("default male", R.drawable.male, R.drawable.male_small, R.id.char_default_male_edit),
+    DEFAULT_FEMALE("default female", R.drawable.female, R.drawable.female_small, R.id.char_default_female_edit),
+    STONER_BOB("stoner bob", R.drawable.stoner_bob, R.drawable.stoner_bob_small, R.id.char_stoner_bob_edit),
+    STONER_BOB_ALT("stoner bob alt", R.drawable.stoner_bob_alt, R.drawable.stoner_bob_alt_small, R.id.char_stoner_bob_alt_edit),
+    GOTH_GIRL("goth girl", R.drawable.goth_girl, R.drawable.goth_girl_small, R.id.char_goth_girl_edit),
+    ABIBA("abiba", R.drawable.abiba, R.drawable.abiba_small, R.id.char_abiba_edit),
+    GAMER_BOB("gamer bob", R.drawable.gamer_bob, R.drawable.gamer_bob_small, R.id.char_gamer_bob_edit),
 
-    BLUE_DRESS_FEMALE("blue dress female", R.drawable.blue_dress_female, R.drawable.blue_dress_female_small),
-    RED_DRESS_FEMALE("red dress female", R.drawable.red_dress_female, R.drawable.red_dress_female_small),
+    BLUE_DRESS_FEMALE("blue dress female", R.drawable.blue_dress_female, R.drawable.blue_dress_female_small, R.id.char_blue_dress_edit),
+    RED_DRESS_FEMALE("red dress female", R.drawable.red_dress_female, R.drawable.red_dress_female_small, R.id.char_red_dress_edit),
 
-    ABUDADY("abudady", R.drawable.abudady, R.drawable.abudady_small);
+    ABUDADY("abudady", R.drawable.abudady, R.drawable.abudady_small, R.id.char_abudady_edit);
 
     private String identifier;
     private int characterFile;
     private int characterFileSmall;
+    private int characterIdEdits;
 
-    Character(String identifier, int characterFile, int characterFileSmall)
+    Character(String identifier, int characterFile, int characterFileSmall, int characerIdEdits)
     {
         this.setIdentifier(identifier);
         this.setCharacterFile(characterFile);
@@ -67,5 +68,25 @@ public enum Character
             }
         }
         return null;
+    }
+
+    public static Character getCharacterForId(int id)
+    {
+        for(Character character : values())
+        {
+            if(character.getCharacterIdEdits() == id)
+            {
+                return character;
+            }
+        }
+        return null;
+    }
+
+    public int getCharacterIdEdits() {
+        return characterIdEdits;
+    }
+
+    public void setCharacterIdEdits(int characterIdEdits) {
+        this.characterIdEdits = characterIdEdits;
     }
 }

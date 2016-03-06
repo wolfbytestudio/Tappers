@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,10 +33,15 @@ import java.util.HashMap;
 public class MainActivity extends Activity {
 
     /**
-     * All the contacts
+     * All the contacts as a list
      */
     public static ArrayList<Contact> contacts;
 
+    /**
+     * Gets the position of the contact
+     * @param name
+     * @return
+     */
     public static int getPositionForContact(String name)
     {
         int counter = 0;
@@ -130,7 +137,11 @@ public class MainActivity extends Activity {
         listView = (ListView) findViewById(R.id.lstContacts);
 
         customListViewAdapter = new MainListAdapter(getApplicationContext(), contacts, typeFaces, this);
+
         listView.setAdapter(customListViewAdapter);
+        registerForContextMenu(listView);
+
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -172,8 +183,24 @@ public class MainActivity extends Activity {
 
 
 
+
     }
 
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.contact_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item)
+    {
+        Log.v("BRooo", "Context item selected as="+item.toString());
+        return super.onContextItemSelected(item);
+    }
 
     public void generateTotal()
     {
@@ -327,26 +354,7 @@ public class MainActivity extends Activity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 }

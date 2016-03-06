@@ -6,10 +6,10 @@ android {
 
     defaultConfig {
         applicationId "org.tapper"
-        minSdkVersion 17
+        minSdkVersion 13
         targetSdkVersion 23
-        versionCode 10
-        versionName "5"
+        versionCode 11
+        versionName "6"
     }
     buildTypes {
         release {

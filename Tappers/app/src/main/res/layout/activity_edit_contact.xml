@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/AppTheme"
-    tools:context="org.tappers.contact.NewContact">
+    tools:context="org.tappers.contact.EditContact">
+
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="New Contact"
+        android:text="Edit Contact"
         android:id="@+id/contact_title"
         android:fontFamily="sans-serif-light"
         android:textAlignment="gravity"
@@ -84,137 +85,16 @@
                 android:inputType="textPersonName"
                 android:fontFamily="sans-serif-light"
                 android:ems="10"
-                android:id="@+id/txtContactName"
+                android:id="@+id/txtEditConactName"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/lblContactName" />
 
-
-            <TextView
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txtContactName"
-                android:textColor="#0b0c0e"
-                android:text="Transaction Amount"
-                android:textSize="18dp"
-                android:layout_marginLeft="10dp"
-                android:paddingTop="5dp"
-                android:fontFamily="sans-serif-light"
-                android:id="@+id/lblTransaction"
-                />
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_marginRight="10dp"
-                android:textSize="14dp"
-                android:hint="0"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:fontFamily="sans-serif-light"
-                android:ems="10"
-                android:id="@+id/txtTransaction"
-                android:layout_below="@+id/txtContactName"
-                android:layout_toEndOf="@+id/lblTransaction" />
-
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/lblTransaction"
-                android:layout_below="@+id/txtTransaction"
-                android:paddingRight="10dp"
-                android:id="@+id/radGroup"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="To"
-                    android:layout_marginRight="10dp"
-                    android:checked="true"
-                    android:id="@+id/rdbTo"/>
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="From"
-                    android:id="@+id/rdbFrom"
-                    android:layout_gravity="right" />
-
-            </RadioGroup>
-
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/radGroup"
-                android:textColor="#0b0c0e"
-                android:text="Reason"
-                android:textSize="20dp"
-                android:layout_marginLeft="10dp"
-                android:paddingTop="5dp"
-                android:fontFamily="sans-serif-light"
-                android:id="@+id/lblReason"
-                />
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_marginRight="10dp"
-                android:textSize="14dp"
-                android:hint="Unspecific Reason"
-                android:layout_height="wrap_content"
-                android:inputType="textAutoCorrect"
-                android:fontFamily="sans-serif-light"
-                android:text=""
-                android:ems="10"
-                android:id="@+id/txtReason"
-                android:layout_alignTop="@+id/lblReason"
-                android:layout_toEndOf="@+id/lblReason" />
-
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txtReason"
-                android:textColor="#0b0c0e"
-                android:text="Date"
-                android:textSize="20dp"
-                android:layout_marginLeft="10dp"
-                android:paddingTop="5dp"
-                android:fontFamily="sans-serif-light"
-                android:id="@+id/lblDate"
-                />
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Pick Date"
-                android:layout_marginLeft="10dp"
-                android:fontFamily="sans-serif-light"
-                android:id="@+id/btnPickNewDate"
-                android:layout_below="@+id/txtReason"
-                android:layout_toEndOf="@+id/lblSetDate" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="44dp"
-                android:gravity="center"
-                android:fontFamily="sans-serif-light"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Date Selected: 14/12/2015"
-                android:textSize="14dp"
-                android:id="@+id/lblSetDate"
-                android:layout_below="@+id/txtReason"
-                android:layout_toEndOf="@+id/lblDate" />
-
-
-
-
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/lblSetDate"
+                android:layout_below="@+id/txtEditConactName"
                 android:textColor="#0b0c0e"
-                android:text="Characters..."
+                android:text="Characters"
                 android:textSize="20dp"
                 android:layout_marginLeft="10dp"
                 android:paddingTop="5dp"
@@ -243,7 +123,7 @@
                     <ImageButton
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:id="@+id/char_default_male"
+                        android:id="@+id/char_default_male_edit"
                         android:scaleType="fitCenter"
                         android:background="@drawable/bgcol_blue"
                         android:layout_marginRight="10dp"
@@ -252,14 +132,14 @@
                         />
 
                     <ImageButton
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:scaleType="fitCenter"
-                    android:background="@null"
-                    android:layout_marginRight="10dp"
-                    android:id="@+id/char_default_female"
-                    android:layout_toEndOf="@+id/char_default_male"
-                    android:src="@drawable/female_small"/>
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:scaleType="fitCenter"
+                        android:background="@null"
+                        android:layout_marginRight="10dp"
+                        android:id="@+id/char_default_female_edit"
+                        android:layout_toEndOf="@+id/char_default_male_edit"
+                        android:src="@drawable/female_small"/>
 
                     <ImageButton
                         android:layout_width="75dp"
@@ -267,8 +147,8 @@
                         android:scaleType="fitCenter"
                         android:background="@null"
                         android:layout_marginRight="10dp"
-                        android:id="@+id/char_stoner_bob"
-                        android:layout_toEndOf="@+id/char_default_female"
+                        android:id="@+id/char_stoner_bob_edit"
+                        android:layout_toEndOf="@+id/char_default_female_edit"
                         android:src="@drawable/stoner_bob_small"/>
 
                     <ImageButton
@@ -278,8 +158,8 @@
                         android:background="@null"
                         android:layout_marginRight="10dp"
 
-                        android:id="@+id/char_goth_girl"
-                        android:layout_toEndOf="@+id/char_stoner_bob"
+                        android:id="@+id/char_goth_girl_edit"
+                        android:layout_toEndOf="@+id/char_stoner_bob_edit"
                         android:src="@drawable/goth_girl_small"/>
 
 
@@ -290,8 +170,8 @@
                         android:background="@null"
                         android:layout_marginRight="10dp"
 
-                        android:id="@+id/char_red_dress"
-                        android:layout_toEndOf="@+id/char_goth_girl"
+                        android:id="@+id/char_red_dress_edit"
+                        android:layout_toEndOf="@+id/char_goth_girl_edit"
                         android:src="@drawable/red_dress_female_small"/>
 
                     <ImageButton
@@ -301,9 +181,8 @@
                         android:background="@null"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"
-                        android:id="@+id/char_stoner_bob_alt"
-                        android:layout_toEndOf="@+id/char_red_dress"
+                        android:id="@+id/char_stoner_bob_alt_edit"
+                        android:layout_toEndOf="@+id/char_red_dress_edit"
                         android:src="@drawable/stoner_bob_alt_small"/>
 
                     <ImageButton
@@ -312,43 +191,39 @@
                         android:scaleType="fitCenter"
                         android:background="@null"
                         android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"
-                        android:id="@+id/char_abudady"
-                        android:layout_toEndOf="@+id/char_stoner_bob_alt"
+                        android:id="@+id/char_abudady_edit"
+                        android:layout_toEndOf="@+id/char_stoner_bob_alt_edit"
                         android:src="@drawable/abudady_small"/>
 
                     <ImageButton
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:layout_marginTop="10dp"
                         android:scaleType="fitCenter"
                         android:background="@null"
                         android:layout_marginRight="10dp"
-                        android:id="@+id/char_abiba"
-                        android:layout_toEndOf="@+id/char_abudady"
+                        android:id="@+id/char_abiba_edit"
+                        android:layout_toEndOf="@+id/char_abudady_edit"
                         android:src="@drawable/abiba_small"/>
 
                     <ImageButton
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:layout_marginTop="10dp"
                         android:scaleType="fitCenter"
                         android:background="@null"
                         android:layout_marginRight="10dp"
-                        android:id="@+id/char_gamer_bob"
-                        android:layout_toEndOf="@+id/char_abiba"
+                        android:id="@+id/char_gamer_bob_edit"
+                        android:layout_toEndOf="@+id/char_abiba_edit"
                         android:src="@drawable/gamer_bob_small"/>
 
 
                     <ImageButton
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:layout_marginTop="10dp"
                         android:scaleType="fitCenter"
                         android:background="@null"
                         android:layout_marginRight="10dp"
-                        android:id="@+id/char_blue_dress"
-                        android:layout_toEndOf="@+id/char_gamer_bob"
+                        android:id="@+id/char_blue_dress_edit"
+                        android:layout_toEndOf="@+id/char_gamer_bob_edit"
                         android:src="@drawable/blue_dress_female_small"/>
 
                 </RelativeLayout>
@@ -489,6 +364,7 @@
 
 
     </ScrollView>
+
 
 
 </RelativeLayout>
