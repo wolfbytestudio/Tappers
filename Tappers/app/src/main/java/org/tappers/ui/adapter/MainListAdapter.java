@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,9 +89,6 @@ public class MainListAdapter extends BaseAdapter
 
         payment.setText(myContact.getTotalString());
 
-
-
-
         ImageView character = (ImageView) view.findViewById(R.id.characterImage);
 
         Character person = Character.getCharacterForName(myContact.getCharacterType());
@@ -125,6 +123,7 @@ public class MainListAdapter extends BaseAdapter
             @Override
             public void onClick(View view)
             {
+
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener()
                 {
                     @Override
@@ -137,7 +136,7 @@ public class MainListAdapter extends BaseAdapter
                                 Contacts.SINGLETON.save(context);
                                 owner.updateContactCount();
                                 notifyDataSetChanged();
-                                owner.generateTotal();
+                                owner.txtTotalOwe.setText(Contacts.SINGLETON.getTotal());
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:
@@ -157,6 +156,4 @@ public class MainListAdapter extends BaseAdapter
 
         return view;
     }
-
-
 }

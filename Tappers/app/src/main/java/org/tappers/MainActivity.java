@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,7 @@ import java.util.ArrayList;
  */
 public class MainActivity extends Activity
 {
+
     /**
      * The list view
      */
@@ -56,7 +59,7 @@ public class MainActivity extends Activity
     }
 
 
-    private TextView txtTotalOwe;
+    public TextView txtTotalOwe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -81,7 +84,7 @@ public class MainActivity extends Activity
         txtContactCount = (TextView) findViewById(R.id.contactCount);
 
         updateContactCount();
-        generateTotal();
+        txtTotalOwe.setText(Contacts.SINGLETON.getTotal());
 
         txtTotalOwe.setTypeface(CustomTypeFaces.get("light"));
         txtContactCount.setTypeface(CustomTypeFaces.get("light"));
@@ -91,7 +94,7 @@ public class MainActivity extends Activity
 
 
         listView = (ListView) findViewById(R.id.lstContacts);
-
+        registerForContextMenu(txtTotalOwe);
         listView.setOnLongClickListener(new View.OnLongClickListener()
         {
             @Override
@@ -101,13 +104,10 @@ public class MainActivity extends Activity
             }
         });
 
-        registerForContextMenu(listView);
 
         customListViewAdapter = new MainListAdapter(getApplicationContext(), this);
 
         listView.setAdapter(customListViewAdapter);
-
-       // registerForContextMenu(txtTotalOwe);
 
 
 
@@ -148,15 +148,18 @@ public class MainActivity extends Activity
 
     }
 
-
+    
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
     {
         super.onCreateContextMenu(menu, v, menuInfo);
         if (v.getId() == R.id.txtTotalOwe)
         {
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.menu_edit_contact, menu);
+            menu.add(0, v.getId(), 0, "Something");
+            menu.add(0, v.getId(), 0, "Something else");
+            menu.add(0, v.getId(), 0, "Something else");
+            menu.add(0, v.getId(), 0, "Something else");
+            menu.add(0, v.getId(), 0, "Something else");
         }
     }
 
@@ -176,43 +179,7 @@ public class MainActivity extends Activity
     }
 
 
-    public void generateTotal()
-    {
-        NumberFormat formatter = NumberFormat.getCurrencyInstance();
-        if(Contacts.SINGLETON.getContacts().size() == 0)
-        {
-            txtTotalOwe.setText("Add a new contact by clicking the top right button");
-            return;
-        }
-        double total = 0;
-        for(Contact c : Contacts.SINGLETON.getContacts())
-        {
-            for(Transaction t : c.getTransactions())
-            {
-                if(t.getType() == TransactionType.FROM)
-                {
-                    total -= t.getAmount();
-                }
-                else
-                {
-                    total += t.getAmount();
-                }
-            }
-        }
 
-        if(total < 0)
-        {
-            txtTotalOwe.setText("You owe a total of " + formatter.format(Math.abs(total)));
-        }
-        else if(total > 0)
-        {
-            txtTotalOwe.setText("You are owed a total of " + formatter.format(Math.abs(total)));
-        }
-        else
-        {
-            txtTotalOwe.setText("Nobody owes anyone anything!");
-        }
-    }
 
 
     /**
@@ -308,9 +275,13 @@ public class MainActivity extends Activity
             }
         }
 
-        generateTotal();
+        txtTotalOwe.setText(Contacts.SINGLETON.getTotal());
 
     }
-
+    
+    /**
+     * A MEGABYTE
+     */
+    public static final boolean MEGABYTE = false;
 
 }

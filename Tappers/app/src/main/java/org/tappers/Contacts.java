@@ -7,6 +7,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.tappers.contact.Contact;
+import org.tappers.contact.Transaction;
+import org.tappers.contact.TransactionType;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -15,6 +17,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -145,5 +148,47 @@ public class Contacts
     {
         Type type = new TypeToken<List<Contact>>(){}.getType();
         contacts = GSON.fromJson(json, type);
+    }
+
+    /**
+     * Gets the total text for all contacts
+     *
+     * @return - the total string
+     */
+    public String getTotal()
+    {
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        if(Contacts.SINGLETON.getContacts().size() == 0)
+        {
+            return "Add a new contact by clicking the top right button";
+        }
+        double total = 0;
+        for(Contact c : Contacts.SINGLETON.getContacts())
+        {
+            for(Transaction t : c.getTransactions())
+            {
+                if(t.getType() == TransactionType.FROM)
+                {
+                    total -= t.getAmount();
+                }
+                else
+                {
+                    total += t.getAmount();
+                }
+            }
+        }
+
+        if(total < 0)
+        {
+            return "You owe a total of " + formatter.format(Math.abs(total));
+        }
+        else if(total > 0)
+        {
+            return"You are owed a total of " + formatter.format(Math.abs(total));
+        }
+        else
+        {
+            return"Nobody owes anyone anything!";
+        }
     }
 }

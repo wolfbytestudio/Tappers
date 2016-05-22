@@ -6,6 +6,7 @@
     android:layout_height="100dp">
 
     <LinearLayout
+        android:focusable="false"
         android:id="@+id/thumbnail"
         android:padding="3dp"
         android:layout_width="wrap_content"
@@ -28,7 +29,7 @@
     </LinearLayout>
 
     <TextView
-
+        android:focusable="false"
         android:layout_width="wrap_content"
         android:id="@+id/name"
         android:layout_alignTop="@id/thumbnail"
@@ -46,6 +47,7 @@
         android:fontFamily="sans-serif-light"
         android:id="@+id/payment"
         android:textColor="#37383A"
+        android:focusable="false"
         android:textSize="15dp"
         android:layout_toRightOf="@id/thumbnail"
         android:text="John Smith owes you placeholder, placeholder and another placeholder"
@@ -59,6 +61,7 @@
         android:fontFamily="sans-serif-light"
         android:textSize="10dp"
         android:textColor="#37383A"
+        android:focusable="false"
         android:id="@+id/date"
         android:text="13/12/2015"
         />
