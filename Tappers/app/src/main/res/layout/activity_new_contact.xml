@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/AppTheme"
-    tools:context="org.tappers.contact.NewContact">
+    tools:context="org.tappers.ui.page.NewContact">
 
     <TextView
         android:layout_width="fill_parent"

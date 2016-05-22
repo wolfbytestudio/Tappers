@@ -1,4 +1,4 @@
-package org.tappers.contact;
+package org.tappers.ui.page;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,10 +16,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.tappers.transaction.NewTransaction;
+import org.tappers.Contacts;
+import org.tappers.contact.*;
+import org.tappers.ui.data.CharacterBackground;
 import org.tappers.R;
-import org.tappers.adapter.TransactionListAdapter;
-import org.tappers.util.ActivityUtils;
+import org.tappers.ui.adapter.TransactionListAdapter;
+import org.tappers.util.ActivityConstants;
 import org.tappers.util.CustomTypeFaces;
 
 import java.lang.*;
@@ -69,7 +71,7 @@ public class ContactPage extends Activity
         txtHistory.setTypeface(CustomTypeFaces.get("light"));
         ImageView characterImageContact = (ImageView) findViewById(R.id.characterImageContact);
 
-        Character charType = Character.getCharacterForName(contact.getCharacterType());
+        org.tappers.ui.data.Character charType = org.tappers.ui.data.Character.getCharacterForName(contact.getCharacterType());
         CharacterBackground charBackground =
                 CharacterBackground.getBackgroundForId(contact.getBackgroundColour());
 
@@ -142,7 +144,7 @@ public class ContactPage extends Activity
             public void onClick(View v) {
                 Intent intent = getIntent();
                 intent.putExtra("name", position);
-                setResult(ActivityUtils.CONTACT_RETURN, intent);
+                setResult(ActivityConstants.CONTACT_RETURN, intent);
                 finish();
             }
         });

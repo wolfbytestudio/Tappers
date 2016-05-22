@@ -1,8 +1,5 @@
 package org.tappers.contact;
 
-import org.tappers.transaction.Transaction;
-import org.tappers.transaction.TransactionType;
-
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.ArrayList;

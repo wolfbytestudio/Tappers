@@ -1,4 +1,4 @@
-package org.tappers.contact;
+package org.tappers.ui.page;
 
 import android.app.Activity;
 import android.os.Bundle;

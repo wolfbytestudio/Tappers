@@ -7,13 +7,15 @@ import org.tappers.MainActivity;
 import java.util.HashMap;
 
 /**
+ * Custom Typefaces contains all the custom typefaces
+ *
  * Created by Zack on 22/05/2016.
  */
 public final class CustomTypeFaces
 {
 
     /**
-     * initializes the typefaces
+     * Initializes the typefaces
      * @param activity - the activity to initialize with
      */
     public static void initialize(MainActivity activity)

@@ -1,10 +1,12 @@
-package org.tappers.contact;
+package org.tappers;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.tappers.contact.Contact;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -19,6 +21,7 @@ import java.util.List;
 
 /**
  * This class contains all the contacts and necessary methods
+ *
  * Created by Zack on 22/05/2016.
  */
 public class Contacts

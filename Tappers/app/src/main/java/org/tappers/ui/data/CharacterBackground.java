@@ -1,4 +1,4 @@
-package org.tappers.contact;
+package org.tappers.ui.data;
 
 import org.tappers.R;
 

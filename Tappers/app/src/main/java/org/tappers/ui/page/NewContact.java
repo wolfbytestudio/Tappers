@@ -1,4 +1,4 @@
-package org.tappers.contact;
+package org.tappers.ui.page;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -17,7 +17,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.tappers.util.ActivityUtils;
+import org.tappers.ui.data.CharacterBackground;
+import org.tappers.util.ActivityConstants;
 import org.tappers.R;
 
 import java.util.Calendar;
@@ -336,7 +337,7 @@ public class NewContact extends Activity {
                 returnIntent.putExtra("bgcol", backgroundSelected);
                 returnIntent.putExtra("tofrom", toFrom.toUpperCase());
 
-                setResult(ActivityUtils.NEW_CONTACT_RETURN, returnIntent);
+                setResult(ActivityConstants.NEW_CONTACT_RETURN, returnIntent);
                 finish();
             }
         });

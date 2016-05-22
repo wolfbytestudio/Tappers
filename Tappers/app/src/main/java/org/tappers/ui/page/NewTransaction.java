@@ -1,10 +1,9 @@
-package org.tappers.transaction;
+package org.tappers.ui.page;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,9 +14,10 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import org.tappers.MainActivity;
 import org.tappers.R;
-import org.tappers.contact.Contacts;
+import org.tappers.Contacts;
+import org.tappers.contact.Transaction;
+import org.tappers.contact.TransactionType;
 import org.tappers.util.CustomTypeFaces;
 
 import java.util.Calendar;

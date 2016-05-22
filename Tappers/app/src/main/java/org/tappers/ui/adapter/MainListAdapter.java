@@ -1,12 +1,10 @@
-package org.tappers.adapter;
+package org.tappers.ui.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -16,13 +14,13 @@ import android.widget.TextView;
 import org.tappers.MainActivity;
 import org.tappers.R;
 
-import org.tappers.contact.Character;
-import org.tappers.contact.CharacterBackground;
+import org.tappers.ui.data.Character;
+import org.tappers.ui.data.CharacterBackground;
 import org.tappers.contact.Contact;
-import org.tappers.contact.ContactPage;
+import org.tappers.ui.page.ContactPage;
 
-import org.tappers.contact.Contacts;
-import org.tappers.util.ActivityUtils;
+import org.tappers.Contacts;
+import org.tappers.util.ActivityConstants;
 import org.tappers.util.CustomTypeFaces;
 
 /**
@@ -117,7 +115,7 @@ public class MainListAdapter extends BaseAdapter
                 int mPos = position;
                 Intent intent = new Intent(view.getContext(), ContactPage.class);
                 intent.putExtra("pos", mPos);
-                owner.startActivityForResult(intent, ActivityUtils.CONTACT);
+                owner.startActivityForResult(intent, ActivityConstants.CONTACT);
 
             }
         });

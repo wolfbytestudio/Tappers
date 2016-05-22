@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,14 +15,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.tappers.adapter.MainListAdapter;
+import org.tappers.ui.adapter.MainListAdapter;
 import org.tappers.contact.Contact;
-import org.tappers.contact.ContactPage;
-import org.tappers.contact.Contacts;
-import org.tappers.contact.NewContact;
-import org.tappers.transaction.Transaction;
-import org.tappers.transaction.TransactionType;
-import org.tappers.util.ActivityUtils;
+import org.tappers.ui.page.ContactPage;
+import org.tappers.ui.page.NewContact;
+import org.tappers.contact.Transaction;
+import org.tappers.contact.TransactionType;
+import org.tappers.util.ActivityConstants;
 import org.tappers.util.CustomTypeFaces;
 
 import java.text.NumberFormat;
@@ -122,7 +120,7 @@ public class MainActivity extends Activity
                 int mPos = position;
                 Intent intent = new Intent(view.getContext(), ContactPage.class);
                 intent.putExtra("pos", mPos);
-                startActivityForResult(intent, ActivityUtils.CONTACT);
+                startActivityForResult(intent, ActivityConstants.CONTACT);
             }
         });
 
@@ -141,7 +139,7 @@ public class MainActivity extends Activity
                     contactNames.add(c.getName());
                 }
                 intent.putStringArrayListExtra("contacts", contactNames);
-                startActivityForResult(intent, ActivityUtils.NEW_CONTACT);
+                startActivityForResult(intent, ActivityConstants.NEW_CONTACT);
             }
         });
 
@@ -240,9 +238,9 @@ public class MainActivity extends Activity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if(requestCode == ActivityUtils.NEW_CONTACT)
+        if(requestCode == ActivityConstants.NEW_CONTACT)
         {
-            if(resultCode == ActivityUtils.NEW_CONTACT_RETURN)
+            if(resultCode == ActivityConstants.NEW_CONTACT_RETURN)
             {
                 Log.d("a", "Hi1");
                 try
@@ -286,9 +284,9 @@ public class MainActivity extends Activity
             }
         }
 
-        if(requestCode == ActivityUtils.CONTACT)
+        if(requestCode == ActivityConstants.CONTACT)
         {
-            if (resultCode == ActivityUtils.CONTACT_RETURN)
+            if (resultCode == ActivityConstants.CONTACT_RETURN)
             {
 
                 for(Contact conn : Contacts.SINGLETON.getContacts())

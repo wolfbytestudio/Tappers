@@ -1,4 +1,4 @@
-package org.tappers.adapter;
+package org.tappers.ui.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -13,10 +13,10 @@ import android.widget.TextView;
 
 import org.tappers.R;
 import org.tappers.contact.Contact;
-import org.tappers.contact.ContactPage;
-import org.tappers.contact.Contacts;
-import org.tappers.transaction.Transaction;
-import org.tappers.transaction.TransactionType;
+import org.tappers.ui.page.ContactPage;
+import org.tappers.Contacts;
+import org.tappers.contact.Transaction;
+import org.tappers.contact.TransactionType;
 import org.tappers.util.CustomTypeFaces;
 
 import java.text.NumberFormat;

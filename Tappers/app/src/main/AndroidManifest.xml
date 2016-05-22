@@ -26,20 +26,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".contact.NewContact"
+            android:name=".ui.page.NewContact"
             android:label="@string/title_activity_new_contact" >
         </activity>
         <activity
-            android:name=".contact.ContactPage"
+            android:name=".ui.page.ContactPage"
             android:configChanges="orientation"
             android:label="@string/title_activity_contact_page" >
         </activity>
         <activity
-            android:name=".transaction.NewTransaction"
+            android:name=".ui.page.NewTransaction"
             android:label="@string/title_activity_new_transaction" >
         </activity>
         <activity
-            android:name=".contact.EditContact"
+            android:name=".ui.page.EditContact"
             android:label="@string/title_activity_edit_contact" >
         </activity>
     </application>
