@@ -278,7 +278,7 @@ public class MainActivity extends Activity
         txtTotalOwe.setText(Contacts.SINGLETON.getTotal());
 
     }
-    
+
     /**
      * A MEGABYTE
      */

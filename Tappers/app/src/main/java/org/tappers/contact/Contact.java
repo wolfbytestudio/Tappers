@@ -8,8 +8,7 @@ import java.util.List;
 /**
  * Created by Zack on 13/12/2015.
  */
-@SuppressWarnings("serial")
-public class Contact implements Serializable
+public class Contact
 {
 
     private String name;
