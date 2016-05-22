@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,71 +16,62 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.tappers.MainActivity;
 import org.tappers.transaction.NewTransaction;
 import org.tappers.R;
 import org.tappers.adapter.TransactionListAdapter;
 import org.tappers.util.ActivityUtils;
+import org.tappers.util.CustomTypeFaces;
 
 import java.lang.*;
-import java.util.HashMap;
 
 
-public class ContactPage extends Activity {
+public class ContactPage extends Activity
+{
 
     private Contact contact;
 
-    private HashMap<String, Typeface> fonts;
-
     private ListView transactionList = null;
-
-    public TextView txtTotal;
 
     private TransactionListAdapter transactionListAdapter;
 
     private int position;
 
-    private String name;
+    public TextView txtTotal;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_page);
 
+        position = getIntent().getIntExtra("pos", -1);
+
+        contact = Contacts.SINGLETON.getContacts().get(position);
+
         txtTotal = (TextView) findViewById(R.id.txtTotal);
 
-        fonts = new HashMap<>();
         transactionList = (ListView) findViewById(R.id.lstTransaction);
 
         Typeface thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface light = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
         Typeface regular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
 
-        fonts.put("thin", thin);
-        fonts.put("light", light);
-        fonts.put("regular", regular);
-
         TextView lblBackContacts = (TextView) findViewById(R.id.lblBackContacts);
-        lblBackContacts.setTypeface(fonts.get("regular"));
+        lblBackContacts.setTypeface(CustomTypeFaces.get("regular"));
 
-        txtTotal.setTypeface(fonts.get("light"));
-        txtTotal.setText(getIntent().getStringExtra("total"));
+        txtTotal.setTypeface(CustomTypeFaces.get("light"));
+        txtTotal.setText(contact.getTotalString());
 
         TextView lblTitle = (TextView) findViewById(R.id.contactPageTitle);
         TextView txtHistory = (TextView) findViewById(R.id.txtHistory);
-        lblTitle.setTypeface(fonts.get("light"));
-        lblTitle.setText(getIntent().getStringExtra("name").toString());
-        txtHistory.setTypeface(fonts.get("light"));
-        name = getIntent().getStringExtra("name").toString();
+        lblTitle.setTypeface(CustomTypeFaces.get("light"));
+        lblTitle.setText(contact.getName());
+        txtHistory.setTypeface(CustomTypeFaces.get("light"));
         ImageView characterImageContact = (ImageView) findViewById(R.id.characterImageContact);
 
-        position = MainActivity.getPositionForContact(getIntent().getStringExtra("name").toString());
-
-        contact = MainActivity.contacts.get(position);
-
-        Character charType = Character.getCharacterForName(contact.characterType);
+        Character charType = Character.getCharacterForName(contact.getCharacterType());
         CharacterBackground charBackground =
-                CharacterBackground.getBackgroundForId(contact.backgroundColour);
+                CharacterBackground.getBackgroundForId(contact.getBackgroundColour());
 
         characterImageContact.setImageResource(charType.getCharacterFile());
 
@@ -91,11 +81,12 @@ public class ContactPage extends Activity {
 
         ImageButton btnNewTrans = (ImageButton) findViewById(R.id.btnNewTransaction);
 
-        btnNewTrans.setOnClickListener(new View.OnClickListener() {
+        btnNewTrans.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Intent intent = new Intent(v.getContext(), NewTransaction.class);
-
                 intent.putExtra("pos", position);
                 startActivityForResult(intent, 1);
             }
@@ -103,25 +94,30 @@ public class ContactPage extends Activity {
 
         ImageButton btnClearHistory = (ImageButton) findViewById(R.id.btnClearHistory);
 
-        btnClearHistory.setOnClickListener(new View.OnClickListener() {
+        btnClearHistory.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 
 
-                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener()
+                {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
-                                if (contact.transactions.size() == 0) {
-                                    Toast.makeText(getApplicationContext(), "There is no history to delete!", Toast.LENGTH_LONG).show();
+                                if (contact.getTransactions().size() == 0)
+                                {
+                                    Toast.makeText(getApplicationContext(),
+                                            "There is no history to delete!",
+                                            Toast.LENGTH_LONG).show();
                                     return;
                                 }
-                                contact.transactions.clear();
+                                contact.getTransactions().clear();
                                 updateContactList();
-                                contact.setTotalString();
-                                txtTotal.setText(contact.total);
-                                MainActivity.save.save();
+                                txtTotal.setText(contact.getTotalString());
+                                Contacts.SINGLETON.save(getApplicationContext());
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:
@@ -131,7 +127,7 @@ public class ContactPage extends Activity {
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setMessage("Are you sure you want to clear the history for " + contact.name)
+                builder.setMessage("Are you sure you want to clear the history for " + contact.getName())
                         .setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
 
@@ -162,49 +158,53 @@ public class ContactPage extends Activity {
      * @param data - the intent data
      */
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (requestCode == 1) {
-            if (resultCode == 1) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == 1)
+        {
+            if (resultCode == 1)
+            {
                 updateContactList();
-                contact.setTotalString();
-                txtTotal.setText(contact.total);
+                txtTotal.setText(contact.getTotalString());
                 data.putExtra("pos", position);
-                MainActivity.save.save();
+                Contacts.SINGLETON.save(this);
             }
         }
     }
 
     public void updateContactList()
     {
-        for(int i = 0; i < contact.transactions.size(); i++)
+        for(int i = 0; i < contact.getTransactions().size(); i++)
         {
-            if(contact.transactions.get(i).getAmount() == 0)
+            if(contact.getTransactions().get(i).getAmount() == 0)
             {
-                contact.transactions.remove(i);
+                contact.getTransactions().remove(i);
             }
         }
 
-        transactionListAdapter = new TransactionListAdapter(getApplicationContext(), contact, fonts, this);
+        transactionListAdapter = new TransactionListAdapter(getApplicationContext(), this, position);
         transactionList.setAdapter(transactionListAdapter);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_contact_page, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings)
+        {
             return true;
         }
 

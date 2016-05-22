@@ -2,7 +2,6 @@ package org.tappers;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -11,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,43 +19,21 @@ import android.widget.Toast;
 import org.tappers.adapter.MainListAdapter;
 import org.tappers.contact.Contact;
 import org.tappers.contact.ContactPage;
+import org.tappers.contact.Contacts;
 import org.tappers.contact.NewContact;
 import org.tappers.transaction.Transaction;
 import org.tappers.transaction.TransactionType;
 import org.tappers.util.ActivityUtils;
-import org.tappers.util.LoadHandler;
-import org.tappers.util.SaveHandler;
+import org.tappers.util.CustomTypeFaces;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class MainActivity extends Activity {
-
-    /**
-     * All the contacts as a list
-     */
-    public static ArrayList<Contact> contacts;
-
-    /**
-     * Gets the position of the contact
-     * @param name
-     * @return
-     */
-    public static int getPositionForContact(String name)
-    {
-        int counter = 0;
-        for(Contact con : contacts)
-        {
-            if(con.name.equalsIgnoreCase(name))
-            {
-                return counter;
-            }
-            counter++;
-        }
-        return -1;
-    }
-
+/**
+ * Main Activity
+ */
+public class MainActivity extends Activity
+{
     /**
      * The list view
      */
@@ -67,16 +45,6 @@ public class MainActivity extends Activity {
     private MainListAdapter customListViewAdapter;
 
     /**
-     * The types of font
-     */
-    private HashMap<String, Typeface> typeFaces = new HashMap<>();
-
-    /**
-     * Object for handling saving
-     */
-    public static SaveHandler save;
-
-    /**
      * Displays all the contacts
      */
     private TextView txtContactCount;
@@ -86,78 +54,74 @@ public class MainActivity extends Activity {
      */
     public void updateContactCount()
     {
-        txtContactCount.setText(contacts.size() + "");
+        txtContactCount.setText(Contacts.SINGLETON.getContacts().size() + "");
     }
 
 
     private TextView txtTotalOwe;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
+
+        CustomTypeFaces.initialize(this);
+
         setContentView(R.layout.activity_main);
 
-        contacts = new ArrayList<>();
+        try
+        {
+            Contacts.SINGLETON.load(this);
+        }
+        catch(Exception e)
+        {
+            Log.d("abc", "Error loading");
+        }
+
+
         txtTotalOwe = (TextView) findViewById(R.id.txtTotalOwe);
         txtContactCount = (TextView) findViewById(R.id.contactCount);
-
-        LoadHandler load = new LoadHandler(getApplicationContext());
-        load.load();
-
-        contacts = load.getContacts();
-        //contacts.clear();
-        save = new SaveHandler(getApplicationContext());
-        //save.save();
 
         updateContactCount();
         generateTotal();
 
-        Typeface thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
-        Typeface light = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
-        Typeface regular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
-
-
-
-
-        txtTotalOwe.setTypeface(light);
-
-        txtContactCount.setTypeface(light);
-
-
-
-        typeFaces.put("thin", thin);
-        typeFaces.put("light", light);
-        typeFaces.put("regular", regular);
-
+        txtTotalOwe.setTypeface(CustomTypeFaces.get("light"));
+        txtContactCount.setTypeface(CustomTypeFaces.get("light"));
 
         TextView title = (TextView) findViewById(R.id.txtTitle);
-        title.setTypeface(light);
+        title.setTypeface(CustomTypeFaces.get("light"));
 
 
         listView = (ListView) findViewById(R.id.lstContacts);
 
-        customListViewAdapter = new MainListAdapter(getApplicationContext(), contacts, typeFaces, this);
+        listView.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View v)
+            {
+                return false;
+            }
+        });
 
-        listView.setAdapter(customListViewAdapter);
         registerForContextMenu(listView);
 
+        customListViewAdapter = new MainListAdapter(getApplicationContext(), this);
+
+        listView.setAdapter(customListViewAdapter);
+
+       // registerForContextMenu(txtTotalOwe);
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
 
                 int mPos = position;
                 Intent intent = new Intent(view.getContext(), ContactPage.class);
-
-                intent.putExtra("name", contacts.get(position).name);
-
-                Contact c = contacts.get(position);
-                c.setTotalString();
-
-                intent.putExtra("total", c.total);
                 intent.putExtra("pos", mPos);
-
                 startActivityForResult(intent, ActivityUtils.CONTACT);
             }
         });
@@ -165,17 +129,17 @@ public class MainActivity extends Activity {
         ImageView img = (ImageView) findViewById(R.id.newContact);
 
 
-        img.setOnClickListener(new View.OnClickListener() {
+        img.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-
-
+            public void onClick(View v)
+            {
                 Intent intent = new Intent(v.getContext(), NewContact.class);
                 ArrayList<String> contactNames = new ArrayList<String>();
-                for (Contact c : contacts) {
-                    contactNames.add(c.name);
+                for (Contact c : Contacts.SINGLETON.getContacts())
+                {
+                    contactNames.add(c.getName());
                 }
-
                 intent.putStringArrayListExtra("contacts", contactNames);
                 startActivityForResult(intent, ActivityUtils.NEW_CONTACT);
             }
@@ -191,29 +155,41 @@ public class MainActivity extends Activity {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
     {
         super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.contact_menu, menu);
+        if (v.getId() == R.id.txtTotalOwe)
+        {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_edit_contact, menu);
+        }
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item)
-    {
-        Log.v("BRooo", "Context item selected as="+item.toString());
-        return super.onContextItemSelected(item);
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+        switch(item.getItemId()) {
+            case R.id.edit_contact:
+                // add stuff here
+                return true;
+            case R.id.edit_delete:
+                // edit stuff here
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
+
 
     public void generateTotal()
     {
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
-        if(contacts.size() == 0)
+        if(Contacts.SINGLETON.getContacts().size() == 0)
         {
             txtTotalOwe.setText("Add a new contact by clicking the top right button");
             return;
         }
         double total = 0;
-        for(Contact c : contacts)
+        for(Contact c : Contacts.SINGLETON.getContacts())
         {
-            for(Transaction t : c.transactions)
+            for(Transaction t : c.getTransactions())
             {
                 if(t.getType() == TransactionType.FROM)
                 {
@@ -247,19 +223,9 @@ public class MainActivity extends Activity {
      */
     public void addContact(Contact contact)
     {
-        contact.setTotalString();
-        contacts.add(0, contact);
+        Contacts.SINGLETON.getContacts().add(0, contact);
 
-
-        save.save();
-
-        customListViewAdapter.notifyDataSetChanged();
-
-    }
-
-    public void removeContact(int index)
-    {
-        contacts.remove(index);
+        Contacts.SINGLETON.save(this);
         customListViewAdapter.notifyDataSetChanged();
 
     }
@@ -272,8 +238,8 @@ public class MainActivity extends Activity {
      * @param data - the intent data
      */
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         if(requestCode == ActivityUtils.NEW_CONTACT)
         {
             if(resultCode == ActivityUtils.NEW_CONTACT_RETURN)
@@ -292,7 +258,7 @@ public class MainActivity extends Activity {
 
                     TransactionType type = TransactionType.valueOf(tofrom);
 
-                    Contact newCon = new Contact(name, "", date, charString, backgroundCol);
+                    Contact newCon = new Contact(name, date, charString, backgroundCol);
 
                     Log.d("a", "Hi3");
                     double am = 0;
@@ -309,8 +275,7 @@ public class MainActivity extends Activity {
                     {
                         reason = "Reason Unspecific";
                     }
-                    System.out.print("WHYYYYY?");
-                    newCon.setTotalString();
+
                     addContact(newCon);
                     updateContactCount();
                 }
@@ -321,40 +286,33 @@ public class MainActivity extends Activity {
             }
         }
 
-        if(requestCode == ActivityUtils.CONTACT) {
-            if (resultCode == ActivityUtils.CONTACT_RETURN) {
+        if(requestCode == ActivityUtils.CONTACT)
+        {
+            if (resultCode == ActivityUtils.CONTACT_RETURN)
+            {
 
-                for(Contact conn : contacts)
+                for(Contact conn : Contacts.SINGLETON.getContacts())
                 {
-                    if(conn.transactions.size() == 0)
+                    if(conn.getTransactions().size() == 0)
                     {
-                        conn.total = "You and " +
-                                conn.name
-                                + " don't owe each other anything!";
-                        conn.transactions.add(
+                        conn.getTransactions().add(
                                 new Transaction(TransactionType.FROM, 0, "0/0/0", "Reason Unspecific")
                         );
                         customListViewAdapter.notifyDataSetChanged();
                     }
                     else
                     {
-                        conn.setTotalString();
                         customListViewAdapter.notifyDataSetChanged();
                     }
 
                 }
-
-
-                SaveHandler saver = new SaveHandler(getApplicationContext());
-                saver.save();
+                Contacts.SINGLETON.save(this);
             }
         }
 
         generateTotal();
 
     }
-
-
 
 
 }

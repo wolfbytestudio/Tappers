@@ -110,7 +110,6 @@ public class NewContact extends Activity {
         initializeDate();
         lblDateSelected.setTypeface(light);
         lblDate.setTypeface(light);
-        loadBackgrounds();
 
         final EditText txtContactName = (EditText) findViewById(R.id.txtContactName);
         final EditText txtTransaction = (EditText) findViewById(R.id.txtTransaction);
@@ -358,12 +357,6 @@ public class NewContact extends Activity {
         backgroundSelected = id;
         CharacterBackground bg = CharacterBackground.getBackgroundForId(backgroundSelected);
         lastCharSelected.setBackgroundResource(bg.getSmallBackground());
-    }
-
-    private void loadBackgrounds()
-    {
-
-
     }
 
     private void initializeDate()

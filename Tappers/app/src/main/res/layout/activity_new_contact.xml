@@ -301,7 +301,6 @@
                         android:background="@null"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"
                         android:id="@+id/char_stoner_bob_alt"
                         android:layout_toEndOf="@+id/char_red_dress"
                         android:src="@drawable/stoner_bob_alt_small"/>
@@ -312,7 +311,6 @@
                         android:scaleType="fitCenter"
                         android:background="@null"
                         android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"
                         android:id="@+id/char_abudady"
                         android:layout_toEndOf="@+id/char_stoner_bob_alt"
                         android:src="@drawable/abudady_small"/>
@@ -320,7 +318,6 @@
                     <ImageButton
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:layout_marginTop="10dp"
                         android:scaleType="fitCenter"
                         android:background="@null"
                         android:layout_marginRight="10dp"
@@ -331,7 +328,6 @@
                     <ImageButton
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:layout_marginTop="10dp"
                         android:scaleType="fitCenter"
                         android:background="@null"
                         android:layout_marginRight="10dp"
@@ -343,7 +339,6 @@
                     <ImageButton
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:layout_marginTop="10dp"
                         android:scaleType="fitCenter"
                         android:background="@null"
                         android:layout_marginRight="10dp"
@@ -393,6 +388,7 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:id="@+id/bgcol_blue"
+
                         android:background="@drawable/bgcol_blue"
                         android:layout_marginRight="6dp"
                         android:layout_toEndOf="@+id/bgcol_default" />

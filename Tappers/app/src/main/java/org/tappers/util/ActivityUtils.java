@@ -22,7 +22,7 @@ public class ActivityUtils
     {
         Contact contact = null;
         for (Contact con: contacts) {
-            if(con.name.equals(name))
+            if(con.getName().equals(name))
             {
                 return contact;
             }

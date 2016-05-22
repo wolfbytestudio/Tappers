@@ -3,7 +3,6 @@ package org.tappers.adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,56 +11,58 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.tappers.MainActivity;
 import org.tappers.R;
 import org.tappers.contact.Contact;
 import org.tappers.contact.ContactPage;
+import org.tappers.contact.Contacts;
 import org.tappers.transaction.Transaction;
 import org.tappers.transaction.TransactionType;
+import org.tappers.util.CustomTypeFaces;
 
 import java.text.NumberFormat;
-import java.util.HashMap;
 
 /**
  * Created by 30008095 on 15/12/2015.
  */
-public class TransactionListAdapter extends BaseAdapter {
+public class TransactionListAdapter extends BaseAdapter
+{
 
 
     private Context context;
     private Contact contact;
     private ContactPage owner;
     private static LayoutInflater inflater = null;
-    private HashMap<String, Typeface> fonts;
 
-    public TransactionListAdapter(Context context, Contact contact
-            , HashMap<String, Typeface> fonts, ContactPage owner)
+    public TransactionListAdapter(Context context, ContactPage owner, int position)
     {
-        this.fonts = fonts;
         this.context = context;
-        this.contact = contact;
+        contact = Contacts.SINGLETON.getContacts().get(position);
         this.owner = owner;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
-    public int getCount() {
-        return contact.transactions.size();
+    public int getCount()
+    {
+        return contact.getTransactions().size();
     }
 
     @Override
-    public Object getItem(int position) {
+    public Object getItem(int position)
+    {
         return position;
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(int position)
+    {
         return position;
     }
 
 
     @Override
-    public View getView(final int i, View convertView, ViewGroup viewGroup) {
+    public View getView(final int i, View convertView, ViewGroup viewGroup)
+    {
         View view = convertView;
 
         if(view == null) {
@@ -74,12 +75,12 @@ public class TransactionListAdapter extends BaseAdapter {
         TextView lblTime = (TextView) view.findViewById(R.id.lblPaymentDate);
 
 
-        lblContactName.setTypeface(fonts.get("light"));
-        lblReason.setTypeface(fonts.get("light"));
-        lblTime.setTypeface(fonts.get("regular"));
+        lblContactName.setTypeface(CustomTypeFaces.get("light"));
+        lblReason.setTypeface(CustomTypeFaces.get("light"));
+        lblTime.setTypeface(CustomTypeFaces.get("regular"));
 
-        Transaction transaction = contact.transactions.get(i);
-        lblContactName.setText(getPayment(transaction, contact.name));
+        Transaction transaction = contact.getTransactions().get(i);
+        lblContactName.setText(getPayment(transaction, contact.getName()));
 
         if(transaction.getType() == TransactionType.FROM)
         {
@@ -105,19 +106,23 @@ public class TransactionListAdapter extends BaseAdapter {
 
         ImageButton btnDeleteHistoryItem = (ImageButton)view.findViewById(R.id.btnDeleteHistoryItem);
 
-        btnDeleteHistoryItem.setOnClickListener(new View.OnClickListener() {
+        btnDeleteHistoryItem.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            public void onClick(View v)
+            {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener()
+                {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        switch (which)
+                        {
                             case DialogInterface.BUTTON_POSITIVE:
-                                contact.transactions.remove(i);
+                                contact.getTransactions().remove(i);
                                 owner.updateContactList();
-                                contact.setTotalString();
-                                owner.txtTotal.setText(contact.total);
-                                MainActivity.save.save();
+                                owner.txtTotal.setText(contact.getTotalString());
+                                Contacts.SINGLETON.save(context);
                                 notifyDataSetChanged();
                                 break;
 

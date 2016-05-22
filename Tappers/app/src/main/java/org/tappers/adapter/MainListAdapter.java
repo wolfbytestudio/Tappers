@@ -4,9 +4,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -21,33 +21,25 @@ import org.tappers.contact.CharacterBackground;
 import org.tappers.contact.Contact;
 import org.tappers.contact.ContactPage;
 
+import org.tappers.contact.Contacts;
 import org.tappers.util.ActivityUtils;
-
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
+import org.tappers.util.CustomTypeFaces;
 
 /**
  * Created by Zack on 13/12/2015.
  */
-public class MainListAdapter extends BaseAdapter {
+public class MainListAdapter extends BaseAdapter
+{
 
     private Context context;
 
-    private ArrayList<Contact> contacts;
-
     private static LayoutInflater inflater = null;
-
-    private HashMap<String, Typeface> fonts;
 
     private MainActivity owner;
 
-    public MainListAdapter(Context context, ArrayList<Contact> contacts
-            , HashMap<String, Typeface> fonts, MainActivity owner)
+    public MainListAdapter(Context context, MainActivity owner)
     {
-        this.fonts = fonts;
         this.context = context;
-        this.contacts = contacts;
         this.owner = owner;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -55,26 +47,31 @@ public class MainListAdapter extends BaseAdapter {
 
 
     @Override
-    public int getCount() {
-        return contacts.size();
+    public int getCount()
+    {
+        return Contacts.SINGLETON.getContacts().size();
     }
 
     @Override
-    public Object getItem(int position) {
+    public Object getItem(int position)
+    {
         return position;
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(int position)
+    {
         return position;
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent)
+    {
 
         View view = convertView;
 
-        if(convertView == null) {
+        if(convertView == null)
+        {
             view = inflater.inflate(R.layout.list_row, null);
         }
 
@@ -83,67 +80,63 @@ public class MainListAdapter extends BaseAdapter {
         TextView date = (TextView) view.findViewById(R.id.date);
 
 
-        contactName.setTypeface(fonts.get("light"));
-        payment.setTypeface(fonts.get("light"));
-        date.setTypeface(fonts.get("regular"));
+        contactName.setTypeface(CustomTypeFaces.get("light"));
+        payment.setTypeface(CustomTypeFaces.get("light"));
+        date.setTypeface(CustomTypeFaces.get("regular"));
 
-        Contact myContact = contacts.get(position);
+        Contact myContact = Contacts.SINGLETON.getContacts().get(position);
 
-        contactName.setText(myContact.name);
+        contactName.setText(myContact.getName());
 
-        try
-        {
-            double a = Double.parseDouble(myContact.total);
-            DecimalFormat precision = new DecimalFormat("0.00");
-            payment.setText(precision.format(a));
-        }
-        catch(Exception e)
-        {
-            payment.setText(myContact.total);
-        }
+        payment.setText(myContact.getTotalString());
+
+
 
 
         ImageView character = (ImageView) view.findViewById(R.id.characterImage);
 
-        Character person = Character.getCharacterForName(myContact.characterType);
+        Character person = Character.getCharacterForName(myContact.getCharacterType());
 
         character.setImageResource(person.getCharacterSmallFile());
 
-        date.setText(myContact.date);
+        date.setText(myContact.getDate());
 
         CharacterBackground charBackground =
-                CharacterBackground.getBackgroundForId(myContact.backgroundColour);
+                CharacterBackground.getBackgroundForId(myContact.getBackgroundColour());
 
         character.setBackgroundResource(charBackground.getSmallBackground());
 
 
         ImageView deleteContact = (ImageView) view.findViewById(R.id.btnDeleteContact);
 
-        view.setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 int mPos = position;
                 Intent intent = new Intent(view.getContext(), ContactPage.class);
-                intent.putExtra("name", contacts.get(position).name);
-                Contact c = contacts.get(position);
-                c.setTotalString();
-                intent.putExtra("total", c.total);
+                intent.putExtra("pos", mPos);
                 owner.startActivityForResult(intent, ActivityUtils.CONTACT);
 
             }
         });
 
-
-        deleteContact.setOnClickListener(new View.OnClickListener() {
+        deleteContact.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            public void onClick(View view)
+            {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener()
+                {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        switch (which)
+                        {
                             case DialogInterface.BUTTON_POSITIVE:
-                                contacts.remove(position);
-                                owner.save.save();
+                                Contacts.SINGLETON.getContacts().remove(position);
+                                Contacts.SINGLETON.save(context);
                                 owner.updateContactCount();
                                 notifyDataSetChanged();
                                 owner.generateTotal();
@@ -156,7 +149,9 @@ public class MainListAdapter extends BaseAdapter {
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(owner);
-                builder.setMessage("Are you sure you want to delete the contact '" + contacts.get(position).name + "'?").setPositiveButton("Yes", dialogClickListener)
+                builder.setMessage("Are you sure you want to delete the contact '"
+                        + Contacts.SINGLETON.getContacts().get(position).getName() + "'?")
+                        .setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
 
             }

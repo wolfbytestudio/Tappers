@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import org.tappers.MainActivity;
 import org.tappers.R;
+import org.tappers.contact.Contacts;
+import org.tappers.util.CustomTypeFaces;
 
 import java.util.Calendar;
 
@@ -41,35 +43,31 @@ public class NewTransaction extends Activity {
         Button btnAccept = (Button) findViewById(R.id.cmdConfirmTrans);
         Button btnDate = (Button) findViewById(R.id.btnPickNewDateTran);
 
-        Typeface thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
-        Typeface light = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
-        Typeface regular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
-
         TextView txtTransactionTran =  (TextView) findViewById(R.id.lblTransactionTran);
-        txtTransactionTran.setTypeface(light);
+        txtTransactionTran.setTypeface(CustomTypeFaces.get("light"));
 
 
         TextView txtTransactionTitle = (TextView) findViewById(R.id.txtTransactionTitle);
-        txtTransactionTitle.setTypeface(light);
+        txtTransactionTitle.setTypeface(CustomTypeFaces.get("light"));
 
         TextView lblReasonTran = (TextView) findViewById(R.id.lblReasonTran);
-        lblReasonTran.setTypeface(light);
+        lblReasonTran.setTypeface(CustomTypeFaces.get("light"));
 
         TextView lblDateTran = (TextView) findViewById(R.id.lblDateTran);
-        lblDateTran.setTypeface(light);
+        lblDateTran.setTypeface(CustomTypeFaces.get("light"));
 
         final TextView amount = (TextView) findViewById(R.id.txtTransactionTran);
-        amount.setTypeface(light);
+        amount.setTypeface(CustomTypeFaces.get("light"));
         final TextView reason = (TextView) findViewById(R.id.txtReasonTran);
-        reason.setTypeface(light);
+        reason.setTypeface(CustomTypeFaces.get("light"));
         final TextView date = (TextView) findViewById(R.id.lblSetDateTran);
-        date.setTypeface(light);
+        date.setTypeface(CustomTypeFaces.get("light"));
         final TextView back = (TextView) findViewById(R.id.lblBackContactsTransaction);
-        back.setTypeface(regular);
+        back.setTypeface(CustomTypeFaces.get("regular"));
         final RadioButton to = (RadioButton) findViewById(R.id.rdbToTran);
-        to.setTypeface(light);
+        to.setTypeface(CustomTypeFaces.get("light"));
         final RadioButton from = (RadioButton) findViewById(R.id.rdbFromTran);
-        from.setTypeface(light);
+        from.setTypeface(CustomTypeFaces.get("light"));
 
         date.setText("Date Selected: " + dayDate + "/" + (monthDate + 1) + "/" + yearDate);
 
@@ -100,8 +98,8 @@ public class NewTransaction extends Activity {
                 TransactionType type = TransactionType.valueOf(tofrom);
 
 
-
-                MainActivity.contacts.get(getIntent().getIntExtra("pos", 0)).addTransaction(new Transaction(
+                Contacts.SINGLETON.getContacts().get(
+                        getIntent().getIntExtra("pos", 0)).addTransaction(new Transaction(
                         type, am, date.getText().toString().substring(15),
                         reason.getText().toString()));
 

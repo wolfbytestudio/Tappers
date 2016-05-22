@@ -8,8 +8,8 @@ android {
         applicationId "org.tapper"
         minSdkVersion 13
         targetSdkVersion 23
-        versionCode 11
-        versionName "6"
+        versionCode 12
+        versionName "7"
     }
     buildTypes {
         release {
@@ -20,5 +20,6 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('lib/gson-2.6.2.jar')
 }
