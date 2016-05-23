@@ -1,9 +1,5 @@
 package org.tappers.util;
 
-import org.tappers.contact.Contact;
-
-import java.util.ArrayList;
-
 /**
  * Created by Zack on 16/12/2015.
  */

@@ -49,6 +49,7 @@ public class Contacts
 
     /**
      * Gets the contacts
+     *
      * @return - contacts
      */
     public List<Contact> getContacts()
@@ -58,6 +59,7 @@ public class Contacts
 
     /**
      * Sets the contacts
+     *
      * @param contacts - the new list of contacts
      */
     public void setContacts(List<Contact> contacts)
@@ -67,8 +69,10 @@ public class Contacts
 
     /**
      * Gets the position of the contact
-     * @param name
-     * @return
+     *
+     * @param name - the name of the contact
+     *
+     * @return - the position in the index
      */
     public int getContactPosition(String name)
     {
@@ -84,20 +88,26 @@ public class Contacts
         return -1;
     }
 
-    public static final Gson GSON = new Gson();
+    /**
+     * Gson object for saving and loading in a json format
+     */
+    private static final Gson GSON = new Gson();
 
+    /**
+     * The file to save and load from
+     */
     private static final String FILE = "tappers.json";
 
     /**
      * Loads data from json
-     * @param context - the contxt
+     *
+     * @param context - the context
      */
     public void load(Context context)
     {
         StringBuilder data = new StringBuilder();
         try
         {
-            Log.d("abc", "Try");
             InputStream inputStream = context.openFileInput(FILE);
             if(inputStream != null)
             {
@@ -106,8 +116,8 @@ public class Contacts
 
                 String temp;
 
-                while( (temp = bufferedReader.readLine()) != null ) {
-                    Log.d("abc", temp);
+                while( (temp = bufferedReader.readLine()) != null )
+                {
                     data.append(temp);
                 }
                 inputStream.close();
@@ -115,8 +125,6 @@ public class Contacts
 
         } catch (FileNotFoundException e) {Log.d("abc", "cant find file"); }
         catch (IOException e){ Log.d("abc", "exception"); }
-
-        Log.d("abc", data.toString());
 
         loadFromJson(data.toString());
 
@@ -128,21 +136,25 @@ public class Contacts
 
     /**
      * Saves all the contacts
-     * @param context
+     *
+     * @param context - the context
      */
     public void save(Context context)
     {
-        try {
+        try
+        {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(
                     context.openFileOutput(FILE, Context.MODE_PRIVATE));
             outputStreamWriter.write(GSON.toJson(contacts));
             outputStreamWriter.close();
-        }catch(IOException e){ }
+        }
+        catch(IOException e){ }
     }
 
     /**
      * Loads contacts based on a json string
-     * @param json
+     *
+     * @param json - the json string to load
      */
     public void loadFromJson(String json)
     {
@@ -157,12 +169,14 @@ public class Contacts
      */
     public String getTotal()
     {
-        NumberFormat formatter = NumberFormat.getCurrencyInstance();
         if(Contacts.SINGLETON.getContacts().size() == 0)
         {
             return "Add a new contact by clicking the top right button";
         }
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+
         double total = 0;
+
         for(Contact c : Contacts.SINGLETON.getContacts())
         {
             for(Transaction t : c.getTransactions())
@@ -184,11 +198,12 @@ public class Contacts
         }
         else if(total > 0)
         {
-            return"You are owed a total of " + formatter.format(Math.abs(total));
+            return "You are owed a total of " + formatter.format(Math.abs(total));
         }
         else
         {
-            return"Nobody owes anyone anything!";
+            return "Nobody owes anyone anything!";
         }
     }
+
 }
