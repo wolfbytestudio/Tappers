@@ -144,7 +144,7 @@ public class ContactPage extends Activity
             public void onClick(View v) {
                 Intent intent = getIntent();
                 intent.putExtra("name", position);
-                setResult(ActivityConstants.CONTACT_RETURN, intent);
+                setResult(ActivityConstants.CONTACT_PAGE_RETURN, intent);
                 finish();
             }
         });

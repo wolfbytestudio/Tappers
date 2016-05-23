@@ -6,21 +6,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Contains contact details and necessary methods
+ *
  * Created by Zack on 13/12/2015.
  */
 public class Contact
 {
 
+    /**
+     * The name of the contact
+     */
     private String name;
 
+    /**
+     * The date the contact was created
+     */
     private String date;
 
+    /**
+     * The character type
+     */
     private String characterType;
 
+    /**
+     * The background colour
+     */
     private String backgroundColour;
 
+    /**
+     * A list of all the transactions made by the contact
+     */
     private List<Transaction> transactions;
 
+    /**
+     * Contact constructor
+     *
+     * @param name - the contact name
+     * @param date - the contact date
+     * @param characterType - the characterType
+     * @param backgroundColour - the background colour
+     * @param transactions - a list of transactions
+     */
     public Contact(String name, String date, String characterType,
                    String backgroundColour, List<Transaction> transactions)
     {
@@ -31,18 +57,22 @@ public class Contact
         this.setTransactions(transactions);
     }
 
-    public Contact(String name, String date, String characterType,
-                   String backgroundColour)
+    /**
+     * Contact constructor
+     *
+     * @param name - the contact name
+     * @param date - the contact date
+     * @param characterType - the characterType
+     * @param backgroundColour - the background colour
+     */
+    public Contact(String name, String date, String characterType, String backgroundColour)
     {
-        this.setName(name);
-        this.setDate(date);
-        this.setCharacterType(characterType);
-        this.setBackgroundColour(backgroundColour);
-        this.setTransactions(null);
+        this(name, date, characterType, backgroundColour, null);
     }
 
     /**
      * Adds a transaction to the transactions list
+     *
      * @param transaction - the transaction being added in
      */
     public void addTransaction(Transaction transaction)
@@ -57,6 +87,8 @@ public class Contact
     /**
      * Gets all transactions, calculates them all and totals up
      * then sets the total string to what the total transaction value is
+     *
+     * @return - the total string
      */
     public String getTotalString()
     {
@@ -92,6 +124,11 @@ public class Contact
         return "error: 105";
     }
 
+    /**
+     * Getter for name
+     *
+     * @return - name
+     */
     public String getName()
     {
         return name;

@@ -5,15 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +23,6 @@ import org.tappers.contact.TransactionType;
 import org.tappers.util.ActivityConstants;
 import org.tappers.util.CustomTypeFaces;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 
 /**
@@ -120,7 +116,7 @@ public class MainActivity extends Activity
                 int mPos = position;
                 Intent intent = new Intent(view.getContext(), ContactPage.class);
                 intent.putExtra("pos", mPos);
-                startActivityForResult(intent, ActivityConstants.CONTACT);
+                startActivityForResult(intent, ActivityConstants.CONTACT_PAGE);
             }
         });
 
@@ -251,9 +247,9 @@ public class MainActivity extends Activity
             }
         }
 
-        if(requestCode == ActivityConstants.CONTACT)
+        if(requestCode == ActivityConstants.CONTACT_PAGE)
         {
-            if (resultCode == ActivityConstants.CONTACT_RETURN)
+            if (resultCode == ActivityConstants.CONTACT_PAGE_RETURN)
             {
 
                 for(Contact conn : Contacts.SINGLETON.getContacts())
