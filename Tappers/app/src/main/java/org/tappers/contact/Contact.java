@@ -134,46 +134,91 @@ public class Contact
         return name;
     }
 
+    /**
+     * Setter for name
+     *
+     * @param name - the new name
+     */
     public void setName(String name)
     {
         this.name = name;
     }
 
+    /**
+     * Getter for date
+     *
+     * @return - date
+     */
     public String getDate()
     {
         return date;
     }
 
+    /**
+     * Setter for date
+     *
+     * @param date - the new date
+     */
     public void setDate(String date)
     {
         this.date = date;
     }
 
+    /**
+     * Getter for characterType
+     *
+     * @return - characterType
+     */
     public String getCharacterType()
     {
         return characterType;
     }
 
+    /**
+     * Setter for characterType
+     *
+     * @param characterType - the new characterType
+     */
     public void setCharacterType(String characterType)
     {
         this.characterType = characterType;
     }
 
+    /**
+     * Getter for backgroundColour
+     *
+     * @return - backgroundColour
+     */
     public String getBackgroundColour()
     {
         return backgroundColour;
     }
 
+    /**
+     * Setter for backgroundColour
+     *
+     * @param backgroundColour - the new backgroundColour
+     */
     public void setBackgroundColour(String backgroundColour)
     {
         this.backgroundColour = backgroundColour;
     }
 
+    /**
+     * Getter for transactions
+     *
+     * @return - transactions
+     */
     public List<Transaction> getTransactions()
     {
         return transactions;
     }
 
+    /**
+     * Setter for transactions
+     *
+     * @param transactions - the new transactions
+     */
     public void setTransactions(List<Transaction> transactions)
     {
         this.transactions = transactions;

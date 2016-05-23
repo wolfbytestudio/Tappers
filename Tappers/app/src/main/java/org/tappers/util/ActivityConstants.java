@@ -2,8 +2,7 @@ package org.tappers.util;
 
 /**
  * Activity Constants contain constants
- * used by acitivites, this will mostly contain
- * intent return codes
+ * used by activities, this will mostly contain intent return codes
  *
  * Created by Zack on 16/12/2015.
  */
@@ -22,5 +21,9 @@ public class ActivityConstants
 
     public static final int EDIT_CONTACT_RETURN = 0x08;
 
+    /**
+     * Private Constructor
+     */
+    private ActivityConstants() {}
 
 }

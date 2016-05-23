@@ -48,4 +48,8 @@ public final class CustomTypeFaces
         return typeFaces.get(name);
     }
 
+    /**
+     * Private Constructor
+     */
+    private CustomTypeFaces() {}
 }
