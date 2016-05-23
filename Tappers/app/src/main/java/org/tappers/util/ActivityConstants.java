@@ -18,5 +18,9 @@ public class ActivityConstants
 
     public static final int NEW_CONTACT_RETURN = 0x06;
 
+    public static final int EDIT_CONTACT = 0x07;
+
+    public static final int EDIT_CONTACT_RETURN = 0x08;
+
 
 }

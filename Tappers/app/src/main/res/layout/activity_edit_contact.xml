@@ -34,7 +34,7 @@
         android:layout_marginLeft="25dp"
         android:textSize="17dp"
         android:id="@+id/lblBackContactsNew"
-        android:text="Menu"
+        android:text="Contact"
         android:background="@null"
         android:fontFamily="sans-serif-light"
         android:textColor="#FFFFFF" />
@@ -42,7 +42,7 @@
     <ImageButton
         android:layout_width="75dp"
         android:layout_height="54.5dp"
-        android:id="@+id/btnBackNewContact"
+        android:id="@+id/btnBackEditContact"
         android:background="@null"
         android:scaleType="fitCenter"
         android:paddingRight="40dp"
@@ -73,7 +73,7 @@
                 android:layout_marginLeft="10dp"
                 android:paddingTop="10dp"
                 android:fontFamily="sans-serif-light"
-                android:id="@+id/lblContactName" />
+                android:id="@+id/lblContactNameEdit" />
 
             <EditText
                 android:layout_width="fill_parent"
@@ -87,7 +87,7 @@
                 android:ems="10"
                 android:id="@+id/txtEditConactName"
                 android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/lblContactName" />
+                android:layout_toEndOf="@+id/lblContactNameEdit" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -260,89 +260,89 @@
                     <ImageButton
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:id="@+id/bgcol_default"
+                        android:id="@+id/bgcol_default_edit"
                         android:layout_marginRight="6dp"
                         android:background="@drawable/bgcol_default"/>
 
                     <ImageButton
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:id="@+id/bgcol_blue"
+                        android:id="@+id/bgcol_blue_edit"
                         android:background="@drawable/bgcol_blue"
                         android:layout_marginRight="6dp"
-                        android:layout_toEndOf="@+id/bgcol_default" />
+                        android:layout_toEndOf="@+id/bgcol_default_edit" />
 
                     <ImageButton
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:id="@+id/bgcol_green"
+                        android:id="@+id/bgcol_green_edit"
                         android:background="@drawable/bgcol_green"
                         android:layout_marginRight="6dp"
-                        android:layout_toEndOf="@+id/bgcol_blue" />
+                        android:layout_toEndOf="@+id/bgcol_blue_edit" />
 
                     <ImageButton
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginRight="6dp"
-                        android:id="@+id/bgcol_turq"
+                        android:id="@+id/bgcol_turq_edit"
                         android:background="@drawable/bgcol_turq"
-                        android:layout_toEndOf="@+id/bgcol_green" />
+                        android:layout_toEndOf="@+id/bgcol_green_edit" />
 
                     <ImageButton
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginRight="6dp"
-                        android:id="@+id/bgcol_purple"
+                        android:id="@+id/bgcol_purple_edit"
                         android:background="@drawable/bgcol_purple"
-                        android:layout_toEndOf="@+id/bgcol_turq" />
+                        android:layout_toEndOf="@+id/bgcol_turq_edit" />
 
                     <ImageButton
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginRight="6dp"
-                        android:id="@+id/bgcol_pink"
+                        android:id="@+id/bgcol_pink_edit"
                         android:background="@drawable/bgcol_pink"
-                        android:layout_toEndOf="@+id/bgcol_purple" />
+                        android:layout_toEndOf="@+id/bgcol_purple_edit" />
 
                     <ImageButton
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginRight="6dp"
-                        android:id="@+id/bgcol_red"
+                        android:id="@+id/bgcol_red_edit"
                         android:background="@drawable/bgcol_red"
-                        android:layout_toEndOf="@+id/bgcol_pink" />
+                        android:layout_toEndOf="@+id/bgcol_pink_edit" />
 
                     <ImageButton
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginRight="6dp"
-                        android:id="@+id/bgcol_orange"
+                        android:id="@+id/bgcol_orange_edit"
                         android:background="@drawable/bgcol_orange"
-                        android:layout_toEndOf="@+id/bgcol_red" />
+                        android:layout_toEndOf="@+id/bgcol_red_edit" />
 
                     <ImageButton
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginRight="6dp"
-                        android:id="@+id/bgcol_gold"
+                        android:id="@+id/bgcol_gold_edit"
                         android:background="@drawable/bgcol_gold"
-                        android:layout_toEndOf="@+id/bgcol_orange" />
+                        android:layout_toEndOf="@+id/bgcol_orange_edit" />
 
                     <ImageButton
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginRight="6dp"
-                        android:id="@+id/bgcol_yellow"
+                        android:id="@+id/bgcol_yellow_edit"
                         android:background="@drawable/bgcol_yellow"
-                        android:layout_toEndOf="@+id/bgcol_gold" />
+                        android:layout_toEndOf="@+id/bgcol_gold_edit" />
 
                     <ImageButton
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginRight="6dp"
-                        android:id="@+id/bgcol_black"
+                        android:id="@+id/bgcol_black_edit"
                         android:background="@drawable/bgcol_black"
-                        android:layout_toEndOf="@+id/bgcol_yellow" />
+                        android:layout_toEndOf="@+id/bgcol_yellow_edit" />
 
                 </RelativeLayout>
 
@@ -354,7 +354,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:text="Confirm"
-                android:id="@+id/cmdConfirm"
+                android:id="@+id/cmdConfirmEdit"
                 android:layout_marginBottom="10dp"
                 android:layout_below="@+id/backgroundColours"
                 android:gravity="center"/>

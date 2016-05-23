@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -18,9 +19,10 @@ import android.widget.Toast;
 
 import org.tappers.Contacts;
 import org.tappers.contact.*;
-import org.tappers.ui.data.CharacterBackground;
+import org.tappers.ui.data.*;
 import org.tappers.R;
 import org.tappers.ui.adapter.TransactionListAdapter;
+import org.tappers.ui.data.Character;
 import org.tappers.util.ActivityConstants;
 import org.tappers.util.CustomTypeFaces;
 
@@ -40,6 +42,12 @@ public class ContactPage extends Activity
 
     public TextView txtTotal;
 
+    public TextView lblTitle;
+
+    private org.tappers.ui.data.Character charType;
+    private CharacterBackground charBackground;
+    private RelativeLayout charBack;
+    private ImageView characterImageContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +61,7 @@ public class ContactPage extends Activity
         txtTotal = (TextView) findViewById(R.id.txtTotal);
 
         transactionList = (ListView) findViewById(R.id.lstTransaction);
-
+        lblTitle = (TextView) findViewById(R.id.contactPageTitle);
         Typeface thin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         Typeface light = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
         Typeface regular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
@@ -64,21 +72,19 @@ public class ContactPage extends Activity
         txtTotal.setTypeface(CustomTypeFaces.get("light"));
         txtTotal.setText(contact.getTotalString());
 
-        TextView lblTitle = (TextView) findViewById(R.id.contactPageTitle);
+
         TextView txtHistory = (TextView) findViewById(R.id.txtHistory);
         lblTitle.setTypeface(CustomTypeFaces.get("light"));
         lblTitle.setText(contact.getName());
         txtHistory.setTypeface(CustomTypeFaces.get("light"));
-        ImageView characterImageContact = (ImageView) findViewById(R.id.characterImageContact);
 
-        org.tappers.ui.data.Character charType = org.tappers.ui.data.Character.getCharacterForName(contact.getCharacterType());
-        CharacterBackground charBackground =
-                CharacterBackground.getBackgroundForId(contact.getBackgroundColour());
+        characterImageContact = (ImageView) findViewById(R.id.characterImageContact);
+
+        charBack = (RelativeLayout) findViewById(R.id.character_background);
+        charBackground =  CharacterBackground.getBackgroundForId(contact.getBackgroundColour());
+        charType = Character.getCharacterForName(contact.getCharacterType());
 
         characterImageContact.setImageResource(charType.getCharacterFile());
-
-        RelativeLayout charBack = (RelativeLayout) findViewById(R.id.character_background);
-
         charBack.setBackgroundResource(charBackground.getLargeBackground());
 
         ImageButton btnNewTrans = (ImageButton) findViewById(R.id.btnNewTransaction);
@@ -96,21 +102,17 @@ public class ContactPage extends Activity
 
         ImageButton btnClearHistory = (ImageButton) findViewById(R.id.btnClearHistory);
 
-        btnClearHistory.setOnClickListener(new View.OnClickListener()
-        {
+        btnClearHistory.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
 
 
-                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener()
-                {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
-                                if (contact.getTransactions().size() == 0)
-                                {
+                                if (contact.getTransactions().size() == 0) {
                                     Toast.makeText(getApplicationContext(),
                                             "There is no history to delete!",
                                             Toast.LENGTH_LONG).show();
@@ -129,7 +131,7 @@ public class ContactPage extends Activity
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setMessage("Are you sure you want to clear the history for " + contact.getName())
+                builder.setMessage("Are you sure you want to clear all transactions for " + contact.getName() + "?")
                         .setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
 
@@ -146,6 +148,18 @@ public class ContactPage extends Activity
                 intent.putExtra("name", position);
                 setResult(ActivityConstants.CONTACT_PAGE_RETURN, intent);
                 finish();
+            }
+        });
+
+        Button edit = (Button) findViewById(R.id.btnEditContact);
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(view.getContext(), EditContact.class);
+                intent.putExtra("pos", position);
+                startActivityForResult(intent, ActivityConstants.EDIT_CONTACT);
             }
         });
 
@@ -170,6 +184,22 @@ public class ContactPage extends Activity
                 txtTotal.setText(contact.getTotalString());
                 data.putExtra("pos", position);
                 Contacts.SINGLETON.save(this);
+            }
+        }
+        if(requestCode == ActivityConstants.EDIT_CONTACT)
+        {
+            if(resultCode == ActivityConstants.EDIT_CONTACT_RETURN)
+            {
+                charBackground =  CharacterBackground.getBackgroundForId(contact.getBackgroundColour());
+                charType = Character.getCharacterForName(contact.getCharacterType());
+
+                characterImageContact.setImageResource(charType.getCharacterFile());
+                charBack.setBackgroundResource(charBackground.getLargeBackground());
+
+                txtTotal.setText(contact.getTotalString());
+                lblTitle.setText(contact.getName());
+                Contacts.SINGLETON.save(this);
+                updateContactList();
             }
         }
     }
