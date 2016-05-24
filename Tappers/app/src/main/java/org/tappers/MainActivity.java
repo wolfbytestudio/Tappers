@@ -90,7 +90,8 @@ public class MainActivity extends Activity
 
 
         listView = (ListView) findViewById(R.id.lstContacts);
-        registerForContextMenu(txtTotalOwe);
+        listView.setClickable(true);
+
         listView.setOnLongClickListener(new View.OnLongClickListener()
         {
             @Override
@@ -105,18 +106,28 @@ public class MainActivity extends Activity
 
         listView.setAdapter(customListViewAdapter);
 
-
+        listView.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View v)
+            {
+                Log.d("abc", "fucking long");
+                registerForContextMenu(listView);
+                return true;
+            }
+        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-
+                Log.d("abc", "fucking long");
                 int mPos = position;
                 Intent intent = new Intent(view.getContext(), ContactPage.class);
                 intent.putExtra("pos", mPos);
                 startActivityForResult(intent, ActivityConstants.CONTACT_PAGE);
+
             }
         });
 
@@ -148,15 +159,19 @@ public class MainActivity extends Activity
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
     {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        if (v.getId() == R.id.txtTotalOwe)
+        //super.onCreateContextMenu(menu, v, menuInfo);
+        if (v.getId() == R.id.lstContacts)
         {
-            menu.add(0, v.getId(), 0, "Something");
-            menu.add(0, v.getId(), 0, "Something else");
-            menu.add(0, v.getId(), 0, "Something else");
-            menu.add(0, v.getId(), 0, "Something else");
-            menu.add(0, v.getId(), 0, "Something else");
+
         }
+
+        ListView lv = (ListView) v;
+        AdapterView.AdapterContextMenuInfo acmi = (AdapterContextMenuInfo) menuInfo;
+        Contact obj = (Contact) lv.getItemAtPosition(acmi.position);
+        menu.add("One");
+        menu.add("Two");
+        menu.add("Three");
+        menu.add(obj.getName());
     }
 
     @Override

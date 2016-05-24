@@ -18,6 +18,7 @@
         android:layout_height="fill_parent">
 
         <ImageView
+            android:focusable="false"
             android:layout_width="60dp"
             android:cropToPadding="true"
             android:src="@drawable/female"

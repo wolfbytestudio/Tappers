@@ -99,13 +99,15 @@
         android:layout_height="40dp"
         android:id="@+id/btnNewTransaction"
         android:background="@null"
-        android:padding="5dp"
+        android:padding="7dp"
+
         android:scaleType="fitCenter"
         android:layout_marginRight="5dp"
         android:src="@drawable/plus_sign"
         android:layout_alignBottom="@+id/txtHistory"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="1dp"/>
 
 
     <TextView
@@ -133,11 +135,16 @@
         android:src="@drawable/back_arrow"
         android:layout_alignParentTop="true" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/edit_icon"
         android:text="Edit"
+        android:scaleType="fitCenter"
+        android:padding="7dp"
+        android:background="@null"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="3dp"
         android:id="@+id/btnEditContact"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"

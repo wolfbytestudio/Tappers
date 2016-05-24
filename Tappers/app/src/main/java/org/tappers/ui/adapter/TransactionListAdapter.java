@@ -27,10 +27,12 @@ import java.text.NumberFormat;
 public class TransactionListAdapter extends BaseAdapter
 {
 
-
     private Context context;
+
     private Contact contact;
+
     private ContactPage owner;
+
     private static LayoutInflater inflater = null;
 
     public TransactionListAdapter(Context context, ContactPage owner, int position)
@@ -91,7 +93,6 @@ public class TransactionListAdapter extends BaseAdapter
             imgTransactionType.setImageDrawable(view.getResources().getDrawable(R.drawable.to_icon));
         }
 
-
         if(transaction.getReason().equals(""))
         {
             lblReason.setText("Reason unspecific");
@@ -143,16 +144,15 @@ public class TransactionListAdapter extends BaseAdapter
 
     private String getPayment(Transaction t, String name)
     {
-        String r = "";
+        String r;
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
-
         if(t.getType() == TransactionType.FROM)
         {
             r = "You Borrowed " + formatter.format(Math.abs(t.getAmount())) + " from " + name;
         }
         else
         {
-            r = "You Lent " + formatter.format(Math.abs(t.getAmount())) + " to " + name + ".";
+            r = "You loaned " + formatter.format(Math.abs(t.getAmount())) + " to " + name + ".";
         }
 
         return r;

@@ -141,6 +141,8 @@ public class ContactPage extends Activity
 
         ImageButton btnBack = (ImageButton) findViewById(R.id.btnBackContact);
 
+
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,7 +153,7 @@ public class ContactPage extends Activity
             }
         });
 
-        Button edit = (Button) findViewById(R.id.btnEditContact);
+        ImageButton edit = (ImageButton) findViewById(R.id.btnEditContact);
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
