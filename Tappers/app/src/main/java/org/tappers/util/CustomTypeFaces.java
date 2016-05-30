@@ -8,8 +8,8 @@ import java.util.HashMap;
 
 /**
  * Custom Typefaces contains all the custom typefaces
- *
  * Current fonts = light, thin, regular
+ *
  * Created by Zack on 22/05/2016.
  */
 public final class CustomTypeFaces
